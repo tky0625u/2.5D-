@@ -91,6 +91,18 @@
     <Filter Include="Src\Application\WindowUi">
       <UniqueIdentifier>{5f089e21-489c-4e59-b0db-29cb47694249}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Gimmick">
+      <UniqueIdentifier>{6e6e922f-9bf9-4810-a231-335b74745960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Gimmick\Cannon">
+      <UniqueIdentifier>{5ff33b08-13e8-4a23-8e61-070983d9961a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Gimmick\GimmickManager">
+      <UniqueIdentifier>{776f3e78-0f16-4e4e-9d13-fd7a15b2b46d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Gimmick\Cannon\Bullet">
+      <UniqueIdentifier>{217b4539-b4ed-44a3-91a3-787fc03b3fd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -273,6 +285,15 @@
     <ClInclude Include="Src\Application\Object\Character\Player\Player.h">
       <Filter>Src\Application\Object\Character\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Gimmick\Cannon\Cannon.h">
+      <Filter>Src\Application\Object\Gimmick\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Gimmick\GimmickManager\GimmickManager.h">
+      <Filter>Src\Application\Object\Gimmick\GimmickManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Gimmick\Cannon\Bullet\Bullet.h">
+      <Filter>Src\Application\Object\Gimmick\Cannon\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -424,6 +445,15 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Character\Player\Player.cpp">
       <Filter>Src\Application\Object\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Gimmick\Cannon\Cannon.cpp">
+      <Filter>Src\Application\Object\Gimmick\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Gimmick\GimmickManager\GimmickManager.cpp">
+      <Filter>Src\Application\Object\Gimmick\GimmickManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Gimmick\Cannon\Bullet\Bullet.cpp">
+      <Filter>Src\Application\Object\Gimmick\Cannon\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
