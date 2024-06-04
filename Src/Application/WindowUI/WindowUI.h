@@ -6,4 +6,4 @@
 #define HIGHT 720    //スクリーン　高さ
 #define WIDE 1280    //スクリーン　横幅
 #define SECOND 60    //一秒
-#define ANIME 4      //アニメーション間隔#pragma once
+#define ANIME 0.1f      //アニメーション間隔

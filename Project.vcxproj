@@ -161,6 +161,7 @@
     <ClInclude Include="Src\Application\Object\Gimmick\Cannon\Bullet\Bullet.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\Cannon\Cannon.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\GimmickManager\GimmickManager.h" />
+    <ClInclude Include="Src\Application\Object\Gimmick\Pole\Pole.h" />
     <ClInclude Include="Src\Application\Object\Ground\Ground.h" />
     <ClInclude Include="Src\Application\Object\UI\Timer\Timer.h" />
     <ClInclude Include="Src\Application\Object\UI\Timer\TimerManager.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Src\Application\Object\Gimmick\Cannon\Bullet\Bullet.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\Cannon\Cannon.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\GimmickManager\GimmickManager.cpp" />
+    <ClCompile Include="Src\Application\Object\Gimmick\Pole\Pole.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Ground.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Timer\Timer.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Timer\TimerManager.cpp" />

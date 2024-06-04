@@ -1,5 +1,6 @@
 ﻿#include "GimmickManager.h"
 #include"../Cannon/Cannon.h"
+#include"../Pole/Pole.h"
 
 void GimmickManager::Update()
 {
@@ -35,5 +36,10 @@ void GimmickManager::Init()
 		m_GimmickList.push_back(cannon);
 		m_cannon[i] = cannon;
 	}
+	//=============================================================================================
+
+	//ポール=======================================================================================
+	std::shared_ptr<Pole>pole = std::make_shared<Pole>();
+	m_GimmickList.push_back(pole);
 	//=============================================================================================
 }

@@ -103,6 +103,9 @@
     <Filter Include="Src\Application\Object\Gimmick\Cannon\Bullet">
       <UniqueIdentifier>{217b4539-b4ed-44a3-91a3-787fc03b3fd9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Gimmick\Pole">
+      <UniqueIdentifier>{9bba6bb4-238c-4c86-95a6-a2c68fcab45c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -294,6 +297,9 @@
     <ClInclude Include="Src\Application\Object\Gimmick\Cannon\Bullet\Bullet.h">
       <Filter>Src\Application\Object\Gimmick\Cannon\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Gimmick\Pole\Pole.h">
+      <Filter>Src\Application\Object\Gimmick\Pole</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -454,6 +460,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Gimmick\Cannon\Bullet\Bullet.cpp">
       <Filter>Src\Application\Object\Gimmick\Cannon\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Gimmick\Pole\Pole.cpp">
+      <Filter>Src\Application\Object\Gimmick\Pole</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
