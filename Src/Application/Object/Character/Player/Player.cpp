@@ -1,5 +1,7 @@
 ﻿#include "Player.h"
 #include"../../../WindowUI/WindowUI.h"
+#include"../../../Scene/SceneManager.h"
+#include"../../Gimmick/GimmickManager/GimmickManager.h"
 
 void Player::Update()
 {
@@ -51,13 +53,6 @@ void Player::Update()
 	m_move.z = m_dir.z * SPEED;
 	m_move.y -= m_gravity;  //重力を与える
 	m_pos += m_move;
-
-	if (m_pos.y <= 0)  //地面についたら落ちないようにする
-	{
-		m_pos.y = 0;
-		m_move.y = 0;
-		m_jumpFlg = false;
-	}
 	//===============================================================
 
 	//=============================================================================================
@@ -72,7 +67,92 @@ void Player::Update()
 
 void Player::PostUpdate()
 {
+	//当たり判定===================================================================================
 
+	//レイ判定=======================================================
+	
+	//レイ判定変数宣言=====================================
+	KdCollider::RayInfo ray;                      //レイ判定用の変数作成
+	ray.m_pos = m_pos;                            //レイのスタート地点
+	ray.m_dir = Math::Vector3::Down;              //レイの方向
+	ray.m_pos.y += 0.1f;                          //少し上から飛ばす
+	float enableStepHight = 0.2f;                 //段差の許容範囲
+	ray.m_pos.y += enableStepHight;               //許容範囲を加える
+	ray.m_range = -(m_move.y) + enableStepHight;  //レイの長さ
+	ray.m_type = KdCollider::Type::TypeGround;    //当たり判定したいタイプ
+
+	//デバッグ表示
+	Math::Color color = { 1,1,1,1 };
+	m_pDebugWire->AddDebugLine(ray.m_pos, ray.m_dir, ray.m_range, color);
+	//=====================================================
+
+	//当たり判定===========================================
+	std::list<KdCollider::CollisionResult> retRayList;                                        //当たったオブジェクトの情報を格納するリスト
+	for (auto obj : SceneManager::Instance().GetObjList())obj->Intersects(ray, &retRayList);  //地面
+	for (auto gimmick : m_GimmickList)gimmick->Intersects(ray, &retRayList);                  //ギミック
+	//=====================================================
+
+	//レイに当たったオブジェクトで一番近いものを検出=======
+	float maxOverLap = 0;  //レイがはみ出た長さ
+	Math::Vector3 hitPos;  //当たった座標
+	bool isHit = false;    //当たり判定フラグ
+	for (auto& ret : retRayList)
+	{
+		//はみ出た長さが一番長いものを探す
+		if (maxOverLap < ret.m_overlapDistance)
+		{
+			//情報を上書き=======================
+			maxOverLap = ret.m_overlapDistance;
+			hitPos = ret.m_hitPos;
+			//===================================
+			
+			isHit = true;  //当たり判定フラグtrue
+		}
+	}
+	//=====================================================
+
+	//当たった時===========================================
+	if (isHit)
+	{
+		m_pos = hitPos + Math::Vector3{ 0.0f,-0.1f,0.0f };  //座標更新
+		m_move.y = 0.0f;                                    //落下速度をなくす
+		m_jumpFlg = false;                                  //ジャンプフラグfalse
+	}
+	//=====================================================
+
+	//===============================================================
+
+	//球判定=========================================================
+	KdCollider::SphereInfo sphere;
+	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };
+	sphere.m_sphere.Radius = 1.0f;
+	sphere.m_type = KdCollider::Type::TypeGround;
+
+	std::list<KdCollider::CollisionResult> retSphereList;
+	for (auto obj : SceneManager::Instance().GetObjList())obj->Intersects(ray, &retSphereList);  //地面
+	for (auto gimmick : m_GimmickList)gimmick->Intersects(ray, &retSphereList);                  //ギミック
+
+	maxOverLap = 0;
+	Math::Vector3 hitDir;
+	isHit = false;
+	for (auto& ret : retSphereList)
+	{
+		if (maxOverLap < ret.m_overlapDistance)
+		{
+			maxOverLap = ret.m_overlapDistance;
+			hitDir = ret.m_hitDir;
+			isHit = true;
+		}
+	}
+
+	if (isHit)
+	{
+		hitDir.Normalize();
+		m_pos += hitDir * maxOverLap;
+	}
+	//===============================================================
+
+	//=============================================================================================
 }
 
 void Player::Draw()
@@ -103,4 +183,7 @@ void Player::Init()
 	m_angle = 0.0f;
 	m_gravity = 0.05f;
 	m_jumpFlg = false;
+
+	//デバッグ用
+	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
 }

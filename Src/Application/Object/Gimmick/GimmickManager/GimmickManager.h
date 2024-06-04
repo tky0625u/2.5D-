@@ -16,6 +16,8 @@ public:
 
 	void SetCameraPos(Math::Vector3 a_cameraPos) { m_cameraPos = a_cameraPos; }
 
+	const std::vector<std::shared_ptr<KdGameObject>> GetGimmickList(){ return m_GimmickList; }
+
 private:
 	std::vector<std::shared_ptr<KdGameObject>> m_GimmickList;  //リスト
 	

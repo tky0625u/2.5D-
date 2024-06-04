@@ -16,6 +16,8 @@ public:
 	void GenerateDepthMapFromLight()override;
 	void Init()override;
 
+	void SetGimmickList(std::vector<std::shared_ptr<KdGameObject>> a_GimmickList) { m_GimmickList = a_GimmickList; }
+
 private:
 	std::shared_ptr<KdSquarePolygon> m_polygon;  //板ポリ
 	Math::Vector3 m_pos;                         //座標
@@ -25,4 +27,6 @@ private:
 	float m_angle;                               //角度
 	float m_gravity;                             //重力
 	bool  m_jumpFlg;                             //ジャンプフラグ
+
+	std::vector<std::shared_ptr<KdGameObject>> m_GimmickList;  //ギミックリスト　※当たり判定のため
 };
