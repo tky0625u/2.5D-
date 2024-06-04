@@ -5,7 +5,7 @@
 #define COOL_TIME 2*60     //クールタイム 
 #define DISTANS   10       //大砲の間隔
 #define CorrectionX -0.5f  //X座標補正
-#define CorrectionY 3.5f  //Y座標補正
+#define CorrectionY 0.5f  //Y座標補正
 
 class Cannon :public KdGameObject
 {

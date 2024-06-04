@@ -38,6 +38,8 @@ void Bullet::Init()
 {
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/Cannon/Bullet/Bullet.gltf");
+	m_pCollider = std::make_unique<KdCollider>();
+	m_pCollider->RegisterCollisionShape("Bullet", m_model, KdCollider::Type::TypeBump);
 	m_pos = {};
 	m_size = 0.5f;
 	m_angle = 0.0f;

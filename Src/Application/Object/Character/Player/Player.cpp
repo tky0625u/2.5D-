@@ -89,7 +89,6 @@ void Player::PostUpdate()
 	//当たり判定===========================================
 	std::list<KdCollider::CollisionResult> retRayList;                                        //当たったオブジェクトの情報を格納するリスト
 	for (auto obj : SceneManager::Instance().GetObjList())obj->Intersects(ray, &retRayList);  //地面
-	for (auto gimmick : m_GimmickList)gimmick->Intersects(ray, &retRayList);                  //ギミック
 	//=====================================================
 
 	//レイに当たったオブジェクトで一番近いものを検出=======
@@ -126,11 +125,13 @@ void Player::PostUpdate()
 	KdCollider::SphereInfo sphere;
 	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };
 	sphere.m_sphere.Radius = 1.0f;
-	sphere.m_type = KdCollider::Type::TypeGround;
+	sphere.m_type = KdCollider::Type::TypeBump;
+
+	//デバッグ用
+	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius, color);
 
 	std::list<KdCollider::CollisionResult> retSphereList;
-	for (auto obj : SceneManager::Instance().GetObjList())obj->Intersects(ray, &retSphereList);  //地面
-	for (auto gimmick : m_GimmickList)gimmick->Intersects(ray, &retSphereList);                  //ギミック
+	for (auto gimmick : m_GimmickList)gimmick->Intersects(sphere, &retSphereList);                  //ギミック
 
 	maxOverLap = 0;
 	Math::Vector3 hitDir;
@@ -149,6 +150,7 @@ void Player::PostUpdate()
 	{
 		hitDir.Normalize();
 		m_pos += hitDir * maxOverLap;
+		m_move.y = 0.0f;
 	}
 	//===============================================================
 
