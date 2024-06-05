@@ -3,9 +3,23 @@
 #define SPEED 0.2f  //移動量
 #define JUMP  1.0f  //ジャンプ力
 
+//アニメーション=================================
+#define IDOL 0
+#define WALK 1
+#define IDOL_MAX 4
+#define WALK_MAX 7
+//===============================================
+
 class Player :public KdGameObject
 {
 public:
+	struct Animation
+	{
+		int m_motion;
+		int m_CntMAX;
+		float m_AnimeCnt;
+	};
+
 	Player() { Init(); }
 	~Player()override{}
 
@@ -28,6 +42,8 @@ private:
 	float m_angle;                               //角度
 	float m_gravity;                             //重力
 	bool  m_jumpFlg;                             //ジャンプフラグ
+
+	Animation m_anime;  //アニメーション
 
 	std::vector<std::shared_ptr<KdGameObject>> m_GimmickList;  //ギミックリスト　※当たり判定のため
 	std::vector<std::shared_ptr<KdGameObject>> m_BulletList;  //弾リスト　※当たり判定のため

@@ -6,10 +6,7 @@
 void Player::Update()
 {
 	//行動=========================================================================================
-	
-	int Anime[][7] = { { 0,1,2,3 }, { 4,5,6,7,8,9 } ,{ 10,11,12,13 } ,{ 17,18,19,20,21,22,23 } };
-	static float a = 0.0f;
-	static float b = 0.0f;
+
 	//移動===========================================================
 	m_dir = Math::Vector3::Zero;
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
@@ -41,20 +38,47 @@ void Player::Update()
 			m_jumpFlg = true;  
 		}
 	}
-	if (m_move.x == 0.0f && m_move.y == 0.0f && m_move.z == 0.0f)
-	{
-		m_polygon->SetUVRect(Anime[0][(int)a], 0);
-		a += ANIME;
-		if (a >= 4)a = 0;
-	}
-
+	//===============================================================
+	
 	m_dir.Normalize();
 	m_move.x = m_dir.x * SPEED;
 	m_move.z = m_dir.z * SPEED;
 	m_move.y -= m_gravity;  //重力を与える
 	m_pos += m_move;
-	//===============================================================
 
+	//=============================================================================================
+
+	//アニメーション===============================================================================
+	int Anime[][WALK_MAX] = { { 0,1,2,3 }, { 4,5,6,7,8,9,10 } };  //アニメーション配列
+
+	//移動=======================================
+	if (m_move.x != 0 || m_move.z != 0)
+	{
+		if (m_anime.m_motion != WALK)
+		{
+			m_anime.m_motion = WALK;
+			m_anime.m_AnimeCnt = 0.0f;
+			m_anime.m_CntMAX = WALK_MAX;
+		}
+	}
+	//===========================================
+
+	//立ち=======================================
+	else if (!m_jumpFlg)
+	{
+		if (m_anime.m_motion != IDOL)
+		{
+			m_anime.m_motion = IDOL;
+			m_anime.m_AnimeCnt = 0.0f;
+			m_anime.m_CntMAX = IDOL_MAX;
+		}
+	}
+	//===========================================
+
+	m_anime.m_AnimeCnt += ANIME;  //アニメーション
+	if (m_anime.m_AnimeCnt >= m_anime.m_CntMAX)m_anime.m_AnimeCnt = 0.0f;  //最大値になったら最初に戻す
+
+	m_polygon->SetUVRect(Anime[m_anime.m_motion][(int)m_anime.m_AnimeCnt], 0);
 	//=============================================================================================
 
 	//行列更新=====================================================================================
@@ -153,6 +177,7 @@ void Player::PostUpdate()
 
 	if (isHit)
 	{
+		hitDir.y = 0.0f;
 		hitDir.Normalize();
 		m_pos += hitDir * maxOverLap;
 		m_move.y = 0.0f;
@@ -190,6 +215,11 @@ void Player::Init()
 	m_angle = 0.0f;
 	m_gravity = 0.05f;
 	m_jumpFlg = false;
+
+	//アニメーション
+	m_anime.m_AnimeCnt = 0.0f;
+	m_anime.m_CntMAX = IDOL_MAX;
+	m_anime.m_motion = IDOL;
 
 	//デバッグ用
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
