@@ -117,6 +117,10 @@ void Player::PostUpdate()
 		m_move.y = 0.0f;                                    //落下速度をなくす
 		m_jumpFlg = false;                                  //ジャンプフラグfalse
 	}
+	else
+	{
+		m_jumpFlg = true;
+	}
 	//=====================================================
 
 	//===============================================================
@@ -179,7 +183,7 @@ void Player::Init()
 	m_polygon->SetMaterial("Asset/Textures/Character/Player/sheets/DinoSprites - doux.png");
 	m_polygon->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_polygon->SetSplit(24, 1);
-	m_pos = Math::Vector3::Zero;
+	m_pos = { -15,0,0 };
 	m_move = Math::Vector3::Zero;
 	m_dir = Math::Vector3::Zero;
 	m_size = { 3.0f,3.0f,3.0f };
