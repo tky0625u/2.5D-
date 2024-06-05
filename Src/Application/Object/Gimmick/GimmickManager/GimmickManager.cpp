@@ -1,6 +1,7 @@
 ﻿#include "GimmickManager.h"
 #include"../Cannon/Cannon.h"
 #include"../Pole/Pole.h"
+#include"../Brock/Brock.h"
 
 void GimmickManager::Update()
 {
@@ -70,5 +71,10 @@ void GimmickManager::Init()
 	//ポール=======================================================================================
 	std::shared_ptr<Pole>pole = std::make_shared<Pole>();
 	m_GimmickList.push_back(pole);
+	//=============================================================================================
+
+	//一マス床=====================================================================================
+	std::shared_ptr<Brock>brock = std::make_shared<Brock>();
+	m_GimmickList.push_back(brock);
 	//=============================================================================================
 }

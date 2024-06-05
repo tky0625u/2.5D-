@@ -13,7 +13,7 @@ void Ground::DrawLit()
 
 void Ground::Init()
 {
-	m_pos = { -15,-4,0 };
+	m_pos = { -35,-4,0 };
 	m_model = std::make_shared<KdModelData>();          //メモリ確保
 	m_model->Load("Asset/Models/Ground/Start.gltf");  //モデル読み込み
 	m_pCollider = std::make_unique<KdCollider>();

@@ -106,6 +106,9 @@
     <Filter Include="Src\Application\Object\Gimmick\Pole">
       <UniqueIdentifier>{9bba6bb4-238c-4c86-95a6-a2c68fcab45c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Gimmick\Brock">
+      <UniqueIdentifier>{b56267b1-48b6-4f26-9ec5-7fbbee35018b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -300,6 +303,9 @@
     <ClInclude Include="Src\Application\Object\Gimmick\Pole\Pole.h">
       <Filter>Src\Application\Object\Gimmick\Pole</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Gimmick\Brock\Brock.h">
+      <Filter>Src\Application\Object\Gimmick\Brock</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -463,6 +469,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Gimmick\Pole\Pole.cpp">
       <Filter>Src\Application\Object\Gimmick\Pole</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Gimmick\Brock\Brock.cpp">
+      <Filter>Src\Application\Object\Gimmick\Brock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

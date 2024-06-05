@@ -41,7 +41,7 @@ void Pole::Init()
 	m_model->Load("Asset/Models/Pole/Pole.gltf");
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("Pole", m_model, KdCollider::Type::TypeBump);
-	m_pos = {};
+	m_pos = { 3,0.0f,0.0f };
 	m_size = 1.0f;
 	m_angleX = 0.0f;
 	m_angleY = 0.0f;

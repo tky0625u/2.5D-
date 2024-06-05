@@ -43,7 +43,7 @@ void Player::Update()
 	m_dir.Normalize();
 	m_move.x = m_dir.x * SPEED;
 	m_move.z = m_dir.z * SPEED;
-	m_move.y -= m_gravity;  //重力を与える
+	//m_move.y -= m_gravity;  //重力を与える
 	m_pos += m_move;
 
 	//=============================================================================================
@@ -113,6 +113,7 @@ void Player::PostUpdate()
 	//当たり判定===========================================
 	std::list<KdCollider::CollisionResult> retRayList;                                        //当たったオブジェクトの情報を格納するリスト
 	for (auto obj : SceneManager::Instance().GetObjList())obj->Intersects(ray, &retRayList);  //地面
+	for (auto gimmick : m_GimmickList)gimmick->Intersects(ray, &retRayList);                  //ギミック
 	//=====================================================
 
 	//レイに当たったオブジェクトで一番近いものを検出=======
@@ -153,7 +154,7 @@ void Player::PostUpdate()
 	KdCollider::SphereInfo sphere;
 	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };
 	sphere.m_sphere.Radius = 1.0f;
-	sphere.m_type = KdCollider::Type::TypeBump;
+	sphere.m_type = KdCollider::Type::TypeBump | KdCollider::Type::TypeGround;
 
 	//デバッグ用
 	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius, color);
@@ -208,7 +209,7 @@ void Player::Init()
 	m_polygon->SetMaterial("Asset/Textures/Character/Player/sheets/DinoSprites - doux.png");
 	m_polygon->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_polygon->SetSplit(24, 1);
-	m_pos = { -15,0,0 };
+	m_pos = { -35,0,0 };
 	m_move = Math::Vector3::Zero;
 	m_dir = Math::Vector3::Zero;
 	m_size = { 3.0f,3.0f,3.0f };
