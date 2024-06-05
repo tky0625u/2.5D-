@@ -17,6 +17,7 @@ public:
 	void Init()override;
 
 	void SetGimmickList(std::vector<std::shared_ptr<KdGameObject>> a_GimmickList) { m_GimmickList = a_GimmickList; }
+	void SetBulletList(std::vector<std::shared_ptr<KdGameObject>> a_BulletList) { m_BulletList = a_BulletList; }
 
 private:
 	std::shared_ptr<KdSquarePolygon> m_polygon;  //板ポリ
@@ -29,4 +30,5 @@ private:
 	bool  m_jumpFlg;                             //ジャンプフラグ
 
 	std::vector<std::shared_ptr<KdGameObject>> m_GimmickList;  //ギミックリスト　※当たり判定のため
+	std::vector<std::shared_ptr<KdGameObject>> m_BulletList;  //弾リスト　※当たり判定のため
 };

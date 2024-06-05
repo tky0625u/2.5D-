@@ -12,9 +12,8 @@ void Cannon::Update()
 		bullet->SetPos({m_pos.x+CorrectionX,m_pos.y+ CorrectionY,m_pos.z});  //座標格納
 		bullet->SetAngle(m_angle);                                           //角度格納
 		m_bulletList.push_back(bullet);                                      //リストに格納
+		m_bullet = bullet;                                                   //変数に代入
 		//=====================================================================
-
-		m_coolTime = COOL_TIME;  //クールタイム代入
 	}
 
 	for (auto bullet : m_bulletList)bullet->Update();  //弾更新
@@ -92,9 +91,13 @@ void Cannon::Init()
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/Cannon/Cannon.gltf");
 	m_pos = { 0,0,10.0f };
-	m_size = 2.0f;
+	m_size = 2.5f;
 	m_angle = 180.0f;
-	m_coolTime = 0.0f;
+}
+
+void Cannon::CoolTimeUP()
+{
+	m_coolTime += COOL_TIME;
 }
 
 void Cannon::SetPos(int i)

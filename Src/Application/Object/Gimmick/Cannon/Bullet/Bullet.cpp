@@ -41,6 +41,6 @@ void Bullet::Init()
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("Bullet", m_model, KdCollider::Type::TypeBump);
 	m_pos = {};
-	m_size = 0.5f;
+	m_size = 1.0f;
 	m_angle = 0.0f;
 }

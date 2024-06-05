@@ -132,6 +132,7 @@ void Player::PostUpdate()
 
 	std::list<KdCollider::CollisionResult> retSphereList;
 	for (auto gimmick : m_GimmickList)gimmick->Intersects(sphere, &retSphereList);                  //ギミック
+	for (auto bullet : m_BulletList)bullet->Intersects(sphere, &retSphereList);                     //弾
 
 	maxOverLap = 0;
 	Math::Vector3 hitDir;

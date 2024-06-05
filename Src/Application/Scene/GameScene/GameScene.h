@@ -3,6 +3,7 @@
 #include"../BaseScene/BaseScene.h"
 
 class GimmickManager;
+class Player;
 
 class GameScene : public BaseScene
 {
@@ -23,6 +24,6 @@ private:
 	Math::Vector3 m_pos;           //座標
 	//======================================
 
-	std::weak_ptr<KdGameObject>   m_player;  //プレイヤー ※カメラ制御のため
+	std::weak_ptr<Player>   m_player;  //プレイヤー ※カメラ制御のため
 	std::weak_ptr<GimmickManager> m_gimmick; //ギミック管理クラス　※弾の削除処理のため
 };
