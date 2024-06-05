@@ -2,8 +2,9 @@
 
 void Ground::Update()
 {
+	Math::Matrix Scale = Math::Matrix::CreateScale(m_size);
 	Math::Matrix Trans = Math::Matrix::CreateTranslation(m_pos);
-	m_mWorld = Trans;
+	m_mWorld = Scale * Trans;
 }
 
 void Ground::DrawLit()
@@ -13,7 +14,8 @@ void Ground::DrawLit()
 
 void Ground::Init()
 {
-	m_pos = { -35,-4,0 };
+	m_pos = { -50,-18,0 };
+	m_size = 5.0f;
 	m_model = std::make_shared<KdModelData>();          //メモリ確保
 	m_model->Load("Asset/Models/Ground/Start.gltf");  //モデル読み込み
 	m_pCollider = std::make_unique<KdCollider>();

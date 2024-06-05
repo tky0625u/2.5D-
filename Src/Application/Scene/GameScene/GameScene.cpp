@@ -51,7 +51,7 @@ void GameScene::Init()
 {
 	//カメラ　生成＆視野角設定===================================================================================================
 	m_angleX = 20;
-	m_angleY = 0;
+	m_angleY = 20;
 	m_ViewingAngle = 60;
 	m_pos = { 0,10,-15 };
 	m_camera = std::make_unique<KdCamera>();        //メモリ確保

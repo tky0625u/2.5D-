@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#define SPEED 0.2f  //移動量
+#define SPEED 0.4f  //移動量
 #define JUMP  1.0f  //ジャンプ力
 
 //アニメーション=================================
@@ -29,6 +29,8 @@ public:
 	void DrawLit()override;
 	void GenerateDepthMapFromLight()override;
 	void Init()override;
+
+	void ReStart();
 
 	void SetGimmickList(std::vector<std::shared_ptr<KdGameObject>> a_GimmickList) { m_GimmickList = a_GimmickList; }
 	void SetBulletList(std::vector<std::shared_ptr<KdGameObject>> a_BulletList) { m_BulletList = a_BulletList; }

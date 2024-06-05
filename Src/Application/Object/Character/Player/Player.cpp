@@ -43,9 +43,10 @@ void Player::Update()
 	m_dir.Normalize();
 	m_move.x = m_dir.x * SPEED;
 	m_move.z = m_dir.z * SPEED;
-	//m_move.y -= m_gravity;  //重力を与える
+	m_move.y -= m_gravity;  //重力を与える
 	m_pos += m_move;
 
+	if (m_pos.y <= -50 || GetAsyncKeyState('R')&0x8000)ReStart();
 	//=============================================================================================
 
 	//アニメーション===============================================================================
@@ -178,7 +179,6 @@ void Player::PostUpdate()
 
 	if (isHit)
 	{
-		hitDir.y = 0.0f;
 		hitDir.Normalize();
 		m_pos += hitDir * maxOverLap;
 		m_move.y = 0.0f;
@@ -209,7 +209,7 @@ void Player::Init()
 	m_polygon->SetMaterial("Asset/Textures/Character/Player/sheets/DinoSprites - doux.png");
 	m_polygon->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_polygon->SetSplit(24, 1);
-	m_pos = { -35,0,0 };
+	m_pos = { -50,0,0 };
 	m_move = Math::Vector3::Zero;
 	m_dir = Math::Vector3::Zero;
 	m_size = { 3.0f,3.0f,3.0f };
@@ -224,4 +224,9 @@ void Player::Init()
 
 	//デバッグ用
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
+}
+
+void Player::ReStart()
+{
+	m_pos = { -50,0,0 };
 }

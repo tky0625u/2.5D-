@@ -15,5 +15,5 @@ private:
 
 	std::shared_ptr<KdModelData> m_model = nullptr;  //モデル
 	Math::Vector3 m_pos;
-
+	float m_size;
 };
