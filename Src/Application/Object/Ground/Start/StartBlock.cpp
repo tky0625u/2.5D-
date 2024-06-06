@@ -1,23 +1,23 @@
-﻿#include "Ground.h"
+﻿#include "StartBlock.h"
 
-void Ground::Update()
+void StartBlock::Update()
 {
 	Math::Matrix Scale = Math::Matrix::CreateScale(m_size);
 	Math::Matrix Trans = Math::Matrix::CreateTranslation(m_pos);
 	m_mWorld = Scale * Trans;
 }
 
-void Ground::DrawLit()
+void StartBlock::DrawLit()
 {
-	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model,m_mWorld);  //モデル描画
+	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model, m_mWorld);  //モデル描画
 }
 
-void Ground::Init()
+void StartBlock::Init()
 {
 	m_pos = { -50,-18,0 };
 	m_size = 5.0f;
 	m_model = std::make_shared<KdModelData>();          //メモリ確保
-	m_model->Load("Asset/Models/Ground/Start.gltf");  //モデル読み込み
+	m_model->Load("Asset/Models/Ground/Start/Start.gltf");  //モデル読み込み
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("Start", m_model, KdCollider::Type::TypeGround);
 }

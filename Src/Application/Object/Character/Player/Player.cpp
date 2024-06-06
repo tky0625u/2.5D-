@@ -154,7 +154,7 @@ void Player::PostUpdate()
 	//球判定=========================================================
 	KdCollider::SphereInfo sphere;
 	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };
-	sphere.m_sphere.Radius = 1.0f;
+	sphere.m_sphere.Radius = 1.5f;
 	sphere.m_type = KdCollider::Type::TypeBump | KdCollider::Type::TypeGround;
 
 	//デバッグ用
@@ -179,9 +179,11 @@ void Player::PostUpdate()
 
 	if (isHit)
 	{
+		hitDir.y = 0.0f;
 		hitDir.Normalize();
 		m_pos += hitDir * maxOverLap;
 		m_move.y = 0.0f;
+		m_jumpFlg = false;
 	}
 	//===============================================================
 
