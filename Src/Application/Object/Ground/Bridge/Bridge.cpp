@@ -14,8 +14,8 @@ void Bridge::DrawLit()
 
 void Bridge::Init()
 {
-	m_pos = { 80,-4,0 };
-	m_size = 2.0f;
+	m_pos = { 200,0,0 };
+	m_size = 1.0f;
 	m_model = std::make_shared<KdModelData>();          //メモリ確保
 	m_model->Load("Asset/Models/Ground/Bridge/Bridge.gltf");  //モデル読み込み
 	m_pCollider = std::make_unique<KdCollider>();

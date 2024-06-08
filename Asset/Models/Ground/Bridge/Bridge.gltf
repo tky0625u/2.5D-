@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.1.62",
+		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
 	"scene":0,
@@ -19,13 +19,13 @@
 			"mesh":0,
 			"name":"Cube",
 			"scale":[
-				4.800928592681885,
-				1.4299931526184082,
-				14.913920402526855
+				23.25589942932129,
+				1,
+				1
 			],
 			"translation":[
 				0,
-				1.3895220756530762,
+				1.0675921440124512,
 				0
 			]
 		},
@@ -33,27 +33,27 @@
 			"mesh":1,
 			"name":"\u7acb\u65b9\u4f53",
 			"scale":[
-				11.508096694946289,
-				0.6552383899688721,
-				1
+				2.76922607421875,
+				1,
+				9.818428039550781
 			],
 			"translation":[
-				16.28874969482422,
-				2.1490161418914795,
+				-26.054576873779297,
+				1.0732117891311646,
 				0
 			]
 		},
 		{
 			"mesh":2,
-			"name":"Cube.001",
+			"name":"\u7acb\u65b9\u4f53.001",
 			"scale":[
-				4.800928592681885,
-				1.4299931526184082,
-				14.881294250488281
+				2.76922607421875,
+				1,
+				9.818428039550781
 			],
 			"translation":[
-				32.42157745361328,
-				1.3895220756530762,
+				25.96822738647461,
+				1.0732117891311646,
 				0
 			]
 		}
@@ -62,20 +62,6 @@
 		{
 			"doubleSided":true,
 			"name":"Material",
-			"pbrMetallicRoughness":{
-				"baseColorFactor":[
-					0.800000011920929,
-					0.800000011920929,
-					0.800000011920929,
-					1
-				],
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Material.001",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
 					0.800000011920929,
@@ -117,7 +103,7 @@
 			]
 		},
 		{
-			"name":"Cube.001",
+			"name":"\u7acb\u65b9\u4f53.001",
 			"primitives":[
 				{
 					"attributes":{
@@ -125,8 +111,7 @@
 						"NORMAL":9,
 						"TEXCOORD_0":10
 					},
-					"indices":3,
-					"material":1
+					"indices":7
 				}
 			]
 		}

@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #define ROTATION_X 2.0f
+#define POLEDISTANS 50.0f
 
 class Pole :public KdGameObject
 {
@@ -14,6 +15,8 @@ public:
 	void DrawLit()override;
 	void GenerateDepthMapFromLight()override;
 	void Init()override;
+
+	void SetPos(int i);
 
 private:
 	std::shared_ptr<KdModelData> m_model;      //モデル

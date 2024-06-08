@@ -3,7 +3,7 @@
 #include"Bullet/Bullet.h"
 
 #define COOL_TIME 2*60     //クールタイム 
-#define DISTANS   10       //大砲の間隔
+#define CANNONDISTANS   10       //大砲の間隔
 #define CorrectionX -0.5f  //X座標補正
 #define CorrectionY 4.0f  //Y座標補正
 

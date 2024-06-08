@@ -46,3 +46,8 @@ void Pole::Init()
 	m_angleX = 0.0f;
 	m_angleY = 0.0f;
 }
+
+void Pole::SetPos(int i)
+{
+	m_pos.x += POLEDISTANS * i;
+}

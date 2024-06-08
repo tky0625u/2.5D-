@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#define SPEED 0.4f  //移動量
+#define SPEED 0.3f  //移動量
 #define JUMP  1.0f  //ジャンプ力
 
 //アニメーション=================================

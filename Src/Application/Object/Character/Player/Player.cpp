@@ -152,18 +152,19 @@ void Player::PostUpdate()
 	//===============================================================
 
 	//球判定=========================================================
-	KdCollider::SphereInfo sphere;
-	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };
-	sphere.m_sphere.Radius = 1.5f;
-	sphere.m_type = KdCollider::Type::TypeBump | KdCollider::Type::TypeGround;
+	KdCollider::SphereInfo sphere;                                              //球判定用の変数作成
+	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };                //球の中心
+	sphere.m_sphere.Radius = 1.5f;                                              //球の半径
+	sphere.m_type = KdCollider::Type::TypeBump | KdCollider::Type::TypeGround;  //当たり判定したいタイプ
 
 	//デバッグ用
 	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius, color);
 
-	std::list<KdCollider::CollisionResult> retSphereList;
-	for (auto gimmick : m_GimmickList)gimmick->Intersects(sphere, &retSphereList);                  //ギミック
-	for (auto bullet : m_BulletList)bullet->Intersects(sphere, &retSphereList);                     //弾
+	std::list<KdCollider::CollisionResult> retSphereList;                           //当たったオブジェクトの情報を格納するリスト
+	for (auto gimmick : m_GimmickList)gimmick->Intersects(sphere, &retSphereList);  //ギミック
+	for (auto bullet : m_BulletList)bullet->Intersects(sphere, &retSphereList);     //弾
 
+	//球に当たったもので一番近いものを検出=================
 	maxOverLap = 0;
 	Math::Vector3 hitDir;
 	isHit = false;
@@ -176,6 +177,7 @@ void Player::PostUpdate()
 			isHit = true;
 		}
 	}
+	//=====================================================
 
 	if (isHit)
 	{

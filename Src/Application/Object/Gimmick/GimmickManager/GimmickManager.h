@@ -23,7 +23,8 @@ private:
 	std::vector<std::shared_ptr<KdGameObject>> m_GimmickList;  //リスト
 	std::vector<std::shared_ptr<KdGameObject>> m_BulletList;   //弾リスト　※当たり判定用
 	
-	static const int CANNONNUM = 3;
+	static const int CANNONNUM = 5;
+	static const int POLENUM = 3;
 	std::weak_ptr<Cannon>                      m_cannon[CANNONNUM];       //大砲　※弾の削除処理のため
 	Math::Vector3                              m_cameraPos;    //カメラ座標
 };

@@ -90,7 +90,7 @@ void Cannon::Init()
 {
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/Cannon/Cannon.gltf");
-	m_pos = { 100.0f,0.0f,10.0f };
+	m_pos = { 180.0f,0.0f,10.0f };
 	m_size = 2.5f;
 	m_angle = 180.0f;
 }
@@ -102,5 +102,5 @@ void Cannon::CoolTimeUP()
 
 void Cannon::SetPos(int i)
 {
-	m_pos.x += DISTANS * i;
+	m_pos.x += CANNONDISTANS * i;
 }
