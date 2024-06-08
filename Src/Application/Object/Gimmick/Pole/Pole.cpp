@@ -16,25 +16,6 @@ void Pole::Update()
 	//==================================================================================================
 }
 
-void Pole::PostUpdate()
-{
-}
-
-void Pole::Draw()
-{
-	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model, m_mWorld);
-}
-
-void Pole::DrawLit()
-{
-	Draw();
-}
-
-void Pole::GenerateDepthMapFromLight()
-{
-	Draw();
-}
-
 void Pole::Init()
 {
 	m_model = std::make_shared<KdModelData>();

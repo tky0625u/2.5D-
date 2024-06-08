@@ -1,13 +1,16 @@
 ﻿#pragma once
 
 #include"Bullet/Bullet.h"
+#include"../GimmickBase/GimmickBase.h"
 
 #define COOL_TIME 2*60     //クールタイム 
 #define CANNONDISTANS   10       //大砲の間隔
 #define CorrectionX -0.5f  //X座標補正
 #define CorrectionY 4.0f  //Y座標補正
 
-class Cannon :public KdGameObject
+class GimmickBase;
+
+class Cannon :public GimmickBase
 {
 public:
 	Cannon() { Init(); }
@@ -15,9 +18,9 @@ public:
 
 	void Update()override;
 	void PostUpdate()override;
-	void Draw();
-	void DrawLit()override;
-	void GenerateDepthMapFromLight()override;
+	virtual void Draw();
+	virtual void DrawLit()override;
+	virtual void GenerateDepthMapFromLight()override;
 	void Init()override;
 
 	void CoolTimeUP();
@@ -29,10 +32,6 @@ public:
 	const std::shared_ptr<Bullet> GetBullet() const{ return m_bullet; }
 
 private:
-	std::shared_ptr<KdModelData> m_model;      //モデル
-	Math::Vector3                m_pos;        //座標
-	float                        m_size;       //大きさ
-	float                        m_angle;      //角度
 	float                        m_coolTime;   //発射クールタイム
 
 	Math::Vector3                m_cameraPos;  //カメラ座標

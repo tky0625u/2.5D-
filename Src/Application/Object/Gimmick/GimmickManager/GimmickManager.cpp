@@ -2,6 +2,7 @@
 #include"../Cannon/Cannon.h"
 #include"../Pole/Pole.h"
 #include"../Brock/Brock.h"
+#include"../Board/Board.h"
 
 void GimmickManager::Update()
 {
@@ -80,5 +81,15 @@ void GimmickManager::Init()
 	//一マス床=====================================================================================
 	std::shared_ptr<Brock>brock = std::make_shared<Brock>();
 	m_GimmickList.push_back(brock);
+	//=============================================================================================
+
+	//動く床=====================================================================================
+	for (int i = 0; i < BOARDNUM; ++i)
+	{
+		std::shared_ptr<Board>board = std::make_shared<Board>();
+		board->SetPos(i);
+		board->ChangeSpeed(i);
+		m_GimmickList.push_back(board);
+	}
 	//=============================================================================================
 }

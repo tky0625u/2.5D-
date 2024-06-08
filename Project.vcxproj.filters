@@ -115,6 +115,12 @@
     <Filter Include="Src\Application\Object\Ground\Bridge">
       <UniqueIdentifier>{2e06d883-6bb1-4e37-a5ea-440c9c886881}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Gimmick\Board">
+      <UniqueIdentifier>{227e1741-0bf5-46b1-b435-07e610461657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Gimmick\GimmickBase">
+      <UniqueIdentifier>{cd000c4c-ce61-4e83-9f7b-562f67ca6e54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -315,6 +321,12 @@
     <ClInclude Include="Src\Application\Object\Ground\Bridge\Bridge.h">
       <Filter>Src\Application\Object\Ground\Bridge</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Gimmick\Board\Board.h">
+      <Filter>Src\Application\Object\Gimmick\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Gimmick\GimmickBase\GimmickBase.h">
+      <Filter>Src\Application\Object\Gimmick\GimmickBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -484,6 +496,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Ground\Bridge\Bridge.cpp">
       <Filter>Src\Application\Object\Ground\Bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Gimmick\Board\Board.cpp">
+      <Filter>Src\Application\Object\Gimmick\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Gimmick\GimmickBase\GimmickBase.cpp">
+      <Filter>Src\Application\Object\Gimmick\GimmickBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include"../../Gimmick/GimmickBase/GimmickBase.h"
 
 #define SPEED 0.3f  //移動量
 #define JUMP  1.0f  //ジャンプ力
@@ -9,6 +10,8 @@
 #define IDOL_MAX 4
 #define WALK_MAX 7
 //===============================================
+
+class GimmickBase;
 
 class Player :public KdGameObject
 {
@@ -32,7 +35,7 @@ public:
 
 	void ReStart();
 
-	void SetGimmickList(std::vector<std::shared_ptr<KdGameObject>> a_GimmickList) { m_GimmickList = a_GimmickList; }
+	void SetGimmickList(std::vector<std::shared_ptr<GimmickBase>> a_GimmickList) { m_GimmickList = a_GimmickList; }
 	void SetBulletList(std::vector<std::shared_ptr<KdGameObject>> a_BulletList) { m_BulletList = a_BulletList; }
 
 private:
@@ -47,6 +50,9 @@ private:
 
 	Animation m_anime;  //アニメーション
 
-	std::vector<std::shared_ptr<KdGameObject>> m_GimmickList;  //ギミックリスト　※当たり判定のため
+	std::vector<std::shared_ptr<GimmickBase>> m_GimmickList;  //ギミックリスト　※当たり判定のため
 	std::vector<std::shared_ptr<KdGameObject>> m_BulletList;  //弾リスト　※当たり判定のため
+
+	bool m_air;
+	bool m_keyFlg;
 };

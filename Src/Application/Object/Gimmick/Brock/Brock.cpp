@@ -8,21 +8,6 @@ void Brock::Update()
 	m_mWorld = Scale * RotY * Trans;
 }
 
-void Brock::Draw()
-{
-	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model, m_mWorld);  //モデル描画
-}
-
-void Brock::DrawLit()
-{
-	Draw();
-}
-
-void Brock::GenerateDepthMapFromLight()
-{
-	Draw();
-}
-
 void Brock::Init()
 {
 	m_pos = { -8,-5,-3 };

@@ -40,10 +40,30 @@ void Player::Update()
 	}
 	//===============================================================
 	
+	//デバッグ用=====================================================
+	if (GetAsyncKeyState('P') & 0x8000)
+	{
+		if (!m_keyFlg)
+		{
+			if (!m_air)
+			{
+				m_air = true;
+				m_move.y = 0;
+			}
+			else { m_air = false; }
+			m_keyFlg = true;
+		}
+	}
+	else
+	{
+		m_keyFlg = false;
+	}
+	//===============================================================
+
 	m_dir.Normalize();
 	m_move.x = m_dir.x * SPEED;
 	m_move.z = m_dir.z * SPEED;
-	m_move.y -= m_gravity;  //重力を与える
+	if(!m_air)m_move.y -= m_gravity;  //重力を与える
 	m_pos += m_move;
 
 	if (m_pos.y <= -50 || GetAsyncKeyState('R')&0x8000)ReStart();
@@ -93,6 +113,8 @@ void Player::Update()
 void Player::PostUpdate()
 {
 	//当たり判定===================================================================================
+
+
 
 	//レイ判定=======================================================
 	
@@ -151,11 +173,11 @@ void Player::PostUpdate()
 
 	//===============================================================
 
-	//球判定=========================================================
+		//球判定=========================================================
 	KdCollider::SphereInfo sphere;                                              //球判定用の変数作成
 	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };                //球の中心
 	sphere.m_sphere.Radius = 1.5f;                                              //球の半径
-	sphere.m_type = KdCollider::Type::TypeBump | KdCollider::Type::TypeGround;  //当たり判定したいタイプ
+	sphere.m_type = KdCollider::Type::TypeBump;  //当たり判定したいタイプ
 
 	//デバッグ用
 	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius, color);
@@ -181,7 +203,7 @@ void Player::PostUpdate()
 
 	if (isHit)
 	{
-		hitDir.y = 0.0f;
+		//hitDir.y = 0.0f;
 		hitDir.Normalize();
 		m_pos += hitDir * maxOverLap;
 		m_move.y = 0.0f;
@@ -227,6 +249,8 @@ void Player::Init()
 	m_anime.m_motion = IDOL;
 
 	//デバッグ用
+	m_keyFlg = false;
+	m_air = false;
 	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
 }
 

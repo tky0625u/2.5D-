@@ -65,7 +65,7 @@ void Cannon::PostUpdate()
 
 void Cannon::Draw()
 {
-	KdShaderManager::Instance().m_StandardShader.DrawModel(*m_model, m_mWorld);
+	GimmickBase::Draw();
 }
 
 void Cannon::DrawLit()
