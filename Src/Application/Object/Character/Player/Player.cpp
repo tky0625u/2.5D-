@@ -64,7 +64,7 @@ void Player::Update()
 	m_move.x = m_dir.x * SPEED;
 	m_move.z = m_dir.z * SPEED;
 	if(!m_air)m_move.y -= m_gravity;  //重力を与える
-	m_pos += m_move;
+	m_pos += m_move + m_GmkMove;      //プレイヤーの移動量とギミックの移動量を合わせる
 
 	if (m_pos.y <= -50 || GetAsyncKeyState('R')&0x8000)ReStart();
 	//=============================================================================================
@@ -134,16 +134,35 @@ void Player::PostUpdate()
 	//=====================================================
 
 	//当たり判定===========================================
-	std::list<KdCollider::CollisionResult> retRayList;                                        //当たったオブジェクトの情報を格納するリスト
-	for (auto obj : SceneManager::Instance().GetObjList())obj->Intersects(ray, &retRayList);  //地面
-	for (auto gimmick : m_GimmickList)gimmick->Intersects(ray, &retRayList);                  //ギミック
+
+	//地面=======================================
+	std::list<KdCollider::CollisionResult> retRayObjList;  //当たったオブジェクトの情報を格納するリスト
+	for (auto obj : SceneManager::Instance().GetObjList())obj->Intersects(ray, &retRayObjList);
+	//===========================================
+
+	//ギミック===================================
+	std::list<KdCollider::CollisionResult> retRayGmkList;  //当たったオブジェクトの情報を格納するリスト
+	std::vector<Math::Vector3> MoveList;                   //ギミックの移動量を格納するリスト
+	int ListNum = 0;  //現在のリストの大きさを計測する変数
+	for (auto gimmick : m_GimmickList)
+	{
+		gimmick->Intersects(ray, &retRayGmkList);  //当たり判定
+		if (ListNum != retRayGmkList.size())       //前のリストの大きさと違っていたら=ギミックに当たっていたら
+		{
+			MoveList.push_back(gimmick->GetMove());  //移動量リストに移動量を格納
+			ListNum = retRayGmkList.size();          //リストの大きさを更新
+		}
+	}
+	//===========================================
+
 	//=====================================================
 
-	//レイに当たったオブジェクトで一番近いものを検出=======
+	//地面=================================================
+	//レイに当たったオブジェクトで一番近いものを検出
 	float maxOverLap = 0;  //レイがはみ出た長さ
 	Math::Vector3 hitPos;  //当たった座標
 	bool isHit = false;    //当たり判定フラグ
-	for (auto& ret : retRayList)
+	for (auto& ret : retRayObjList)
 	{
 		//はみ出た長さが一番長いものを探す
 		if (maxOverLap < ret.m_overlapDistance)
@@ -156,24 +175,56 @@ void Player::PostUpdate()
 			isHit = true;  //当たり判定フラグtrue
 		}
 	}
-	//=====================================================
+	//==============================================
 
-	//当たった時===========================================
+	//当たった時====================================
 	if (isHit)
 	{
 		m_pos = hitPos + Math::Vector3{ 0.0f,-0.1f,0.0f };  //座標更新
 		m_move.y = 0.0f;                                    //落下速度をなくす
 		m_jumpFlg = false;                                  //ジャンプフラグfalse
 	}
+	//=====================================================
 	else
 	{
-		m_jumpFlg = true;
+	//ギミック=============================================
+		Math::Vector3 move;  //移動量
+		int Cnt = 0;         //現在がリストの何番目の処理をしているかを計測する変数
+		for (auto& ret : retRayGmkList)
+		{
+			//はみ出た長さが一番長いものを探す
+			if (maxOverLap < ret.m_overlapDistance)
+			{
+				//情報を上書き=======================
+				maxOverLap = ret.m_overlapDistance;
+				hitPos = ret.m_hitPos;
+				move = MoveList[Cnt];  //移動量を上書き
+				//===================================
+
+				isHit = true;  //当たり判定フラグtrue
+			}
+			Cnt++;  //カウントを増やす
+		}
+
+		if (isHit)
+		{
+			m_pos = hitPos + Math::Vector3{ 0.0f,-0.1f,0.0f };  //座標更新
+			m_GmkMove = move;                                   //移動量を更新
+			m_move.y = 0.0f;                                    //落下速度をなくす
+			m_jumpFlg = false;                                  //ジャンプフラグfalse
+		}
+	//=====================================================
+		else
+		{
+			m_GmkMove = Math::Vector3::Zero;
+			m_jumpFlg = true;
+		}
 	}
 	//=====================================================
 
 	//===============================================================
 
-		//球判定=========================================================
+	//球判定=========================================================
 	KdCollider::SphereInfo sphere;                                              //球判定用の変数作成
 	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };                //球の中心
 	sphere.m_sphere.Radius = 1.5f;                                              //球の半径
@@ -203,7 +254,7 @@ void Player::PostUpdate()
 
 	if (isHit)
 	{
-		//hitDir.y = 0.0f;
+		hitDir.y = 0.0f;
 		hitDir.Normalize();
 		m_pos += hitDir * maxOverLap;
 		m_move.y = 0.0f;
@@ -237,6 +288,7 @@ void Player::Init()
 	m_polygon->SetSplit(24, 1);
 	m_pos = { -50,0,0 };
 	m_move = Math::Vector3::Zero;
+	m_GmkMove = Math::Vector3::Zero;
 	m_dir = Math::Vector3::Zero;
 	m_size = { 3.0f,3.0f,3.0f };
 	m_angle = 0.0f;
