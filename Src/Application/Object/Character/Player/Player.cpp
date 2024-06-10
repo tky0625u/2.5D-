@@ -286,7 +286,7 @@ void Player::Init()
 	m_polygon->SetMaterial("Asset/Textures/Character/Player/sheets/DinoSprites - doux.png");
 	m_polygon->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_polygon->SetSplit(24, 1);
-	m_pos = { -50,0,0 };
+	m_pos = { 300,5,0 };
 	m_move = Math::Vector3::Zero;
 	m_GmkMove = Math::Vector3::Zero;
 	m_dir = Math::Vector3::Zero;

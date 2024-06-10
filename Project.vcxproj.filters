@@ -121,6 +121,9 @@
     <Filter Include="Src\Application\Object\Gimmick\GimmickBase">
       <UniqueIdentifier>{cd000c4c-ce61-4e83-9f7b-562f67ca6e54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Ground\Center">
+      <UniqueIdentifier>{68dd4301-1430-48c1-8cd6-e652734c5af7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -327,6 +330,9 @@
     <ClInclude Include="Src\Application\Object\Gimmick\GimmickBase\GimmickBase.h">
       <Filter>Src\Application\Object\Gimmick\GimmickBase</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ground\Center\Center.h">
+      <Filter>Src\Application\Object\Ground\Center</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -502,6 +508,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Gimmick\GimmickBase\GimmickBase.cpp">
       <Filter>Src\Application\Object\Gimmick\GimmickBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ground\Center\Center.cpp">
+      <Filter>Src\Application\Object\Ground\Center</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
