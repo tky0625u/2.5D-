@@ -13,6 +13,7 @@ public:
 	virtual void Init()override = 0;
 
 	virtual const Math::Vector3 GetMove()const { return m_move; }
+	virtual const float GetBound()const { return m_bound; }
 
 protected:
 	std::shared_ptr<KdModelData> m_model;      //モデル
@@ -20,4 +21,5 @@ protected:
 	Math::Vector3                m_move;       //動き
 	float                        m_size;       //大きさ
 	float                        m_angle;      //角度
+	float                        m_bound;      //跳ね返り
 };

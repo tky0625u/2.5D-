@@ -3,6 +3,7 @@
 #include"../Pole/Pole.h"
 #include"../Brock/Brock.h"
 #include"../Board/Board.h"
+#include"../Trampoline/Trampoline.h"
 
 void GimmickManager::Update()
 {
@@ -91,5 +92,10 @@ void GimmickManager::Init()
 		board->ChangeSpeed(i);
 		m_GimmickList.push_back(board);
 	}
+	//=============================================================================================
+
+	//トランポリン=================================================================================
+	std::shared_ptr<Trampoline>trampoline = std::make_shared<Trampoline>();
+	m_GimmickList.push_back(trampoline);
 	//=============================================================================================
 }

@@ -124,6 +124,9 @@
     <Filter Include="Src\Application\Object\Ground\Center">
       <UniqueIdentifier>{68dd4301-1430-48c1-8cd6-e652734c5af7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Gimmick\Trampoline">
+      <UniqueIdentifier>{b0b42059-c23d-4bb0-8432-85511fda73ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -333,6 +336,9 @@
     <ClInclude Include="Src\Application\Object\Ground\Center\Center.h">
       <Filter>Src\Application\Object\Ground\Center</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.h">
+      <Filter>Src\Application\Object\Gimmick\Trampoline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -511,6 +517,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Ground\Center\Center.cpp">
       <Filter>Src\Application\Object\Ground\Center</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.cpp">
+      <Filter>Src\Application\Object\Gimmick\Trampoline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

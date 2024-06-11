@@ -20,6 +20,7 @@ void Board::Init()
 	m_angle = 0;
 	m_speed = 0.1f;
 	m_size = 1.0f;
+	m_bound = 0.0f;
 	m_model = std::make_shared<KdModelData>();          //メモリ確保
 	m_model->Load("Asset/Models/Board/Board.gltf");  //モデル読み込み
 	m_pCollider = std::make_unique<KdCollider>();

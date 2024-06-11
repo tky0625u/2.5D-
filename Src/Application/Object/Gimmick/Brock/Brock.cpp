@@ -13,6 +13,7 @@ void Brock::Init()
 	m_pos = { -8,-5,-3 };
 	m_angle = 90;
 	m_size = 2.0f;
+	m_bound = 0.0f;
 	m_model = std::make_shared<KdModelData>();          //メモリ確保
 	m_model->Load("Asset/Models/Brock/Brock.gltf");  //モデル読み込み
 	m_pCollider = std::make_unique<KdCollider>();

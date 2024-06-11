@@ -34,7 +34,7 @@ void Player::Update()
 	{
 		if (!m_jumpFlg)  //空中ジャンプ防止
 		{
-			m_move.y = JUMP;   //※移動変数にジャンプ力を代入
+			m_move.y += JUMP;   //※移動変数にジャンプ力を代入
 			m_jumpFlg = true;  
 		}
 	}
@@ -63,10 +63,14 @@ void Player::Update()
 	m_dir.Normalize();
 	m_move.x = m_dir.x * SPEED;
 	m_move.z = m_dir.z * SPEED;
-	if(!m_air)m_move.y -= m_gravity;  //重力を与える
+	if(!m_air)m_move.y -= m_gravity;  //重力と跳ね返りを与える
 	m_pos += m_move + m_GmkMove;      //プレイヤーの移動量とギミックの移動量を合わせる
 
-	if (m_pos.y <= -50 || GetAsyncKeyState('R')&0x8000)ReStart();
+	//デバッグ用=====================================================
+	if (GetAsyncKeyState('R')&0x8000)ReStart();
+	if (m_pos.y <= -50)m_pos = { 300.0f,50.0f,0.0f };
+	//===============================================================
+
 	//=============================================================================================
 
 	//アニメーション===============================================================================
@@ -142,15 +146,15 @@ void Player::PostUpdate()
 
 	//ギミック===================================
 	std::list<KdCollider::CollisionResult> retRayGmkList;  //当たったオブジェクトの情報を格納するリスト
-	std::vector<Math::Vector3> MoveList;                   //ギミックの移動量を格納するリスト
+	std::vector<std::shared_ptr<GimmickBase>> GimmickList; //当たったオブジェクト自体を格納するリスト
 	int ListNum = 0;  //現在のリストの大きさを計測する変数
 	for (auto gimmick : m_GimmickList)
 	{
 		gimmick->Intersects(ray, &retRayGmkList);  //当たり判定
 		if (ListNum != retRayGmkList.size())       //前のリストの大きさと違っていたら=ギミックに当たっていたら
 		{
-			MoveList.push_back(gimmick->GetMove());  //移動量リストに移動量を格納
-			ListNum = retRayGmkList.size();          //リストの大きさを更新
+			GimmickList.push_back(gimmick);  //当たったギミックを格納
+			ListNum = retRayGmkList.size();  //リストの大きさを更新
 		}
 	}
 	//===========================================
@@ -189,6 +193,7 @@ void Player::PostUpdate()
 	{
 	//ギミック=============================================
 		Math::Vector3 move;  //移動量
+		float bound;         //跳ね返り
 		int Cnt = 0;         //現在がリストの何番目の処理をしているかを計測する変数
 		for (auto& ret : retRayGmkList)
 		{
@@ -198,7 +203,8 @@ void Player::PostUpdate()
 				//情報を上書き=======================
 				maxOverLap = ret.m_overlapDistance;
 				hitPos = ret.m_hitPos;
-				move = MoveList[Cnt];  //移動量を上書き
+				move = GimmickList[Cnt]->GetMove();    //移動量を上書き
+				bound = GimmickList[Cnt]->GetBound();  //跳ね返りを上書き
 				//===================================
 
 				isHit = true;  //当たり判定フラグtrue
@@ -210,7 +216,7 @@ void Player::PostUpdate()
 		{
 			m_pos = hitPos + Math::Vector3{ 0.0f,-0.1f,0.0f };  //座標更新
 			m_GmkMove = move;                                   //移動量を更新
-			m_move.y = 0.0f;                                    //落下速度をなくす
+			m_move.y = bound;                                   //跳ね返りに更新
 			m_jumpFlg = false;                                  //ジャンプフラグfalse
 		}
 	//=====================================================

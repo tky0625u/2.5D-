@@ -26,6 +26,7 @@ void Pole::Init()
 	m_size = 2.0f;
 	m_angleX = 0.0f;
 	m_angleY = 0.0f;
+	m_bound = 0.0f;
 }
 
 void Pole::SetPos(int i)

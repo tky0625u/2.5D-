@@ -165,6 +165,7 @@
     <ClInclude Include="Src\Application\Object\Gimmick\GimmickBase\GimmickBase.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\GimmickManager\GimmickManager.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\Pole\Pole.h" />
+    <ClInclude Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.h" />
     <ClInclude Include="Src\Application\Object\Ground\Bridge\Bridge.h" />
     <ClInclude Include="Src\Application\Object\Ground\Center\Center.h" />
     <ClInclude Include="Src\Application\Object\Ground\Start\StartBlock.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="Src\Application\Object\Gimmick\GimmickBase\GimmickBase.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\GimmickManager\GimmickManager.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\Pole\Pole.cpp" />
+    <ClCompile Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Bridge\Bridge.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Center\Center.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Start\StartBlock.cpp" />
