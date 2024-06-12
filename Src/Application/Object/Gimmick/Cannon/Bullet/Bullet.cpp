@@ -16,7 +16,7 @@ void Bullet::Update()
 
 void Bullet::PostUpdate()
 {
-	if (m_pos.z <= m_cameraPos.z)m_isExpired = true;
+	if (m_pos.z <= -50.0f)m_isExpired = true;
 }
 
 void Bullet::Draw()

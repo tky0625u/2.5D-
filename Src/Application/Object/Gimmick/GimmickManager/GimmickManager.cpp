@@ -28,10 +28,6 @@ void GimmickManager::Update()
 
 void GimmickManager::PostUpdate()
 {
-	for (int i = 0; i < CANNONNUM; ++i)
-	{
-		if (!m_cannon[i].expired())m_cannon[i].lock()->SetCameraPos(m_cameraPos);  //カメラ座標
-	}
 	for (auto gimmick : m_GimmickList)gimmick->PostUpdate();
 
 	std::vector<std::shared_ptr<KdGameObject>>::iterator it = m_BulletList.begin();

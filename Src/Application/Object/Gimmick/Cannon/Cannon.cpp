@@ -34,7 +34,6 @@ void Cannon::PostUpdate()
 	//後更新===================================================================
 	for (auto bullet : m_bulletList)
 	{
-		bullet->SetCameraPos(m_cameraPos);  //カメラ座標格納
 		bullet->PostUpdate();               //後更新
 	}
 	//=========================================================================

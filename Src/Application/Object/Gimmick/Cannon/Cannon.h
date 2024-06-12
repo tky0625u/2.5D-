@@ -26,15 +26,12 @@ public:
 	void CoolTimeUP();
 
 	void SetPos(int i);
-	void SetCameraPos(Math::Vector3 a_cameraPos) { m_cameraPos = a_cameraPos; }
 
 	const float GetCoolTime()const { return m_coolTime; }
 	const std::shared_ptr<Bullet> GetBullet() const{ return m_bullet; }
 
 private:
 	float                        m_coolTime;   //発射クールタイム
-
-	Math::Vector3                m_cameraPos;  //カメラ座標
 
 	std::vector<std::shared_ptr<Bullet>>  m_bulletList;  //弾リスト
 	std::shared_ptr<Bullet>               m_bullet;      //弾

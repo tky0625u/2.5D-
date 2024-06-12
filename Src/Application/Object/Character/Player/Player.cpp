@@ -9,20 +9,20 @@ void Player::Update()
 
 	//移動===========================================================
 	m_dir = Math::Vector3::Zero;
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	if (GetAsyncKeyState('W') & 0x8000)
 	{
 		m_dir.z = 1.0f;
 	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	if (GetAsyncKeyState('S') & 0x8000)
 	{
 		m_dir.z = -1.0f;
 	}
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	if (GetAsyncKeyState('A') & 0x8000)
 	{
 		m_dir.x = -1.0f;
 		m_size.x = -3.0f;
 	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	if (GetAsyncKeyState('D') & 0x8000)
 	{
 		m_dir.x = 1.0f;
 		m_size.x = 3.0f;
@@ -40,6 +40,29 @@ void Player::Update()
 	}
 	//===============================================================
 	
+	//視点移動=======================================================
+	POINT CurSor;
+	GetCursorPos(&CurSor);
+	if (CurSor.x != m_oldCursorPos.x || CurSor.y!=m_oldCursorPos.y)
+	{
+		if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
+		{
+			m_angleX += (CurSor.y - m_oldCursorPos.y) * VP_SPEED;
+			m_angleY += (CurSor.x - m_oldCursorPos.x) * VP_SPEED;
+		}
+		m_oldCursorPos.x = CurSor.x;
+		m_oldCursorPos.y = CurSor.y;
+	}
+
+	//角度制御===================================
+	if (m_angleX > 360.0f)m_angleX -= 360.0f; 
+	if (m_angleX < -360.0f)m_angleX += 360.0f;
+	if (m_angleY > 360.0f)m_angleY -= 360.0f; 
+	if (m_angleY < -360.0f)m_angleY += 360.0f;
+	//===========================================
+
+	//===============================================================
+
 	//デバッグ用=====================================================
 	if (GetAsyncKeyState('P') & 0x8000)
 	{
@@ -61,10 +84,19 @@ void Player::Update()
 	//===============================================================
 
 	m_dir.Normalize();
-	m_move.x = m_dir.x * SPEED;
-	m_move.z = m_dir.z * SPEED;
 	if(!m_air)m_move.y -= m_gravity;  //重力と跳ね返りを与える
-	m_pos += m_move + m_GmkMove;      //プレイヤーの移動量とギミックの移動量を合わせる
+	m_pos.y += m_move.y;              //高さ
+	m_pos += m_GmkMove;               //ギミックの移動量を合わせる
+
+	//前後=============================================================================================================
+															   //      ↓*速度制御*↓     //                     前 右 後 左
+	m_pos.z += cos(DirectX::XMConvertToRadians(m_angleY)) * (SPEED * m_dir.z);  //速度代入  1  0 -1  0=cos
+	m_pos.x += sin(DirectX::XMConvertToRadians(m_angleY)) * (SPEED * m_dir.z);  //速度代入  0  1  0 -1=sin
+	//=================================================================================================================
+	//左右=============================================================================================================
+	m_pos.z += -sin(DirectX::XMConvertToRadians(m_angleY)) * (SPEED * m_dir.x); //速度代入  0 -1  0  1=-sin
+	m_pos.x += cos(DirectX::XMConvertToRadians(m_angleY)) * (SPEED * m_dir.x);  //速度代入  1  0 -1  0=cos
+	//=================================================================================================================
 
 	//デバッグ用=====================================================
 	if (GetAsyncKeyState('R')&0x8000)ReStart();
@@ -108,7 +140,7 @@ void Player::Update()
 
 	//行列更新=====================================================================================
 	Math::Matrix Scale = Math::Matrix::CreateScale(m_size);                                  //拡縮 S
-	Math::Matrix Rot = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_angle));  //回転 R
+	Math::Matrix Rot = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_angleY));  //回転 R
 	Math::Matrix Trans = Math::Matrix::CreateTranslation(m_pos);                             //座標 T
 	m_mWorld = Scale * Rot * Trans;                                                          //行列合成
 	//=============================================================================================
@@ -218,7 +250,7 @@ void Player::PostUpdate()
 	KdCollider::SphereInfo sphere;                                              //球判定用の変数作成
 	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };                //球の中心
 	sphere.m_sphere.Radius = 1.5f;                                              //球の半径
-	sphere.m_type = KdCollider::Type::TypeBump | KdCollider::Type::TypeGround;  //当たり判定したいタイプ
+	sphere.m_type = KdCollider::Type::TypeBump;  //当たり判定したいタイプ
 
 	//デバッグ用
 	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius, color);
@@ -247,7 +279,7 @@ void Player::PostUpdate()
 	{
 		if (RayHit)
 		{
-			hitDir = Math::Vector3::Zero;
+			hitDir.y = 0.0f;
 		}
 		else
 		{
@@ -266,11 +298,6 @@ void Player::Draw()
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_polygon, m_mWorld);
 }
 
-void Player::DrawLit()
-{
-	Draw();
-}
-
 void Player::GenerateDepthMapFromLight()
 {
 	Draw();
@@ -287,7 +314,9 @@ void Player::Init()
 	m_GmkMove = Math::Vector3::Zero;
 	m_dir = Math::Vector3::Zero;
 	m_size = { 3.0f,3.0f,3.0f };
-	m_angle = 0.0f;
+	m_oldCursorPos = Math::Vector2::Zero;
+	m_angleX = 0.0f;
+	m_angleY = 90.0f;
 	m_gravity = 0.05f;
 	m_jumpFlg = false;
 

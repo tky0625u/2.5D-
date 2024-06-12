@@ -17,7 +17,6 @@ public:
 
 	void SetPos(Math::Vector3 a_pos) { m_pos = a_pos; }
 	void SetAngle(float a_angle) { m_angle = a_angle; }
-	void SetCameraPos(Math::Vector3 a_cameraPos) { m_cameraPos = a_cameraPos; }
 
 private:
 	std::shared_ptr<KdModelData> m_model;  //モデル
