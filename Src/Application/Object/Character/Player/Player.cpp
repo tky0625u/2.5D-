@@ -127,7 +127,7 @@ void Player::PostUpdate()
 	ray.m_pos = m_pos;                            //レイのスタート地点
 	ray.m_dir = Math::Vector3::Down;              //レイの方向
 	ray.m_pos.y += 0.1f;                          //少し上から飛ばす
-	float enableStepHight = 0.2f;                 //段差の許容範囲
+	float enableStepHight = 0.5f;                 //段差の許容範囲
 	ray.m_pos.y += enableStepHight;               //許容範囲を加える
 	ray.m_range = -(m_move.y) + enableStepHight;  //レイの長さ
 	ray.m_type = KdCollider::Type::TypeGround;    //当たり判定したいタイプ
@@ -165,7 +165,7 @@ void Player::PostUpdate()
 	//レイに当たったオブジェクトで一番近いものを検出
 	float maxOverLap = 0;  //レイがはみ出た長さ
 	Math::Vector3 hitPos;  //当たった座標
-	bool isHit = false;    //当たり判定フラグ
+	bool RayHit = false;    //当たり判定フラグ
 	for (auto& ret : retRayObjList)
 	{
 		//はみ出た長さが一番長いものを探す
@@ -176,13 +176,13 @@ void Player::PostUpdate()
 			hitPos = ret.m_hitPos;
 			//===================================
 			
-			isHit = true;  //当たり判定フラグtrue
+			RayHit = true;  //当たり判定フラグtrue
 		}
 	}
 	//==============================================
 
 	//当たった時====================================
-	if (isHit)
+	if (RayHit)
 	{
 		m_pos = hitPos + Math::Vector3{ 0.0f,-0.1f,0.0f };  //座標更新
 		m_move.y = 0.0f;                                    //落下速度をなくす
@@ -207,12 +207,12 @@ void Player::PostUpdate()
 				bound = GimmickList[Cnt]->GetBound();  //跳ね返りを上書き
 				//===================================
 
-				isHit = true;  //当たり判定フラグtrue
+				RayHit = true;  //当たり判定フラグtrue
 			}
 			Cnt++;  //カウントを増やす
 		}
 
-		if (isHit)
+		if (RayHit)
 		{
 			m_pos = hitPos + Math::Vector3{ 0.0f,-0.1f,0.0f };  //座標更新
 			m_GmkMove = move;                                   //移動量を更新
@@ -234,36 +234,44 @@ void Player::PostUpdate()
 	KdCollider::SphereInfo sphere;                                              //球判定用の変数作成
 	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };                //球の中心
 	sphere.m_sphere.Radius = 1.5f;                                              //球の半径
-	sphere.m_type = KdCollider::Type::TypeBump;  //当たり判定したいタイプ
+	sphere.m_type = KdCollider::Type::TypeBump | KdCollider::Type::TypeGround;  //当たり判定したいタイプ
 
 	//デバッグ用
 	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius, color);
 
 	std::list<KdCollider::CollisionResult> retSphereList;                           //当たったオブジェクトの情報を格納するリスト
+	for (auto obj : SceneManager::Instance().GetObjList())obj->Intersects(sphere,&retSphereList);
 	for (auto gimmick : m_GimmickList)gimmick->Intersects(sphere, &retSphereList);  //ギミック
 	for (auto bullet : m_BulletList)bullet->Intersects(sphere, &retSphereList);     //弾
 
 	//球に当たったもので一番近いものを検出=================
 	maxOverLap = 0;
 	Math::Vector3 hitDir;
-	isHit = false;
+	bool SphereHit = false;
 	for (auto& ret : retSphereList)
 	{
 		if (maxOverLap < ret.m_overlapDistance)
 		{
 			maxOverLap = ret.m_overlapDistance;
 			hitDir = ret.m_hitDir;
-			isHit = true;
+			SphereHit = true;
 		}
 	}
 	//=====================================================
 
-	if (isHit)
+	if (SphereHit)
 	{
-		hitDir.y = 0.0f;
+		if (RayHit)
+		{
+			hitDir.x = 0.0f;
+			hitDir.z = 0.0f;
+		}
+		else
+		{
+			m_move.y = 0.0f;
+		}
 		hitDir.Normalize();
 		m_pos += hitDir * maxOverLap;
-		m_move.y = 0.0f;
 		m_jumpFlg = false;
 	}
 	//===============================================================

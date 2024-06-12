@@ -168,6 +168,7 @@
     <ClInclude Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.h" />
     <ClInclude Include="Src\Application\Object\Ground\Bridge\Bridge.h" />
     <ClInclude Include="Src\Application\Object\Ground\Center\Center.h" />
+    <ClInclude Include="Src\Application\Object\Ground\Road\Road.h" />
     <ClInclude Include="Src\Application\Object\Ground\Start\StartBlock.h" />
     <ClInclude Include="Src\Application\Object\UI\Timer\Timer.h" />
     <ClInclude Include="Src\Application\Object\UI\Timer\TimerManager.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Bridge\Bridge.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Center\Center.cpp" />
+    <ClCompile Include="Src\Application\Object\Ground\Road\Road.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Start\StartBlock.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Timer\Timer.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Timer\TimerManager.cpp" />

@@ -127,6 +127,9 @@
     <Filter Include="Src\Application\Object\Gimmick\Trampoline">
       <UniqueIdentifier>{b0b42059-c23d-4bb0-8432-85511fda73ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Ground\Road">
+      <UniqueIdentifier>{fe2a895a-9c64-42ee-8101-42c1832edfd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -339,6 +342,9 @@
     <ClInclude Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.h">
       <Filter>Src\Application\Object\Gimmick\Trampoline</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ground\Road\Road.h">
+      <Filter>Src\Application\Object\Ground\Road</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -520,6 +526,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.cpp">
       <Filter>Src\Application\Object\Gimmick\Trampoline</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ground\Road\Road.cpp">
+      <Filter>Src\Application\Object\Ground\Road</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
