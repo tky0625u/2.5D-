@@ -130,6 +130,9 @@
     <Filter Include="Src\Application\Object\Ground\Road">
       <UniqueIdentifier>{fe2a895a-9c64-42ee-8101-42c1832edfd6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Gimmick\Wall">
+      <UniqueIdentifier>{26bf879b-a3ee-4063-a46f-e03a5a8f7c31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -345,6 +348,9 @@
     <ClInclude Include="Src\Application\Object\Ground\Road\Road.h">
       <Filter>Src\Application\Object\Ground\Road</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Gimmick\Wall\Wall.h">
+      <Filter>Src\Application\Object\Gimmick\Wall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -529,6 +535,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Ground\Road\Road.cpp">
       <Filter>Src\Application\Object\Ground\Road</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Gimmick\Wall\Wall.cpp">
+      <Filter>Src\Application\Object\Gimmick\Wall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

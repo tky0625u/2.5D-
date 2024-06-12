@@ -4,6 +4,7 @@
 #include"../Brock/Brock.h"
 #include"../Board/Board.h"
 #include"../Trampoline/Trampoline.h"
+#include"../Wall/Wall.h"
 
 void GimmickManager::Update()
 {
@@ -97,5 +98,10 @@ void GimmickManager::Init()
 	//トランポリン=================================================================================
 	std::shared_ptr<Trampoline>trampoline = std::make_shared<Trampoline>();
 	m_GimmickList.push_back(trampoline);
+	//=============================================================================================
+
+	//反り立つ壁===================================================================================
+	std::shared_ptr<Wall>wall = std::make_shared<Wall>();
+	m_GimmickList.push_back(wall);
 	//=============================================================================================
 }

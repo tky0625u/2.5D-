@@ -139,11 +139,6 @@ void Player::PostUpdate()
 
 	//当たり判定===========================================
 
-	//地面=======================================
-	std::list<KdCollider::CollisionResult> retRayObjList;  //当たったオブジェクトの情報を格納するリスト
-	for (auto obj : SceneManager::Instance().GetObjList())obj->Intersects(ray, &retRayObjList);
-	//===========================================
-
 	//ギミック===================================
 	std::list<KdCollider::CollisionResult> retRayGmkList;  //当たったオブジェクトの情報を格納するリスト
 	std::vector<std::shared_ptr<GimmickBase>> GimmickList; //当たったオブジェクト自体を格納するリスト
@@ -161,36 +156,11 @@ void Player::PostUpdate()
 
 	//=====================================================
 
-	//地面=================================================
 	//レイに当たったオブジェクトで一番近いものを検出
 	float maxOverLap = 0;  //レイがはみ出た長さ
 	Math::Vector3 hitPos;  //当たった座標
 	bool RayHit = false;    //当たり判定フラグ
-	for (auto& ret : retRayObjList)
-	{
-		//はみ出た長さが一番長いものを探す
-		if (maxOverLap < ret.m_overlapDistance)
-		{
-			//情報を上書き=======================
-			maxOverLap = ret.m_overlapDistance;
-			hitPos = ret.m_hitPos;
-			//===================================
-			
-			RayHit = true;  //当たり判定フラグtrue
-		}
-	}
-	//==============================================
 
-	//当たった時====================================
-	if (RayHit)
-	{
-		m_pos = hitPos + Math::Vector3{ 0.0f,-0.1f,0.0f };  //座標更新
-		m_move.y = 0.0f;                                    //落下速度をなくす
-		m_jumpFlg = false;                                  //ジャンプフラグfalse
-	}
-	//=====================================================
-	else
-	{
 	//ギミック=============================================
 		Math::Vector3 move;  //移動量
 		float bound;         //跳ね返り
@@ -219,13 +189,6 @@ void Player::PostUpdate()
 			m_move.y = bound;                                   //跳ね返りに更新
 			m_jumpFlg = false;                                  //ジャンプフラグfalse
 		}
-	//=====================================================
-		else
-		{
-			m_GmkMove = Math::Vector3::Zero;
-			m_jumpFlg = true;
-		}
-	}
 	//=====================================================
 
 	//===============================================================
@@ -261,15 +224,7 @@ void Player::PostUpdate()
 
 	if (SphereHit)
 	{
-		if (RayHit)
-		{
-			hitDir.x = 0.0f;
-			hitDir.z = 0.0f;
-		}
-		else
-		{
-			m_move.y = 0.0f;
-		}
+		if (!RayHit)m_move.y = 0.0f;
 		hitDir.Normalize();
 		m_pos += hitDir * maxOverLap;
 		m_jumpFlg = false;
