@@ -15,7 +15,8 @@ void Wall::Init()
 	m_pos = { 320.0f,-10.0f,0.0f };
 	m_size = 3.0f;
 	m_angle = 180.0f;
+	m_bound = 0.0f;
 
 	m_pCollider = std::make_unique<KdCollider>();
-	m_pCollider->RegisterCollisionShape("Wall", m_model, KdCollider::TypeBump);
+	m_pCollider->RegisterCollisionShape("Wall", m_model, KdCollider::TypeBump | KdCollider::TypeGround);
 }

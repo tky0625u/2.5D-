@@ -21,7 +21,7 @@ void Pole::Init()
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/Pole/Pole.gltf");
 	m_pCollider = std::make_unique<KdCollider>();
-	m_pCollider->RegisterCollisionShape("Pole", m_model, KdCollider::Type::TypeBump);
+	m_pCollider->RegisterCollisionShape("Pole", m_model, KdCollider::Type::TypeBump | KdCollider::TypeGround);
 	m_pos = { 40,0.0f,0.0f };
 	m_size = 2.0f;
 	m_angleX = 0.0f;

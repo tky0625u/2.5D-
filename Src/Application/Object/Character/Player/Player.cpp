@@ -127,7 +127,7 @@ void Player::PostUpdate()
 	ray.m_pos = m_pos;                            //レイのスタート地点
 	ray.m_dir = Math::Vector3::Down;              //レイの方向
 	ray.m_pos.y += 0.1f;                          //少し上から飛ばす
-	float enableStepHight = 0.5f;                 //段差の許容範囲
+	float enableStepHight = 0.2f;                 //段差の許容範囲
 	ray.m_pos.y += enableStepHight;               //許容範囲を加える
 	ray.m_range = -(m_move.y) + enableStepHight;  //レイの長さ
 	ray.m_type = KdCollider::Type::TypeGround;    //当たり判定したいタイプ
@@ -138,6 +138,14 @@ void Player::PostUpdate()
 	//=====================================================
 
 	//当たり判定===========================================
+
+	//地面=======================================
+	std::list<KdCollider::CollisionResult> retRayGroundList;
+	for (auto ground : SceneManager::Instance().GetObjList())
+	{
+		ground->Intersects(ray, &retRayGroundList);
+	}
+	//===========================================
 
 	//ギミック===================================
 	std::list<KdCollider::CollisionResult> retRayGmkList;  //当たったオブジェクトの情報を格納するリスト
@@ -157,38 +165,51 @@ void Player::PostUpdate()
 	//=====================================================
 
 	//レイに当たったオブジェクトで一番近いものを検出
+	m_GmkMove = Math::Vector3::Zero;
 	float maxOverLap = 0;  //レイがはみ出た長さ
 	Math::Vector3 hitPos;  //当たった座標
 	bool RayHit = false;    //当たり判定フラグ
 
+	//地面=================================================
+	for (auto& ret : retRayGroundList)
+	{
+		if (maxOverLap < ret.m_overlapDistance)
+		{
+			maxOverLap = ret.m_overlapDistance;
+			hitPos = ret.m_hitPos;
+			RayHit = true;
+		}
+	}
+	//=====================================================
+
 	//ギミック=============================================
-		Math::Vector3 move;  //移動量
-		float bound;         //跳ね返り
-		int Cnt = 0;         //現在がリストの何番目の処理をしているかを計測する変数
-		for (auto& ret : retRayGmkList)
+	Math::Vector3 move = Math::Vector3::Zero;  //移動量
+	float bound = 0.0f;						   //跳ね返り
+	int Cnt = 0;							   //現在がリストの何番目の処理をしているかを計測する変数
+	for (auto& ret : retRayGmkList)
+	{
+		//はみ出た長さが一番長いものを探す
+		if (maxOverLap < ret.m_overlapDistance)
 		{
-			//はみ出た長さが一番長いものを探す
-			if (maxOverLap < ret.m_overlapDistance)
-			{
-				//情報を上書き=======================
-				maxOverLap = ret.m_overlapDistance;
-				hitPos = ret.m_hitPos;
-				move = GimmickList[Cnt]->GetMove();    //移動量を上書き
-				bound = GimmickList[Cnt]->GetBound();  //跳ね返りを上書き
-				//===================================
+			//情報を上書き=======================
+			maxOverLap = ret.m_overlapDistance;
+			hitPos = ret.m_hitPos;
+			move = GimmickList[Cnt]->GetMove();    //移動量を上書き
+			bound = GimmickList[Cnt]->GetBound();  //跳ね返りを上書き
+			//===================================
 
-				RayHit = true;  //当たり判定フラグtrue
-			}
-			Cnt++;  //カウントを増やす
+			RayHit = true;  //当たり判定フラグtrue
 		}
+		Cnt++;  //カウントを増やす
+	}
 
-		if (RayHit)
-		{
-			m_pos = hitPos + Math::Vector3{ 0.0f,-0.1f,0.0f };  //座標更新
-			m_GmkMove = move;                                   //移動量を更新
-			m_move.y = bound;                                   //跳ね返りに更新
-			m_jumpFlg = false;                                  //ジャンプフラグfalse
-		}
+	if (RayHit)
+	{
+		m_pos = hitPos + Math::Vector3{ 0.0f,-0.1f,0.0f };  //座標更新
+		m_GmkMove = move;                                   //移動量を更新
+		m_move.y = bound;                                   //跳ね返りに更新
+		m_jumpFlg = false;                                  //ジャンプフラグfalse
+	}
 	//=====================================================
 
 	//===============================================================
@@ -224,10 +245,16 @@ void Player::PostUpdate()
 
 	if (SphereHit)
 	{
-		if (!RayHit)m_move.y = 0.0f;
+		if (RayHit)
+		{
+			hitDir = Math::Vector3::Zero;
+		}
+		else
+		{
+			m_move.y = 0.0f;
+		}
 		hitDir.Normalize();
 		m_pos += hitDir * maxOverLap;
-		m_jumpFlg = false;
 	}
 	//===============================================================
 
@@ -255,7 +282,7 @@ void Player::Init()
 	m_polygon->SetMaterial("Asset/Textures/Character/Player/sheets/DinoSprites - doux.png");
 	m_polygon->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_polygon->SetSplit(24, 1);
-	m_pos = { 300,5,0 };
+	m_pos = { -50.0f,5,0 };
 	m_move = Math::Vector3::Zero;
 	m_GmkMove = Math::Vector3::Zero;
 	m_dir = Math::Vector3::Zero;
