@@ -11,8 +11,8 @@ void Trampoline::Init()
 {
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/Trampoline/Trampoline.gltf");
-	m_pos = { 380.0f,-10.0f,0.0f };
-	m_size = 3.0f;
+	m_pos = { 425.0f,-5.0f,0.0f };
+	m_size = 2.0f;
 	m_bound = 2.0f;
 
 	m_pCollider = std::make_unique<KdCollider>();

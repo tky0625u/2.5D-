@@ -165,11 +165,10 @@
     <ClInclude Include="Src\Application\Object\Gimmick\GimmickBase\GimmickBase.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\GimmickManager\GimmickManager.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\Pole\Pole.h" />
+    <ClInclude Include="Src\Application\Object\Gimmick\Rotate\Circle\Circle.h" />
+    <ClInclude Include="Src\Application\Object\Gimmick\Rotate\Wall\Wall.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.h" />
-    <ClInclude Include="Src\Application\Object\Gimmick\Wall\Wall.h" />
     <ClInclude Include="Src\Application\Object\Ground\Bridge\Bridge.h" />
-    <ClInclude Include="Src\Application\Object\Ground\Center\Center.h" />
-    <ClInclude Include="Src\Application\Object\Ground\Road\Road.h" />
     <ClInclude Include="Src\Application\Object\Ground\Start\StartBlock.h" />
     <ClInclude Include="Src\Application\Object\UI\Timer\Timer.h" />
     <ClInclude Include="Src\Application\Object\UI\Timer\TimerManager.h" />
@@ -232,11 +231,10 @@
     <ClCompile Include="Src\Application\Object\Gimmick\GimmickBase\GimmickBase.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\GimmickManager\GimmickManager.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\Pole\Pole.cpp" />
+    <ClCompile Include="Src\Application\Object\Gimmick\Rotate\Circle\Circle.cpp" />
+    <ClCompile Include="Src\Application\Object\Gimmick\Rotate\Wall\Wall.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.cpp" />
-    <ClCompile Include="Src\Application\Object\Gimmick\Wall\Wall.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Bridge\Bridge.cpp" />
-    <ClCompile Include="Src\Application\Object\Ground\Center\Center.cpp" />
-    <ClCompile Include="Src\Application\Object\Ground\Road\Road.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Start\StartBlock.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Timer\Timer.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Timer\TimerManager.cpp" />

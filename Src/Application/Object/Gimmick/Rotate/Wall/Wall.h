@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include"../GimmickBase/GimmickBase.h"
+#include"../../GimmickBase/GimmickBase.h"
 
 class Wall :public GimmickBase
 {
@@ -10,5 +10,8 @@ public:
 	void Update()override;
 	void Init()override;
 
+	void SetPos(Math::Vector3 a_pos) { m_pos = a_pos; }
+
 private:
+
 };

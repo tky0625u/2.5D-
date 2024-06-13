@@ -242,6 +242,10 @@ void Player::PostUpdate()
 		m_move.y = bound;                                   //跳ね返りに更新
 		m_jumpFlg = false;                                  //ジャンプフラグfalse
 	}
+	else
+	{
+		m_jumpFlg = true;
+	}
 	//=====================================================
 
 	//===============================================================
@@ -305,16 +309,18 @@ void Player::GenerateDepthMapFromLight()
 
 void Player::Init()
 {
+	SetCursorPos(640, 360);
+
 	m_polygon = std::make_shared<KdSquarePolygon>();
 	m_polygon->SetMaterial("Asset/Textures/Character/Player/sheets/DinoSprites - doux.png");
 	m_polygon->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_polygon->SetSplit(24, 1);
-	m_pos = { -50.0f,5,0 };
+	m_pos = { 300.0f,5,0 };
 	m_move = Math::Vector3::Zero;
 	m_GmkMove = Math::Vector3::Zero;
 	m_dir = Math::Vector3::Zero;
 	m_size = { 3.0f,3.0f,3.0f };
-	m_oldCursorPos = Math::Vector2::Zero;
+	m_oldCursorPos = { 640,360 };
 	m_angleX = 0.0f;
 	m_angleY = 90.0f;
 	m_gravity = 0.05f;

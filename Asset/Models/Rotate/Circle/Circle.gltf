@@ -15,48 +15,30 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Cube",
+			"name":"\u5186\u67f1",
 			"scale":[
-				10.41061782836914,
-				4.738592147827148,
-				3.7579636573791504
+				8.860013008117676,
+				0.08732800930738449,
+				8.860013008117676
 			],
 			"translation":[
 				0,
-				4.9226179122924805,
+				0.12146539241075516,
 				0
 			]
 		}
 	],
-	"materials":[
-		{
-			"doubleSided":true,
-			"name":"Material",
-			"pbrMetallicRoughness":{
-				"baseColorFactor":[
-					0.800000011920929,
-					0.800000011920929,
-					0.800000011920929,
-					1
-				],
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
-		}
-	],
 	"meshes":[
 		{
-			"name":"Cube",
+			"name":"\u5186\u67f1",
 			"primitives":[
 				{
 					"attributes":{
 						"POSITION":0,
 						"NORMAL":1,
-						"TEXCOORD_0":2,
-						"TEXCOORD_1":3
+						"TEXCOORD_0":2
 					},
-					"indices":4,
-					"material":0
+					"indices":3
 				}
 			]
 		}
@@ -65,80 +47,68 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":132,
+			"count":972,
 			"max":[
-				1,
-				1,
-				1
+				0.9999997615814209,
+				0.9999992847442627,
+				0.9999997615814209
 			],
 			"min":[
+				-0.9999997615814209,
 				-1,
-				-1,
-				-1
+				-0.9999997615814209
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":132,
+			"count":972,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":132,
+			"count":972,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
-			"componentType":5126,
-			"count":132,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":4,
 			"componentType":5123,
-			"count":252,
+			"count":1992,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":1584,
+			"byteLength":11664,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1584,
-			"byteOffset":1584,
+			"byteLength":11664,
+			"byteOffset":11664,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1056,
-			"byteOffset":3168,
+			"byteLength":7776,
+			"byteOffset":23328,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1056,
-			"byteOffset":4224,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":504,
-			"byteOffset":5280,
+			"byteLength":3984,
+			"byteOffset":31104,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":5784,
-			"uri":"Wall.bin"
+			"byteLength":35088,
+			"uri":"Circle.bin"
 		}
 	]
 }
