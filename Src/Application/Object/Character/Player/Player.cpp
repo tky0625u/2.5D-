@@ -51,10 +51,10 @@ void Player::Update()
 	SetCursorPos(640,360);
 
 	//角度制御===================================
-	if (m_angleX > 360.0f)m_angleX -= 360.0f; 
-	if (m_angleX < -360.0f)m_angleX += 360.0f;
+	if (m_angleX >= 90.0f)m_angleX = 90.0f; 
+	if (m_angleX <= -90.0f)m_angleX = -90.0f;
 	if (m_angleY > 360.0f)m_angleY -= 360.0f; 
-	if (m_angleY < -360.0f)m_angleY += 360.0f;
+	if (m_angleY < 0.0f)m_angleY += 360.0f;
 	//===========================================
 
 	//===============================================================
@@ -286,6 +286,9 @@ void Player::PostUpdate()
 			m_move.y = 0.0f;
 		}
 		hitDir.Normalize();
+
+		if (fabs(hitDir.y) > fabs(hitDir.x) && fabs(hitDir.y) > fabs(hitDir.z))m_jumpFlg = false;
+
 		m_pos += hitDir * maxOverLap;
 	}
 	//===============================================================
