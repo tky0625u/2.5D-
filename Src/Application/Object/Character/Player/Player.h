@@ -11,7 +11,7 @@
 #define WALK_MAX 7
 //===============================================
 
-#define VP_SPEED 0.2f //振り向き速度
+#define VP_SPEED 0.02f //振り向き速度
 
 class GimmickBase;
 

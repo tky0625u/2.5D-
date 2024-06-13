@@ -43,16 +43,12 @@ void Player::Update()
 	//視点移動=======================================================
 	POINT CurSor;
 	GetCursorPos(&CurSor);
-	if (CurSor.x != m_oldCursorPos.x || CurSor.y!=m_oldCursorPos.y)
+	if (CurSor.x != 640 || CurSor.y!=360)
 	{
-		if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
-		{
-			m_angleX += (CurSor.y - m_oldCursorPos.y) * VP_SPEED;
-			m_angleY += (CurSor.x - m_oldCursorPos.x) * VP_SPEED;
-		}
-		m_oldCursorPos.x = CurSor.x;
-		m_oldCursorPos.y = CurSor.y;
+		m_angleX += (CurSor.y - 360) * VP_SPEED;
+		m_angleY += (CurSor.x - 640) * VP_SPEED;
 	}
+	SetCursorPos(640,360);
 
 	//角度制御===================================
 	if (m_angleX > 360.0f)m_angleX -= 360.0f; 

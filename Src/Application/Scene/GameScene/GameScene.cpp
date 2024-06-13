@@ -92,4 +92,6 @@ void GameScene::Init()
 	std::shared_ptr<TimerManager>timer = std::make_shared<TimerManager>();  //メモリ確保
 	m_objList.push_back(timer);                                             //リストに追加
 	//===========================================================================================================================
+
+	ShowCursor(false);
 }
