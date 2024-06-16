@@ -2,6 +2,7 @@
 #include"../SceneManager.h"
 #include"../../Object/Ground/Start/StartBlock.h"
 #include"../../Object/Ground/Bridge/Bridge.h"
+#include"../../Object/Ground/Goal/Goal.h"
 #include"../../Object/Character/Player/Player.h"
 #include"../../Object/UI/Timer/TimerManager.h"
 #include"../../Object/Gimmick/GimmickManager/GimmickManager.h"
@@ -86,6 +87,11 @@ void GameScene::Init()
 	//橋=========================================================================================================================
 	std::shared_ptr<Bridge>bridge = std::make_shared<Bridge>();  //メモリ確保
 	m_objList.push_back(bridge);                                 //リストに追加
+	//===========================================================================================================================
+
+	//ゴール位置=================================================================================================================
+	std::shared_ptr<Goal>goal = std::make_shared<Goal>();
+	m_objList.push_back(goal);
 	//===========================================================================================================================
 
 	//タイマー===================================================================================================================

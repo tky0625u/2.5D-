@@ -73,6 +73,7 @@ void GimmickManager::Init()
 	{
 		std::shared_ptr<Pole>pole = std::make_shared<Pole>();
 		pole->SetPos(i);
+		pole->Rotation(i);
 		m_GimmickList.push_back(pole);
 	}
 	//=============================================================================================

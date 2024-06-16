@@ -3,7 +3,7 @@
 void Pole::Update()
 {
 	//回転==============================================================================================
-	m_angleX += ROTATION_X;                     //角度増加
+	m_angleX += m_rotationX;                    //角度増加
 	if (m_angleX >= 360.0f)m_angleX -= 360.0f;  //360度を越えたら
 	//==================================================================================================
 
@@ -26,7 +26,13 @@ void Pole::Init()
 	m_size = 2.0f;
 	m_angleX = 0.0f;
 	m_angleY = 0.0f;
+	m_rotationX = ROTATION_X;
 	m_bound = 0.0f;
+}
+
+void Pole::Rotation(int i)
+{
+	if ((i + 1) % 2 == 0)m_rotationX *= -1;
 }
 
 void Pole::SetPos(int i)

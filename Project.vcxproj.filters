@@ -133,6 +133,9 @@
     <Filter Include="Src\Application\Object\Gimmick\Rotate\Wall">
       <UniqueIdentifier>{95491ad7-0cab-4e7c-bda1-55c65c240ec5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Ground\Goal">
+      <UniqueIdentifier>{fb1426c9-bb6d-40c4-9473-0eb0cb5b9414}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -348,6 +351,9 @@
     <ClInclude Include="Src\Application\Object\Gimmick\Rotate\Wall\Wall.h">
       <Filter>Src\Application\Object\Gimmick\Rotate\Wall</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ground\Goal\Goal.h">
+      <Filter>Src\Application\Object\Ground\Goal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -532,6 +538,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Gimmick\Rotate\Wall\Wall.cpp">
       <Filter>Src\Application\Object\Gimmick\Rotate\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ground\Goal\Goal.cpp">
+      <Filter>Src\Application\Object\Ground\Goal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
