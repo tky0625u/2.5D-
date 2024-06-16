@@ -28,6 +28,7 @@ private:
 	static const int CANNONNUM = 5;
 	static const int POLENUM = 3;
 	static const int BOARDNUM = 3;
+	static const int TRAMPOLINENUM = 5;
 
 	std::weak_ptr<Cannon>                      m_cannon[CANNONNUM];       //大砲　※弾の削除処理のため
 	Math::Vector3                              m_cameraPos;    //カメラ座標

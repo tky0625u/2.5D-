@@ -27,6 +27,15 @@ void Player::Update()
 		m_dir.x = 1.0f;
 		m_size.x = 3.0f;
 	}
+
+	if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+	{
+		m_speed = DASH_SPEED;
+	}
+	else
+	{
+		m_speed = WAALK_SPEED;
+	}
 	//===============================================================
 
 	//ジャンプ=======================================================
@@ -86,12 +95,12 @@ void Player::Update()
 
 	//前後=============================================================================================================
 															   //      ↓*速度制御*↓     //                     前 右 後 左
-	m_pos.z += cos(DirectX::XMConvertToRadians(m_angleY)) * (SPEED * m_dir.z);  //速度代入  1  0 -1  0=cos
-	m_pos.x += sin(DirectX::XMConvertToRadians(m_angleY)) * (SPEED * m_dir.z);  //速度代入  0  1  0 -1=sin
+	m_pos.z += cos(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.z);  //速度代入  1  0 -1  0=cos
+	m_pos.x += sin(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.z);  //速度代入  0  1  0 -1=sin
 	//=================================================================================================================
 	//左右=============================================================================================================
-	m_pos.z += -sin(DirectX::XMConvertToRadians(m_angleY)) * (SPEED * m_dir.x); //速度代入  0 -1  0  1=-sin
-	m_pos.x += cos(DirectX::XMConvertToRadians(m_angleY)) * (SPEED * m_dir.x);  //速度代入  1  0 -1  0=cos
+	m_pos.z += -sin(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.x); //速度代入  0 -1  0  1=-sin
+	m_pos.x += cos(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.x);  //速度代入  1  0 -1  0=cos
 	//=================================================================================================================
 
 	//デバッグ用=====================================================
@@ -102,16 +111,28 @@ void Player::Update()
 	//=============================================================================================
 
 	//アニメーション===============================================================================
-	int Anime[][WALK_MAX] = { { 0,1,2,3 }, { 4,5,6,7,8,9,10 } };  //アニメーション配列
+	int Anime[][WALK_MAX] = { { 0,1,2,3 }, { 4,5,6,7,8,9,10 },{17,18,19,20,21,22,23,} };  //アニメーション配列
 
 	//移動=======================================
-	if (m_move.x != 0 || m_move.z != 0)
+	if (m_dir.x != 0 || m_dir.z != 0)
 	{
-		if (m_anime.m_motion != WALK)
+		if (m_speed == WAALK_SPEED)
 		{
-			m_anime.m_motion = WALK;
-			m_anime.m_AnimeCnt = 0.0f;
-			m_anime.m_CntMAX = WALK_MAX;
+			if (m_anime.m_motion != WALK)
+			{
+				m_anime.m_motion = WALK;
+				m_anime.m_AnimeCnt = 0.0f;
+				m_anime.m_CntMAX = WALK_MAX;
+			}
+		}
+		else if (m_speed == DASH_SPEED)
+		{
+			if (m_anime.m_motion != DASH)
+			{
+				m_anime.m_motion = DASH;
+				m_anime.m_AnimeCnt = 0.0f;
+				m_anime.m_CntMAX = DASH_MAX;
+			}
 		}
 	}
 	//===========================================
@@ -320,6 +341,7 @@ void Player::Init()
 	m_dir = Math::Vector3::Zero;
 	m_size = { 3.0f,3.0f,3.0f };
 	m_oldCursorPos = { 640,360 };
+	m_speed = WAALK_SPEED;
 	m_angleX = 0.0f;
 	m_angleY = 90.0f;
 	m_gravity = 0.05f;

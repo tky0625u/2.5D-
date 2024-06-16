@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.1.62",
+		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
 	"scene":0,
@@ -9,7 +9,8 @@
 			"name":"Scene",
 			"nodes":[
 				0,
-				1
+				1,
+				2
 			]
 		}
 	],
@@ -35,6 +36,20 @@
 				61.19709777832031,
 				1,
 				61.19709777832031
+			]
+		},
+		{
+			"mesh":2,
+			"name":"\u5186\u67f1.002",
+			"scale":[
+				44.58573913574219,
+				1,
+				44.58573913574219
+			],
+			"translation":[
+				0,
+				6.211172103881836,
+				0
 			]
 		}
 	],
@@ -62,6 +77,19 @@
 						"TEXCOORD_0":6
 					},
 					"indices":3
+				}
+			]
+		},
+		{
+			"name":"\u5186\u67f1.002",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":7,
+						"NORMAL":8,
+						"TEXCOORD_0":9
+					},
+					"indices":10
 				}
 			]
 		}
@@ -128,6 +156,40 @@
 			"componentType":5126,
 			"count":192,
 			"type":"VEC2"
+		},
+		{
+			"bufferView":7,
+			"componentType":5126,
+			"count":180,
+			"max":[
+				-0.2298978865146637,
+				0.9999997615814209,
+				0.9702262282371521
+			],
+			"min":[
+				-0.9999997615814209,
+				-0.9999997615814209,
+				-0.9702262282371521
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":8,
+			"componentType":5126,
+			"count":180,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":9,
+			"componentType":5126,
+			"count":180,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":10,
+			"componentType":5123,
+			"count":348,
+			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
@@ -172,11 +234,35 @@
 			"byteLength":1536,
 			"byteOffset":11496,
 			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":2160,
+			"byteOffset":13032,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":2160,
+			"byteOffset":15192,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":1440,
+			"byteOffset":17352,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":696,
+			"byteOffset":18792,
+			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":13032,
+			"byteLength":19488,
 			"uri":"Tower.bin"
 		}
 	]

@@ -1,14 +1,17 @@
 ﻿#pragma once
 #include"../../Gimmick/GimmickBase/GimmickBase.h"
 
-#define SPEED 0.3f  //移動量
-#define JUMP  1.0f  //ジャンプ力
+#define WAALK_SPEED 0.3f  //歩く移動量
+#define DASH_SPEED 0.5f   //走る移動量
+#define JUMP  1.0f        //ジャンプ力
 
 //アニメーション=================================
 #define IDOL 0
 #define WALK 1
+#define DASH 2
 #define IDOL_MAX 4
 #define WALK_MAX 7
+#define DASH_MAX 7
 //===============================================
 
 #define VP_SPEED 0.02f //振り向き速度
@@ -50,8 +53,9 @@ private:
 	Math::Vector3 m_dir;                         //ベクトル
 	Math::Vector3 m_size;                        //サイズ
 	Math::Vector2 m_oldCursorPos;                //前のマウス座標
-	float m_angleY;                               //角度
-	float m_angleX;                               //角度
+	float m_speed;                               //スピード
+	float m_angleY;                              //角度
+	float m_angleX;                              //角度
 	float m_gravity;                             //重力
 	bool  m_jumpFlg;                             //ジャンプフラグ
 

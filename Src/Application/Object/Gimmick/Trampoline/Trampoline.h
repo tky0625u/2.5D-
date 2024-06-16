@@ -10,6 +10,9 @@ public:
 	void Update()override;
 	void Init()override;
 
-private:
+	void SetPos(Math::Vector3 a_pos) { m_pos += a_pos; }
+	void SetReverse(float a_reverse) { m_reverse += a_reverse; }
 
+private:
+	float m_reverse;
 };
