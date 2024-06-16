@@ -6,6 +6,7 @@
 #include"../Trampoline/Trampoline.h"
 #include"../Rotate/Circle/Circle.h"
 #include"../Rotate/Wall/Wall.h"
+#include"../Tower/Tower.h"
 
 void GimmickManager::Update()
 {
@@ -110,5 +111,10 @@ void GimmickManager::Init()
 	m_GimmickList.push_back(wall);
 	//=========================================================================
 	
+	//=============================================================================================
+
+	//塔===========================================================================================
+	std::shared_ptr<Tower>tower = std::make_shared<Tower>();
+	m_GimmickList.push_back(tower);
 	//=============================================================================================
 }
