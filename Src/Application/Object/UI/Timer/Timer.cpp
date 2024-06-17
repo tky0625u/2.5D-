@@ -7,7 +7,7 @@ void Timer::Update()
 
 void Timer::DrawSprite()
 {
-	KdShaderManager::Instance().m_spriteShader.DrawTex(m_pTex, m_pos.x, m_pos.y,m_rect.width,m_rect.height, &m_rect, &m_color, { 0.5f,1.0f });
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_pTex, (int)m_pos.x, (int)m_pos.y,m_rect.width,m_rect.height, &m_rect, &m_color, { 0.5f,1.0f });
 }
 
 void Timer::Init()

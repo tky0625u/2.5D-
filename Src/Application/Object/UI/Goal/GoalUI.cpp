@@ -4,17 +4,22 @@
 void GoalUI::Update()
 {
 	m_size += 0.2f;
-	if (m_size > 1.0f)m_size = 1.0f;
+	if (m_size > 1.0f)
+	{
+		m_size = 1.0f;
+		m_finishFlg = true;
+	}
 }
 
 void GoalUI::DrawSprite()
 {
-	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_Tex, m_pos.x, m_pos.y, m_Tex.GetWidth() * m_size, m_Tex.GetHeight() * m_size);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_Tex, (int)m_pos.x, (int)m_pos.y, int(m_Tex.GetWidth() * m_size), int(m_Tex.GetHeight() * m_size));
 }
 
 void GoalUI::Init()
 {
 	m_pos = {};
 	m_size = 0.0f;
+	m_finishFlg = false;
 	m_Tex.Load("Asset/Textures/UI/Goal/Goal.png");
 }

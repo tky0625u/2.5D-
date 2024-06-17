@@ -8,7 +8,7 @@ void TimerManager::Update()
 	{
 		m_timerList[0]->Scroll();  //一の位
 		//切り取り範囲変更===============================================================
-		for (int i = 0; i < m_timerList.size(); ++i)
+		for (int i = 0; i < m_timerList.size(); i++)
 		{
 			//それ以外
 			if (i != 1 && i != m_timerList.size()-1)
@@ -48,7 +48,7 @@ void TimerManager::Update()
 		m_frame -= SECOND;  //一秒分マイナス
 	}
 
-	for (int i = 0; i < m_timerList.size(); ++i)
+	for (int i = 0; i < m_timerList.size(); i++)
 	{
 		m_timerList[i]->Update();
 	}
@@ -60,11 +60,11 @@ void TimerManager::Update()
 void TimerManager::DrawSprite()
 {
 	//タイマー=====================================================================================
-	for (int i = 0; i < m_timerList.size(); ++i)m_timerList[i]->DrawSprite();
+	for (int i = 0; i < m_timerList.size(); i++)m_timerList[i]->DrawSprite();
 	//=============================================================================================
 
 	//コンマ=======================================================================================
-	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_Tex, m_pos.x, m_pos.y, m_rect.width, m_rect.height, &m_rect, &m_color, { 0.5f,1.0f });
+	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_Tex, (int)m_pos.x, (int)m_pos.y, m_rect.width, m_rect.height, &m_rect, &m_color, { 0.5f,1.0f });
     //=============================================================================================
 }
 
@@ -79,7 +79,7 @@ void TimerManager::Init()
 
 	//タイマー=====================================================================================
 	m_timerTex.Load("Asset/Textures/UI/Timer/number.png");
-	for (int i = 0; i < DEFAULT; ++i)
+	for (int i = 0; i < DEFAULTNUM; ++i)
 	{
 		std::shared_ptr<Timer> timer = std::make_shared<Timer>();
 		timer->SetPos(i,m_pos);

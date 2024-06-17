@@ -69,10 +69,10 @@ void GameScene::Event()
 
 	if (m_player.expired() == false)
 	{
-		//if (m_player.lock()->GetGoal() && GetAsyncKeyState(VK_SPACE) & 0x8000)
-		//{
-		//	SceneManager::Instance().SetNextScene(SceneManager::SceneType::Title);
-		//}
+		if (m_player.lock()->GetGoal() && m_goalUI->GetFinish() && GetAsyncKeyState(VK_SPACE) & 0x8000)
+		{
+			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Title);
+		}
 
 	//プレイヤー情報取得===================================
 		playerPos = m_player.lock()->GetPos();

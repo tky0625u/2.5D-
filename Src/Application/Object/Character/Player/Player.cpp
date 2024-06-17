@@ -326,7 +326,7 @@ void Player::PostUpdate()
 	//ゴール判定===========================================
 
 	std::list<KdCollider::CollisionResult> retGoalList;
-	for (auto ground : SceneManager::Instance().GetObjList())
+	for (auto& ground : SceneManager::Instance().GetObjList())
 	{
 		if (ground->GetObjType() == ObjType::Goal)ground->Intersects(ray, &retGoalList);
 	}

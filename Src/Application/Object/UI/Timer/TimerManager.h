@@ -3,7 +3,7 @@
 class Timer;
 
 #define SECOND 60
-#define DEFAULT 4
+#define DEFAULTNUM 4
 #define MAXNUM  10
 #define MINUTENUM 6
 

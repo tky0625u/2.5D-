@@ -16,10 +16,10 @@ public:
 	virtual const float GetBound()const { return m_bound; }
 
 protected:
-	std::shared_ptr<KdModelData> m_model;      //モデル
-	Math::Vector3                m_pos;        //座標
-	Math::Vector3                m_move;       //動き
-	float                        m_size;       //大きさ
-	float                        m_angle;      //角度
-	float                        m_bound;      //跳ね返り
+	std::shared_ptr<KdModelData> m_model;                            //モデル
+	Math::Vector3                m_pos = Math::Vector3::Zero;        //座標
+	Math::Vector3                m_move = Math::Vector3::Zero;       //動き
+	float                        m_size = 0.0f;                      //大きさ
+	float                        m_angle = 0.0f;                     //角度
+	float                        m_bound = 0.0f;                     //跳ね返り
 };
