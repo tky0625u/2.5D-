@@ -211,9 +211,6 @@ bool Application::Init(int w, int h)
 	// 日本語対応
 	io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msgothic.ttc", 13.0f, &config, glyphRangesJapanese);
 
-	m_ImGuiFlg = false;
-	m_KeyFlg = false;
-
 	//===================================================================
 	// シェーダー初期化
 	//===================================================================
@@ -355,23 +352,6 @@ void Application::Release()
 
 void Application::ImGuiProcess()
 {
-	////ImGui表示切替
-	//if (GetAsyncKeyState('I') & 0x8000)
-	//{
-	//	if (!m_KeyFlg)
-	//	{
-	//		if (m_ImGuiFlg)m_ImGuiFlg = false;
-	//		else if (!m_ImGuiFlg)m_ImGuiFlg = true;
-
-	//		m_KeyFlg = true;
-	//	}
-	//}
-	//else
-	//{
-	//	m_KeyFlg = false;
-	//}
-
-	//if(!m_ImGuiFlg)
 	return;
 
 	// ImGui開始
@@ -383,14 +363,14 @@ void Application::ImGuiProcess()
 	ImGui::ShowDemoWindow(nullptr);
 
 	// デバッグウィンドウ
-	if (ImGui::Begin("Debug Window"))
-	{
-		// FPS
-		ImGui::Text("FPS : %d", m_fpsController.m_nowfps);
+	ImGui::Begin("Debug Window");
+	
+	// FPS
+	ImGui::Text("FPS : %d", m_fpsController.m_nowfps);
 
-		//日本語表示テスト
-		//ImGui::Text((const char*)u8"あいうえお aiueo");
-	}
+	//日本語表示テスト
+	//ImGui::Text((const char*)u8"あいうえお aiueo");
+	
 	ImGui::End();
 
 	// Imguiのレンダリング：ここより上にimguiの描画はする事

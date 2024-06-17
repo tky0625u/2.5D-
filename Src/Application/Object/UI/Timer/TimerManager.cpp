@@ -8,7 +8,7 @@ void TimerManager::Update()
 	{
 		m_timerList[0]->Scroll();  //一の位
 		//切り取り範囲変更===============================================================
-		for (int i = 0; i < m_timerList.size(); i++)
+		for (unsigned int i = 0; i < m_timerList.size(); i++)
 		{
 			//それ以外
 			if (i != 1 && i != m_timerList.size()-1)
@@ -48,7 +48,7 @@ void TimerManager::Update()
 		m_frame -= SECOND;  //一秒分マイナス
 	}
 
-	for (int i = 0; i < m_timerList.size(); i++)
+	for (unsigned int i = 0; i < m_timerList.size(); i++)
 	{
 		m_timerList[i]->Update();
 	}
@@ -60,7 +60,7 @@ void TimerManager::Update()
 void TimerManager::DrawSprite()
 {
 	//タイマー=====================================================================================
-	for (int i = 0; i < m_timerList.size(); i++)m_timerList[i]->DrawSprite();
+	for (unsigned int i = 0; i < m_timerList.size(); i++)m_timerList[i]->DrawSprite();
 	//=============================================================================================
 
 	//コンマ=======================================================================================

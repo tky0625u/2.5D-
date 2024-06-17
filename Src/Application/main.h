@@ -44,8 +44,6 @@ private:
 
 	//ImGui処理
 	void ImGuiProcess();
-	bool m_ImGuiFlg;
-	bool m_KeyFlg;
 
 	// ゲームウィンドウクラス
 	KdWindow		m_window;

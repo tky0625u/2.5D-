@@ -199,7 +199,7 @@ void Player::PostUpdate()
 	//ギミック===================================
 	std::list<KdCollider::CollisionResult> retRayGmkList;  //当たったオブジェクトの情報を格納するリスト
 	std::vector<std::shared_ptr<GimmickBase>> GimmickList; //当たったオブジェクト自体を格納するリスト
-	int ListNum = 0;  //現在のリストの大きさを計測する変数
+	unsigned int ListNum = 0;  //現在のリストの大きさを計測する変数
 	for (auto gimmick : m_GimmickList)
 	{
 		gimmick->Intersects(ray, &retRayGmkList);  //当たり判定
@@ -328,12 +328,14 @@ void Player::PostUpdate()
 	std::list<KdCollider::CollisionResult> retGoalList;
 	for (auto& ground : SceneManager::Instance().GetObjList())
 	{
-		if (ground->GetObjType() == ObjType::Goal)ground->Intersects(ray, &retGoalList);
-	}
-
-	for (auto& ret : retGoalList)
-	{
-		m_goalFlg = true;
+		if (ground->GetObjType() == ObjType::Goal)
+		{
+			if (ground->Intersects(ray, &retGoalList))
+			{
+				m_goalFlg = true;
+				break;
+			}
+		}
 	}
 	//=====================================================
 

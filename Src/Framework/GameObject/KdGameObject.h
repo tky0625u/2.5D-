@@ -10,7 +10,7 @@ public:
 		Player,
 		Gimmick,
 		Start,
-		Goal,
+		Goal
 	};
 
 	// どのような描画を行うのかを設定するTypeID：Bitフラグで複数指定可能
@@ -23,7 +23,9 @@ public:
 		eDrawTypeDepthOfShadow = 1 << 4,
 	};
 
-	KdGameObject() {}
+	KdGameObject()
+		:m_objType{}
+	{}
 	virtual ~KdGameObject() { Release(); }
 
 	// 生成される全てに共通するパラメータに対する初期化のみ
@@ -98,5 +100,5 @@ protected:
 	// デバッグ情報クラス
 	std::unique_ptr<KdDebugWireFrame> m_pDebugWire = nullptr;
 
-	UINT m_objType;
+	UINT m_objType = NULL;
 };
