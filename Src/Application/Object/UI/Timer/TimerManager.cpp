@@ -54,12 +54,6 @@ void TimerManager::Update()
 	}
 	//=============================================================================================
 
-	//コンマ=======================================================================================
-	Math::Matrix Scale = Math::Matrix::CreateScale(1, 1, 0);
-	Math::Matrix Trans = Math::Matrix::CreateTranslation(m_pos.x, m_pos.y, 0);
-	m_Mat = Scale * Trans;
-	//=============================================================================================
-
 	m_frame++;  //フレーム
 }
 
@@ -70,8 +64,7 @@ void TimerManager::DrawSprite()
 	//=============================================================================================
 
 	//コンマ=======================================================================================
-	KdShaderManager::Instance().m_spriteShader.SetMatrix(m_Mat);
-	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_Tex, 0, 0, &m_rect, &m_color,{0.5f,1.0f});
+	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_Tex, m_pos.x, m_pos.y, m_rect.width, m_rect.height, &m_rect, &m_color, { 0.5f,1.0f });
     //=============================================================================================
 }
 

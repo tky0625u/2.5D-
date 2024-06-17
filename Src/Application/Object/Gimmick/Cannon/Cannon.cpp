@@ -87,6 +87,7 @@ void Cannon::GenerateDepthMapFromLight()
 
 void Cannon::Init()
 {
+	m_objType = ObjType::Gimmick;
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/Cannon/Cannon.gltf");
 	m_pos = { 180.0f,0.0f,10.0f };

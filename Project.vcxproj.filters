@@ -136,6 +136,9 @@
     <Filter Include="Src\Application\Object\Ground\Goal">
       <UniqueIdentifier>{fb1426c9-bb6d-40c4-9473-0eb0cb5b9414}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\UI\Goal">
+      <UniqueIdentifier>{9f6da428-1633-4a2a-824f-0a00fafdb2f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -354,6 +357,9 @@
     <ClInclude Include="Src\Application\Object\Ground\Goal\Goal.h">
       <Filter>Src\Application\Object\Ground\Goal</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\UI\Goal\GoalUI.h">
+      <Filter>Src\Application\Object\UI\Goal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -541,6 +547,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Ground\Goal\Goal.cpp">
       <Filter>Src\Application\Object\Ground\Goal</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\UI\Goal\GoalUI.cpp">
+      <Filter>Src\Application\Object\UI\Goal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

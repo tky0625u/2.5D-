@@ -24,7 +24,6 @@ private:
 	Math::Vector2   m_pos;
 	Math::Color     m_color;
 	Math::Rectangle m_rect;
-	Math::Matrix    m_Mat;
 	KdTexture       m_Tex;
 
 	KdTexture       m_timerTex;

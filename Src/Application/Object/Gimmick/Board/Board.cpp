@@ -15,6 +15,7 @@ void Board::Update()
 
 void Board::Init()
 {
+	m_objType = ObjType::Gimmick;
 	m_pos = { 240,0,0 };
 	m_move = { 0.0f,0.0f,0.0f };
 	m_angle = 0;

@@ -10,6 +10,7 @@ void Brock::Update()
 
 void Brock::Init()
 {
+	m_objType = ObjType::Gimmick;
 	m_pos = { -8,-5,-3 };
 	m_angle = 90;
 	m_size = 2.0f;

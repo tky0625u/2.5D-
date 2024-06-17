@@ -5,17 +5,76 @@
 #include"../../Object/Ground/Goal/Goal.h"
 #include"../../Object/Character/Player/Player.h"
 #include"../../Object/UI/Timer/TimerManager.h"
+#include"../../Object/UI/Goal/GoalUI.h"
 #include"../../Object/Gimmick/GimmickManager/GimmickManager.h"
+
+void GameScene::PreUpdate()
+{
+	if (m_player.expired() == false)
+	{
+		if (m_player.lock()->GetGoal() == false)BaseScene::PreUpdate();
+	}
+}
+
+void GameScene::Update()
+{
+	std::shared_ptr<Player>player;
+	if (m_player.expired() == false)
+	{
+		player = m_player.lock();
+	}
+
+	if (player->GetGoal() == false)
+	{
+		for (auto& obj : m_objList)
+		{
+			obj->Update();
+		}
+	}
+	else { m_goalUI->Update(); }
+
+	Event();
+}
+
+void GameScene::PostUpdate()
+{
+	if (m_player.expired() == false)
+	{
+		if (m_player.lock()->GetGoal() == false)BaseScene::PostUpdate();
+	}
+}
+
+void GameScene::DrawSprite()
+{
+	KdShaderManager::Instance().m_spriteShader.Begin();
+	{
+		for (auto& obj : m_objList)
+		{
+			obj->DrawSprite();
+		}
+
+		if (m_player.expired() == false)
+		{
+			if (m_player.lock()->GetGoal())m_goalUI->DrawSprite();
+		}
+	}
+	KdShaderManager::Instance().m_spriteShader.End();
+}
 
 void GameScene::Event()
 {
-
-	//プレイヤー情報取得===================================
 	static float playerAngleX = 0;
 	static float playerAngleY = 0;
 	static Math::Vector3 playerPos = {};
+
 	if (m_player.expired() == false)
 	{
+		//if (m_player.lock()->GetGoal() && GetAsyncKeyState(VK_SPACE) & 0x8000)
+		//{
+		//	SceneManager::Instance().SetNextScene(SceneManager::SceneType::Title);
+		//}
+
+	//プレイヤー情報取得===================================
 		playerPos = m_player.lock()->GetPos();
 		playerAngleX = m_player.lock()->GetAngleX();
 		if (playerAngleX >= 80)playerAngleX = 80;
@@ -97,6 +156,11 @@ void GameScene::Init()
 	//タイマー===================================================================================================================
 	std::shared_ptr<TimerManager>timer = std::make_shared<TimerManager>();  //メモリ確保
 	m_objList.push_back(timer);                                             //リストに追加
+	//===========================================================================================================================
+
+	//ゴール表記=================================================================================================================
+	std::shared_ptr<GoalUI>goalUI = std::make_shared<GoalUI>();
+	m_goalUI = goalUI;
 	//===========================================================================================================================
 
 	ShowCursor(false);

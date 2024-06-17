@@ -10,6 +10,7 @@ void Circle::Update()
 
 void Circle::Init()
 {
+	m_objType = ObjType::Gimmick;
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/Rotate/Circle/Circle.gltf");
 	m_pos = { 350.0f,0.0f,0.0f };

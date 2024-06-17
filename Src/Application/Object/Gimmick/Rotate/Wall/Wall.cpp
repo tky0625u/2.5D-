@@ -13,6 +13,7 @@ void Wall::Update()
 
 void Wall::Init()
 {
+	m_objType = ObjType::Gimmick;
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/Rotate/Wall/Wall.gltf");
 	m_pos = {};

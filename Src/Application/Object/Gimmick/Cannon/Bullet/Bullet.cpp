@@ -36,6 +36,7 @@ void Bullet::GenerateDepthMapFromLight()
 
 void Bullet::Init()
 {
+	m_objType = ObjType::Gimmick;
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/Cannon/Bullet/Bullet.gltf");
 	m_pCollider = std::make_unique<KdCollider>();

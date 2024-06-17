@@ -15,11 +15,12 @@ void Goal::DrawLit()
 
 void Goal::Init()
 {
+	m_objType = ObjType::Goal;
 	m_pos = { 555.0f,30.0f,0.0f };
 	m_size = 5.0f;
 	m_angle = 180.0f;
 	m_model = std::make_shared<KdModelData>();          //メモリ確保
 	m_model->Load("Asset/Models/Ground/Goal/Goal.gltf");  //モデル読み込み
 	m_pCollider = std::make_unique<KdCollider>();
-	m_pCollider->RegisterCollisionShape("Goal", m_model, KdCollider::Type::TypeGround);
+	m_pCollider->RegisterCollisionShape("Goal", m_model, KdCollider::Type::TypeGround | KdCollider::TypeBump);
 }

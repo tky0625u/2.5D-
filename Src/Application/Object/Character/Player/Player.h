@@ -44,6 +44,7 @@ public:
 
 	float GetAngleX()const { return m_angleX; }
 	float GetAngleY()const { return m_angleY; }
+	bool  GetGoal()  const { return m_goalFlg; }
 
 private:
 	std::shared_ptr<KdSquarePolygon> m_polygon;  //板ポリ
@@ -58,6 +59,7 @@ private:
 	float m_angleX;                              //角度
 	float m_gravity;                             //重力
 	bool  m_jumpFlg;                             //ジャンプフラグ
+	bool  m_goalFlg;                             //ゴールフラグ
 
 	Animation m_anime;  //アニメーション
 

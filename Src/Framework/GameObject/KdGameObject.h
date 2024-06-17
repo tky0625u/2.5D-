@@ -5,6 +5,14 @@ class KdGameObject : public std::enable_shared_from_this<KdGameObject>
 {
 public:
 
+	enum ObjType
+	{
+		Player,
+		Gimmick,
+		Start,
+		Goal,
+	};
+
 	// どのような描画を行うのかを設定するTypeID：Bitフラグで複数指定可能
 	enum
 	{
@@ -62,6 +70,8 @@ public:
 
 	UINT GetDrawType() const { return m_drawType; }
 
+	UINT GetObjType()const { return m_objType; }
+
 	bool Intersects(const KdCollider::SphereInfo& targetShape, std::list<KdCollider::CollisionResult>* pResults);
 	bool Intersects(const KdCollider::BoxInfo& targetBox, std::list<KdCollider::CollisionResult>* pResults);
 	bool Intersects(const KdCollider::RayInfo& targetShape, std::list<KdCollider::CollisionResult>* pResults);
@@ -87,4 +97,6 @@ protected:
 
 	// デバッグ情報クラス
 	std::unique_ptr<KdDebugWireFrame> m_pDebugWire = nullptr;
+
+	UINT m_objType;
 };

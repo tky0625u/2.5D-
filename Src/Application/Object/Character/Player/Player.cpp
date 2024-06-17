@@ -269,7 +269,7 @@ void Player::PostUpdate()
 
 	//球判定=========================================================
 	KdCollider::SphereInfo sphere;                                              //球判定用の変数作成
-	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.5f,m_pos.z };                //球の中心
+	sphere.m_sphere.Center = { m_pos.x,m_pos.y + 1.6f,m_pos.z };                //球の中心
 	sphere.m_sphere.Radius = 1.5f;                                              //球の半径
 	sphere.m_type = KdCollider::Type::TypeBump;  //当たり判定したいタイプ
 
@@ -315,6 +315,30 @@ void Player::PostUpdate()
 	//===============================================================
 
 	//=============================================================================================
+
+	//ゴール判定===================================================================================
+
+	ray.m_range = 50.0f;
+	//デバッグ表示
+	color = { 1,0,0,1 };
+	m_pDebugWire->AddDebugLine(ray.m_pos, ray.m_dir, ray.m_range, color);
+
+	//ゴール判定===========================================
+
+	std::list<KdCollider::CollisionResult> retGoalList;
+	for (auto ground : SceneManager::Instance().GetObjList())
+	{
+		if (ground->GetObjType() == ObjType::Goal)ground->Intersects(ray, &retGoalList);
+	}
+
+	for (auto& ret : retGoalList)
+	{
+		m_goalFlg = true;
+	}
+	//=====================================================
+
+	//=============================================================================================
+
 }
 
 void Player::Draw()
@@ -331,6 +355,7 @@ void Player::Init()
 {
 	SetCursorPos(640, 360);
 
+	m_objType = ObjType::Player;
 	m_polygon = std::make_shared<KdSquarePolygon>();
 	m_polygon->SetMaterial("Asset/Textures/Character/Player/sheets/DinoSprites - doux.png");
 	m_polygon->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
@@ -346,6 +371,7 @@ void Player::Init()
 	m_angleY = 90.0f;
 	m_gravity = 0.05f;
 	m_jumpFlg = false;
+	m_goalFlg = false;
 
 	//アニメーション
 	m_anime.m_AnimeCnt = 0.0f;
