@@ -3,10 +3,10 @@
 
 void GoalUI::Update()
 {
-	m_size += 0.2f;
-	if (m_size > 1.0f)
+	m_size += GoalSIZEUP;
+	if (m_size > GoalSIZEMAX)
 	{
-		m_size = 1.0f;
+		m_size = GoalSIZEMAX;
 		m_finishFlg = true;
 	}
 }

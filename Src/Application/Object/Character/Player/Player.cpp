@@ -8,107 +8,105 @@ void Player::Update()
 	//行動=========================================================================================
 
 	//移動===========================================================
-	m_dir = Math::Vector3::Zero;
-	if (GetAsyncKeyState('W') & 0x8000)
+	if (m_actionFlg)
 	{
-		m_dir.z = 1.0f;
-	}
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-		m_dir.z = -1.0f;
-	}
-	if (GetAsyncKeyState('A') & 0x8000)
-	{
-		m_dir.x = -1.0f;
-		m_size.x = -3.0f;
-	}
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-		m_dir.x = 1.0f;
-		m_size.x = 3.0f;
-	}
-
-	if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
-	{
-		m_speed = DASH_SPEED;
-	}
-	else
-	{
-		m_speed = WAALK_SPEED;
-	}
-	//===============================================================
-
-	//ジャンプ=======================================================
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-	{
-		if (!m_jumpFlg)  //空中ジャンプ防止
+		m_dir = Math::Vector3::Zero;
+		if (GetAsyncKeyState('W') & 0x8000)
 		{
-			m_move.y += JUMP;   //※移動変数にジャンプ力を代入
-			m_jumpFlg = true;  
+			m_dir.z = 1.0f;
 		}
-	}
-	//===============================================================
-	
-	//視点移動=======================================================
-	POINT CurSor;
-	GetCursorPos(&CurSor);
-	if (CurSor.x != 640 || CurSor.y!=360)
-	{
-		m_angleX += (CurSor.y - 360) * VP_SPEED;
-		m_angleY += (CurSor.x - 640) * VP_SPEED;
-	}
-	SetCursorPos(640,360);
-
-	//角度制御===================================
-	if (m_angleX >= 90.0f)m_angleX = 90.0f; 
-	if (m_angleX <= -90.0f)m_angleX = -90.0f;
-	if (m_angleY > 360.0f)m_angleY -= 360.0f; 
-	if (m_angleY < 0.0f)m_angleY += 360.0f;
-	//===========================================
-
-	//===============================================================
-
-	//デバッグ用=====================================================
-	if (GetAsyncKeyState('P') & 0x8000)
-	{
-		if (!m_keyFlg)
+		if (GetAsyncKeyState('S') & 0x8000)
 		{
-			if (!m_air)
+			m_dir.z = -1.0f;
+		}
+		if (GetAsyncKeyState('A') & 0x8000)
+		{
+			m_dir.x = -1.0f;
+			m_size.x = -3.0f;
+		}
+		if (GetAsyncKeyState('D') & 0x8000)
+		{
+			m_dir.x = 1.0f;
+			m_size.x = 3.0f;
+		}
+
+		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+		{
+			m_speed = DASH_SPEED;
+		}
+		else
+		{
+			m_speed = WAALK_SPEED;
+		}
+		//===============================================================
+
+		//ジャンプ=======================================================
+		if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		{
+			if (!m_jumpFlg)  //空中ジャンプ防止
 			{
-				m_air = true;
-				m_move.y = 0;
+				m_move.y += JUMP;   //※移動変数にジャンプ力を代入
+				m_jumpFlg = true;
 			}
-			else { m_air = false; }
-			m_keyFlg = true;
 		}
+		//===============================================================
+
+		//視点移動=======================================================
+		POINT CurSor;
+		GetCursorPos(&CurSor);
+		if (CurSor.x != 640 || CurSor.y != 360)
+		{
+			m_angleX += (CurSor.y - 360) * VP_SPEED;
+			m_angleY += (CurSor.x - 640) * VP_SPEED;
+		}
+		SetCursorPos(640, 360);
+
+		//角度制御===================================
+		if (m_angleX >= 90.0f)m_angleX = 90.0f;
+		if (m_angleX <= -90.0f)m_angleX = -90.0f;
+		if (m_angleY > 360.0f)m_angleY -= 360.0f;
+		if (m_angleY < 0.0f)m_angleY += 360.0f;
+		//===========================================
+
+		//===============================================================
+
+		//デバッグ用=====================================================
+		if (GetAsyncKeyState('P') & 0x8000)
+		{
+			if (!m_keyFlg)
+			{
+				if (!m_air)
+				{
+					m_air = true;
+					m_move.y = 0;
+				}
+				else { m_air = false; }
+				m_keyFlg = true;
+			}
+		}
+		else
+		{
+			m_keyFlg = false;
+		}
+		//===============================================================
+
+		m_dir.Normalize();
+		if (!m_air)m_move.y -= m_gravity;  //重力と跳ね返りを与える
+		m_pos.y += m_move.y;              //高さ
+		m_pos += m_GmkMove;               //ギミックの移動量を合わせる
+
+		//前後=============================================================================================================
+																   //      ↓*速度制御*↓     //                     前 右 後 左
+		m_pos.z += cos(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.z);  //速度代入  1  0 -1  0=cos
+		m_pos.x += sin(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.z);  //速度代入  0  1  0 -1=sin
+		//=================================================================================================================
+		//左右=============================================================================================================
+		m_pos.z += -sin(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.x); //速度代入  0 -1  0  1=-sin
+		m_pos.x += cos(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.x);  //速度代入  1  0 -1  0=cos
+		//=================================================================================================================
+
+		//=============================================================================================
 	}
-	else
-	{
-		m_keyFlg = false;
-	}
-	//===============================================================
-
-	m_dir.Normalize();
-	if(!m_air)m_move.y -= m_gravity;  //重力と跳ね返りを与える
-	m_pos.y += m_move.y;              //高さ
-	m_pos += m_GmkMove;               //ギミックの移動量を合わせる
-
-	//前後=============================================================================================================
-															   //      ↓*速度制御*↓     //                     前 右 後 左
-	m_pos.z += cos(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.z);  //速度代入  1  0 -1  0=cos
-	m_pos.x += sin(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.z);  //速度代入  0  1  0 -1=sin
-	//=================================================================================================================
-	//左右=============================================================================================================
-	m_pos.z += -sin(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.x); //速度代入  0 -1  0  1=-sin
-	m_pos.x += cos(DirectX::XMConvertToRadians(m_angleY)) * (m_speed * m_dir.x);  //速度代入  1  0 -1  0=cos
-	//=================================================================================================================
-
-	//デバッグ用=====================================================
-	if (GetAsyncKeyState('R')&0x8000)ReStart();
-	if (m_pos.y <= -50)m_pos = { 300.0f,50.0f,0.0f };
-	//===============================================================
-
-	//=============================================================================================
 
 	//アニメーション===============================================================================
 	int Anime[][WALK_MAX] = { { 0,1,2,3 }, { 4,5,6,7,8,9,10 },{17,18,19,20,21,22,23,} };  //アニメーション配列
@@ -341,11 +339,20 @@ void Player::PostUpdate()
 
 	//=============================================================================================
 
+	//ゲームオーバー判定===========================================================================
+	if (m_pos.y <= -50)m_gameOverFlg = true;
+	//=============================================================================================
+
 }
 
 void Player::Draw()
 {
 	KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_polygon, m_mWorld);
+}
+
+void Player::DrawLit()
+{
+	Draw();
 }
 
 void Player::GenerateDepthMapFromLight()
@@ -362,7 +369,7 @@ void Player::Init()
 	m_polygon->SetMaterial("Asset/Textures/Character/Player/sheets/DinoSprites - doux.png");
 	m_polygon->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_polygon->SetSplit(24, 1);
-	m_pos = { 300.0f,5,0 };
+	m_pos = { -50.0f,0,0 };
 	m_move = Math::Vector3::Zero;
 	m_GmkMove = Math::Vector3::Zero;
 	m_dir = Math::Vector3::Zero;
@@ -373,7 +380,9 @@ void Player::Init()
 	m_angleY = 90.0f;
 	m_gravity = 0.05f;
 	m_jumpFlg = false;
+	m_actionFlg = false;
 	m_goalFlg = false;
+	m_gameOverFlg = false;;
 
 	//アニメーション
 	m_anime.m_AnimeCnt = 0.0f;

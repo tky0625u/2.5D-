@@ -34,9 +34,11 @@ public:
 	void Update()override;
 	void PostUpdate()override;
 	void Draw();
+	void DrawLit()override;
 	void GenerateDepthMapFromLight()override;
 	void Init()override;
 
+	void ActionON() { m_actionFlg = true; }
 	void ReStart();
 
 	void SetGimmickList(std::vector<std::shared_ptr<GimmickBase>> a_GimmickList) { m_GimmickList = a_GimmickList; }
@@ -45,6 +47,7 @@ public:
 	float GetAngleX()const { return m_angleX; }
 	float GetAngleY()const { return m_angleY; }
 	bool  GetGoal()  const { return m_goalFlg; }
+	bool  GetGameOver()const { return m_gameOverFlg; }
 
 private:
 	std::shared_ptr<KdSquarePolygon> m_polygon;  //板ポリ
@@ -59,7 +62,9 @@ private:
 	float m_angleX;                              //角度
 	float m_gravity;                             //重力
 	bool  m_jumpFlg;                             //ジャンプフラグ
+	bool  m_actionFlg;                           //行動可能フラグ
 	bool  m_goalFlg;                             //ゴールフラグ
+	bool  m_gameOverFlg;                         //ゲームオーバーフラグ
 
 	Animation m_anime;  //アニメーション
 

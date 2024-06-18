@@ -139,6 +139,12 @@
     <Filter Include="Src\Application\Object\UI\Goal">
       <UniqueIdentifier>{9f6da428-1633-4a2a-824f-0a00fafdb2f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\UI\GameOver">
+      <UniqueIdentifier>{e80a6ca2-743e-48db-9b49-329e93db4063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\UI\Start">
+      <UniqueIdentifier>{34d6f2d4-622f-47ab-861e-220a2994fb17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -360,6 +366,12 @@
     <ClInclude Include="Src\Application\Object\UI\Goal\GoalUI.h">
       <Filter>Src\Application\Object\UI\Goal</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\UI\GameOver\GameOver.h">
+      <Filter>Src\Application\Object\UI\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\UI\Start\StartUI.h">
+      <Filter>Src\Application\Object\UI\Start</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -550,6 +562,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\UI\Goal\GoalUI.cpp">
       <Filter>Src\Application\Object\UI\Goal</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\UI\GameOver\GameOver.cpp">
+      <Filter>Src\Application\Object\UI\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\UI\Start\StartUI.cpp">
+      <Filter>Src\Application\Object\UI\Start</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

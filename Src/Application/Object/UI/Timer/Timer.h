@@ -25,6 +25,6 @@ private:
 	Math::Color     m_color;
 	Math::Rectangle m_rect;
 	Math::Matrix    m_Mat;
-	KdTexture*       m_pTex;
+	KdTexture*      m_pTex;
 	int             m_cutX;
 };

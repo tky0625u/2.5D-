@@ -17,6 +17,8 @@ public:
 	void DrawSprite()override;
 	void Init()override;
 
+	void StartON() { m_startFlg = true; }
+
 private:
 	std::vector<std::shared_ptr<Timer>> m_timerList;
 	int m_frame;
@@ -27,4 +29,5 @@ private:
 	KdTexture       m_Tex;
 
 	KdTexture       m_timerTex;
+	bool            m_startFlg;
 };

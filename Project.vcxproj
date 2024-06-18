@@ -171,7 +171,9 @@
     <ClInclude Include="Src\Application\Object\Ground\Bridge\Bridge.h" />
     <ClInclude Include="Src\Application\Object\Ground\Goal\Goal.h" />
     <ClInclude Include="Src\Application\Object\Ground\Start\StartBlock.h" />
+    <ClInclude Include="Src\Application\Object\UI\GameOver\GameOver.h" />
     <ClInclude Include="Src\Application\Object\UI\Goal\GoalUI.h" />
+    <ClInclude Include="Src\Application\Object\UI\Start\StartUI.h" />
     <ClInclude Include="Src\Application\Object\UI\Timer\Timer.h" />
     <ClInclude Include="Src\Application\Object\UI\Timer\TimerManager.h" />
     <ClInclude Include="Src\Application\Scene\BaseScene\BaseScene.h" />
@@ -239,7 +241,9 @@
     <ClCompile Include="Src\Application\Object\Ground\Bridge\Bridge.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Goal\Goal.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Start\StartBlock.cpp" />
+    <ClCompile Include="Src\Application\Object\UI\GameOver\GameOver.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Goal\GoalUI.cpp" />
+    <ClCompile Include="Src\Application\Object\UI\Start\StartUI.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Timer\Timer.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Timer\TimerManager.cpp" />
     <ClCompile Include="Src\Application\Scene\BaseScene\BaseScene.cpp" />

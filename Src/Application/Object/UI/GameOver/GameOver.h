@@ -1,13 +1,13 @@
 ﻿#pragma once
 
-#define GoalSIZEUP  0.2f
-#define GoalSIZEMAX 1.0f
+#define GameOverSIZEUP  0.4f
+#define GameOverSIZEMAX 2.0f
 
-class GoalUI :public KdGameObject
+class GameOverUI :public KdGameObject
 {
 public:
-	GoalUI() { Init(); }
-	~GoalUI()override { m_Tex.Release(); }
+	GameOverUI() { Init(); }
+	~GameOverUI()override { m_Tex.Release(); }
 
 	void Update()override;
 	void DrawSprite()override;

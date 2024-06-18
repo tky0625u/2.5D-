@@ -6,32 +6,29 @@
 #include"../../Object/Character/Player/Player.h"
 #include"../../Object/UI/Timer/TimerManager.h"
 #include"../../Object/UI/Goal/GoalUI.h"
+#include"../../Object/UI/GameOver/GameOver.h"
+#include"../../Object/UI/Start/StartUI.h"
 #include"../../Object/Gimmick/GimmickManager/GimmickManager.h"
 
 void GameScene::PreUpdate()
 {
 	if (m_player.expired() == false)
 	{
-		if (m_player.lock()->GetGoal() == false)BaseScene::PreUpdate();
+		if (m_player.lock()->GetGoal() == false && m_player.lock()->GetGameOver()==false)BaseScene::PreUpdate();
 	}
 }
 
 void GameScene::Update()
 {
-	std::shared_ptr<Player>player;
-	if (m_player.expired() == false)
-	{
-		player = m_player.lock();
-	}
-
-	if (player->GetGoal() == false)
+	if (m_player.lock()->GetGoal() == false && m_player.lock()->GetGameOver() == false)
 	{
 		for (auto& obj : m_objList)
 		{
 			obj->Update();
 		}
 	}
-	else { m_goalUI->Update(); }
+	else if(m_player.lock()->GetGoal()){ m_goalUI->Update(); }
+	else if (m_player.lock()->GetGameOver()) { m_gameOverlUI->Update(); }
 
 	Event();
 }
@@ -40,7 +37,7 @@ void GameScene::PostUpdate()
 {
 	if (m_player.expired() == false)
 	{
-		if (m_player.lock()->GetGoal() == false)BaseScene::PostUpdate();
+		if (m_player.lock()->GetGoal() == false && m_player.lock()->GetGameOver() == false)BaseScene::PostUpdate();
 	}
 }
 
@@ -56,6 +53,7 @@ void GameScene::DrawSprite()
 		if (m_player.expired() == false)
 		{
 			if (m_player.lock()->GetGoal())m_goalUI->DrawSprite();
+			else if (m_player.lock()->GetGameOver())m_gameOverlUI->DrawSprite();
 		}
 	}
 	KdShaderManager::Instance().m_spriteShader.End();
@@ -69,9 +67,21 @@ void GameScene::Event()
 
 	if (m_player.expired() == false)
 	{
-		if (m_player.lock()->GetGoal() && m_goalUI->GetFinish() && GetAsyncKeyState(VK_SPACE) & 0x8000)
+		if ( ((m_player.lock()->GetGameOver() && m_gameOverlUI->GetFinish()) || (m_player.lock()->GetGoal() && m_goalUI->GetFinish())) && GetAsyncKeyState(VK_SPACE) & 0x8000)
 		{
 			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Title);
+		}
+
+		if (m_startUI.expired() == false)
+		{
+			if (m_startUI.lock()->GetStart())
+			{
+				m_player.lock()->ActionON();
+				if (m_timer.expired() == false)
+				{
+					m_timer.lock()->StartON();
+				}
+			}
 		}
 
 	//プレイヤー情報取得===================================
@@ -156,11 +166,23 @@ void GameScene::Init()
 	//タイマー===================================================================================================================
 	std::shared_ptr<TimerManager>timer = std::make_shared<TimerManager>();  //メモリ確保
 	m_objList.push_back(timer);                                             //リストに追加
+	m_timer = timer;
 	//===========================================================================================================================
 
 	//ゴール表記=================================================================================================================
 	std::shared_ptr<GoalUI>goalUI = std::make_shared<GoalUI>();
 	m_goalUI = goalUI;
+	//===========================================================================================================================
+
+	//ゲームオーバー表記=========================================================================================================
+	std::shared_ptr<GameOverUI>gameOverUI = std::make_shared<GameOverUI>();
+	m_gameOverlUI = gameOverUI;
+	//===========================================================================================================================
+
+	//スタート表記===============================================================================================================
+	std::shared_ptr<StartUI>startUI = std::make_shared<StartUI>();
+	m_objList.push_back(startUI);
+	m_startUI = startUI;
 	//===========================================================================================================================
 
 	ShowCursor(false);
