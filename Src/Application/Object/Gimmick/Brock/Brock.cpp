@@ -18,5 +18,5 @@ void Brock::Init()
 	m_model = std::make_shared<KdModelData>();          //メモリ確保
 	m_model->Load("Asset/Models/Brock/Brock.gltf");  //モデル読み込み
 	m_pCollider = std::make_unique<KdCollider>();
-	m_pCollider->RegisterCollisionShape("Brock", m_model, KdCollider::Type::TypeGround);
+	m_pCollider->RegisterCollisionShape("Brock", m_model, KdCollider::Type::TypeGround | KdCollider::TypeBump);
 }

@@ -16,8 +16,6 @@ public:
 	void GenerateDepthMapFromLight()override;
 	void Init()override;
 
-	void SetCameraPos(Math::Vector3 a_cameraPos) { m_cameraPos = a_cameraPos; }
-
 	const std::vector<std::shared_ptr<GimmickBase>> GetGimmickList(){ return m_GimmickList; }
 	const std::vector<std::shared_ptr<KdGameObject>> GetBulletList(){ return m_BulletList; }
 
