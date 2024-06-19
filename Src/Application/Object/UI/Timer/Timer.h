@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#define TIMERWIDESIZE 93   //横サイズ
-#define TIMERHIGHTSIZE 50  //縦サイズ
+#define TIMERWIDESIZE 52   //横サイズ
+#define TIMERHIGHTSIZE 53  //縦サイズ
 
 class Timer:public KdGameObject
 {
@@ -15,6 +15,7 @@ public:
 
 	void Scroll() { m_cutX += TIMERWIDESIZE; }       //次の数字に変更
 	void Reset() { m_cutX = 0; }                     //最初に戻す
+
 	void SetPos(int Number,Math::Vector2 commaPos);  //座標指定
 	void SetTexture(KdTexture* a_pTex) { m_pTex = a_pTex; }
 	void SetSize(float a_size) { m_size = a_size; }

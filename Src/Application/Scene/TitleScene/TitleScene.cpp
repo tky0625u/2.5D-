@@ -27,12 +27,16 @@ void TitleScene::Load(std::string a_filePath)
 
 		m_timer = std::make_shared<TimerManager>();
 		m_timer->SetPos(Math::Vector2{ 0,-100 });
+		m_timer->SetSize(1.5f);
 		m_timer->Init();
-		m_timer->SetSize(0.5f);
 
-		for (int i = 0; i < Data; i++)
+		if (Data == 10)m_timer->TimeNO();
+		else
 		{
-			m_timer->Scroll();
+			for (int i = 0; i < Data; i++)
+			{
+				m_timer->Scroll();
+			}
 		}
 	}
 }

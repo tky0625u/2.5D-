@@ -40,7 +40,6 @@ void TimerManager::Init()
 	//コンマ=======================================================================================
 	m_color = { 1,1,1,1 };
 	m_rect = { 0,0,23,52 };
-	m_size = 1.0f;
 	m_Tex.Load("Asset/Textures/UI/Timer/comma.png");
 	//=============================================================================================
 
@@ -51,6 +50,7 @@ void TimerManager::Init()
 	{
 		std::shared_ptr<Timer> timer = std::make_shared<Timer>();
 		timer->SetPos(i,m_pos);
+		timer->SetSize(m_size);
 		timer->SetTexture(&m_timerTex);
 		m_timerList.push_back(timer);
 	}
@@ -111,4 +111,15 @@ void TimerManager::Scroll()
 	}
 	m_second++;
 	//===============================================================================
+}
+
+void TimerManager::TimeNO()
+{
+	for (unsigned int i = 0; i < m_timerList.size(); ++i)
+	{
+		while (m_timerList[i]->GetCutX() != TIMERWIDESIZE * 10)
+		{
+			m_timerList[i]->Scroll();
+		}
+	}
 }

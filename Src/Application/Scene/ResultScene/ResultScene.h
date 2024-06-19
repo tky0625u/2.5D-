@@ -23,5 +23,7 @@ private:
 	void Init() override;
 
 	std::shared_ptr<TimerManager> m_timer;
+	int                           m_ResultTime;
 	int                           m_frame;
+	bool                          m_ramdomFlg;
 };

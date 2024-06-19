@@ -13,6 +13,7 @@ public:
 	TimerManager()
 		:m_pos(0,360),
 		 m_frame(0),
+		 m_size(1.0f),
 		 m_second(0),
 		 m_default(DEFAULTNUM),
 		 m_startFlg(false)
@@ -26,6 +27,7 @@ public:
 
 	void Random();
 	void Scroll();
+	void TimeNO();
 	void StartON() { m_startFlg = true; }
 	
 	void SetPos(Math::Vector2 a_pos) { m_pos = a_pos; }

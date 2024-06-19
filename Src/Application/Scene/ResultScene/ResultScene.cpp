@@ -8,7 +8,10 @@
 
 void ResultScene::Update()
 {
-	if (m_frame < SECOND * 1)m_timer->Random();
+	if (m_ramdomFlg)
+	{
+		m_timer->Random();
+	}
 
 	Event();
 }
@@ -18,6 +21,11 @@ void ResultScene::PostUpdate()
 	m_timer->PostUpdate();
 
 	m_frame++;
+	if (m_frame >= SECOND * 1)
+	{
+		if (m_ResultTime == 0)m_timer->TimeNO();
+		m_ramdomFlg = false;
+	}
 }
 
 void ResultScene::DrawSprite()
@@ -38,19 +46,24 @@ void ResultScene::Load(std::string a_filePath)
 
 		m_timer = std::make_shared<TimerManager>();
 		m_timer->SetPos(Math::Vector2{ -200,0 });
-		m_timer->Init();
 		m_timer->SetSize(2.0f);
+		m_timer->Init();
 
-		for (int i = 0; i < Data; i++)
+		if (Data > 0)
 		{
-			m_timer->Scroll();
+			for (int i = 0; i < Data; i++)
+			{
+				m_timer->Scroll();
+			}
+
+			getline(ifs, lineString);
+			getline(ifs, lineString);
+			const bool GameOverFlg = stoi(lineString);
+
+			if (!GameOverFlg)BestWrite("ResultTime/BestTime.csv", Data);
 		}
 
-		getline(ifs, lineString);
-		getline(ifs, lineString);
-		const bool GameOverFlg= stoi(lineString);
-
-		if(!GameOverFlg)BestWrite("ResultTime/BestTime.csv", Data);
+		m_ResultTime = Data;
 	}
 
 	ifs.close();
@@ -98,7 +111,9 @@ void ResultScene::Event()
 
 void ResultScene::Init()
 {
-	Load("ResultTime/ResultTime.csv");
+	m_ResultTime = 0;
 	m_frame = 0;
+	m_ramdomFlg = true;
+	Load("ResultTime/ResultTime.csv");
 	ShowCursor(true);
 }
