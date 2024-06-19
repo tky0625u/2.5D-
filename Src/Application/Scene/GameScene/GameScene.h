@@ -22,6 +22,8 @@ public :
 
 	void DrawSprite()override;
 
+	void Write(std::string a_filePath);
+
 private:
 
 	void Event() override;

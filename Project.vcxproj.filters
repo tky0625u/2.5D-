@@ -145,8 +145,8 @@
     <Filter Include="Src\Application\Object\UI\Start">
       <UniqueIdentifier>{34d6f2d4-622f-47ab-861e-220a2994fb17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Camera">
-      <UniqueIdentifier>{aafb9d3a-a0c5-4980-9b41-66c0a1036457}</UniqueIdentifier>
+    <Filter Include="Src\Application\Scene\ResultScene">
+      <UniqueIdentifier>{e07c71aa-8fb2-441c-898b-ff4505abd7a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -375,8 +375,8 @@
     <ClInclude Include="Src\Application\Object\UI\Start\StartUI.h">
       <Filter>Src\Application\Object\UI\Start</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Camera\Camera.h">
-      <Filter>Src\Application\Object\Camera</Filter>
+    <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene.h">
+      <Filter>Src\Application\Scene\ResultScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -575,8 +575,8 @@
     <ClCompile Include="Src\Application\Object\UI\Start\StartUI.cpp">
       <Filter>Src\Application\Object\UI\Start</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Camera\Camera.cpp">
-      <Filter>Src\Application\Object\Camera</Filter>
+    <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene.cpp">
+      <Filter>Src\Application\Scene\ResultScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

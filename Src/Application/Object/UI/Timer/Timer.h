@@ -9,7 +9,7 @@ public:
 	Timer() { Init(); }
 	~Timer()override{}
 
-	void Update()override;
+	void PostUpdate()override;
 	void DrawSprite()override;
 	void Init()override;
 
@@ -17,6 +17,7 @@ public:
 	void Reset() { m_cutX = 0; }                     //最初に戻す
 	void SetPos(int Number,Math::Vector2 commaPos);  //座標指定
 	void SetTexture(KdTexture* a_pTex) { m_pTex = a_pTex; }
+	void SetSize(float a_size) { m_size = a_size; }
 
 	const int GetCutX()const { return m_cutX; }      //切り取り範囲参照
 
@@ -27,4 +28,5 @@ private:
 	Math::Matrix    m_Mat;
 	KdTexture*      m_pTex;
 	int             m_cutX;
+	float           m_size;
 };

@@ -8,6 +8,7 @@ void Camera::Update()
 	Math::Matrix Trans = Math::Matrix::CreateTranslation(m_pos);                                   //座標 (プレイヤーの少し前)
 	Math::Matrix PlayerTrans = Math::Matrix::CreateTranslation(m_PlayerPos);                         //プレイヤー座標
 	Math::Matrix Mat = RotX * Trans * RotY * PlayerTrans;                                          //行列合成
+	m_camera->SetCameraMatrix(Mat);
 	//=========================================================================================================================
 }
 
@@ -18,6 +19,8 @@ void Camera::Init()
 	m_ViewingAngle = 60;
 	m_pos = { 0,2,0 };
 	m_PlayerPos = {};
+	m_camera = std::make_unique<KdCamera>();
+	m_camera->SetProjectionMatrix(m_ViewingAngle);
 }
 
 void Camera::SetPlayerAngle(float a_PlayerAngleX, float a_PlayerAngleY)

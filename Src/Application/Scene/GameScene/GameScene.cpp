@@ -10,6 +10,9 @@
 #include"../../Object/UI/Start/StartUI.h"
 #include"../../Object/Gimmick/GimmickManager/GimmickManager.h"
 
+#include<fstream>
+#include<sstream>
+
 void GameScene::PreUpdate()
 {
 	if (m_player.expired() == false)
@@ -59,6 +62,24 @@ void GameScene::DrawSprite()
 	KdShaderManager::Instance().m_spriteShader.End();
 }
 
+void GameScene::Write(std::string a_filePath)
+{
+	std::ofstream ost(a_filePath);
+
+	if (ost.is_open())
+	{
+		//ゲームオーバーだった場合
+		if (m_player.lock()->GetGameOver())
+		{
+			ost << "Second" << "\n" << 0 << "\n" << "GameOver" << "\n" << m_player.lock()->GetGameOver();
+		}
+		//ゴールした場合
+		else if(m_player.lock()->GetGoal())ost << "Second" << "\n" << m_timer.lock()->GetSecond() << "\n" << "GameOver" << "\n" << m_player.lock()->GetGameOver();
+
+		ost.close();
+	}
+}
+
 void GameScene::Event()
 {
 	static float playerAngleX = 0;
@@ -69,7 +90,11 @@ void GameScene::Event()
 	{
 		if ( ((m_player.lock()->GetGameOver() && m_gameOverlUI->GetFinish()) || (m_player.lock()->GetGoal() && m_goalUI->GetFinish())) && GetAsyncKeyState(VK_SPACE) & 0x8000)
 		{
-			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Title);
+			if (m_timer.expired() == false)
+			{
+				Write("ResultTime/ResultTime.csv");
+			}
+			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
 		}
 
 		if (m_startUI.expired() == false)
@@ -117,6 +142,8 @@ void GameScene::Event()
 	//=========================================================================================================================
 
 	//===========================================================================================================================
+
+	ShowCursor(false);
 }
 
 void GameScene::Init()
@@ -160,6 +187,8 @@ void GameScene::Init()
 
 	//タイマー===================================================================================================================
 	std::shared_ptr<TimerManager>timer = std::make_shared<TimerManager>();  //メモリ確保
+	timer->Init();
+	timer->SetSize(1.0f);
 	m_objList.push_back(timer);                                             //リストに追加
 	m_timer = timer;
 	//===========================================================================================================================
@@ -179,6 +208,4 @@ void GameScene::Init()
 	m_objList.push_back(startUI);
 	m_startUI = startUI;
 	//===========================================================================================================================
-
-	ShowCursor(false);
 }

@@ -40,7 +40,7 @@ void StartUI::Update()
 
 void StartUI::DrawSprite()
 {
-	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_Tex, (int)m_pos.x, (int)m_pos.y, int(m_rect.width * m_size), int(m_rect.height * m_size), &m_rect);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_Tex, (int)m_pos.x, (int)m_pos.y, float(m_rect.width * m_size), float(m_rect.height * m_size), &m_rect);
 }
 
 void StartUI::Init()

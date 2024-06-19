@@ -4,21 +4,24 @@
 
 class TimerManager;
 
-class TitleScene : public BaseScene
+class ResultScene : public BaseScene
 {
-public :
+public:
 
-	TitleScene() { Init(); }
-	~TitleScene() {}
+	ResultScene() { Init(); }
+	~ResultScene() {}
 
+	void Update()override;
 	void PostUpdate()override;
 	void DrawSprite()override;
 	void Load(std::string a_filePath);
+	void BestWrite(std::string a_filePath,int Time);
 
-private :
+private:
 
 	void Event() override;
 	void Init() override;
 
 	std::shared_ptr<TimerManager> m_timer;
+	int                           m_frame;
 };
