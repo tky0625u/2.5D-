@@ -21,6 +21,11 @@ void ResultScene::Update()
 	if (m_ramdomFlg)
 	{
 		m_timer->Random();
+		if (!m_ramdomSoundFlg)
+		{
+			KdAudioManager::Instance().Play("Asset/Sounds/SE/Result/電子ルーレット回転中.WAV", false);
+			m_ramdomSoundFlg = true;
+		}
 	}
 
 	Event();
@@ -33,6 +38,12 @@ void ResultScene::PostUpdate()
 	m_frame++;
 	if (m_frame >= SECOND * 1)
 	{
+		if (m_ramdomSoundFlg && !m_StopSoundFlg)
+		{
+			KdAudioManager::Instance().StopAllSound();
+			KdAudioManager::Instance().Play("Asset/Sounds/SE/Result/電子ルーレット停止ボタンを押す.WAV", false);
+			m_StopSoundFlg = true;
+		}
 		if (m_ResultTime == 0)m_timer->TimeNO();
 		m_ramdomFlg = false;
 	}
@@ -122,6 +133,7 @@ void ResultScene::Event()
 
 	if (m_fedeinFlg && m_brackAlpha >= 1.0f)
 	{
+		KdAudioManager::Instance().StopAllSound();
 		SceneManager::Instance().SetNextScene
 		(
 			SceneManager::SceneType::Title
@@ -141,6 +153,8 @@ void ResultScene::Init()
 	m_ResultTime = 0;
 	m_frame = 0;
 	m_ramdomFlg = true;
+	m_ramdomSoundFlg = false;
+	m_StopSoundFlg = false;
 	Load("ResultTime/ResultTime.csv");
 	ShowCursor(true);
 }

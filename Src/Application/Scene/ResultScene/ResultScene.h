@@ -26,4 +26,6 @@ private:
 	int                           m_ResultTime;
 	int                           m_frame;
 	bool                          m_ramdomFlg;
+	bool                          m_ramdomSoundFlg;
+	bool                          m_StopSoundFlg;
 };

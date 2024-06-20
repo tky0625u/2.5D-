@@ -10,7 +10,15 @@ void StartUI::Update()
 		if (m_frame < SECOND / 2)
 		{
 			m_size += StartSIZECHANGE;
-			if (m_size > StartSIZEMAX)m_size = StartSIZEMAX;
+			if (m_size > StartSIZEMAX)
+			{
+				if (!m_StartSoundFlg)
+				{
+					KdAudioManager::Instance().Play("Asset/Sounds/SE/StartUI/maou_se_system27.WAV", false);
+					m_StartSoundFlg = true;
+				}
+				m_size = StartSIZEMAX;
+			}
 		}
 		else
 		{
@@ -25,14 +33,27 @@ void StartUI::Update()
 			m_size += Start_GO_SizeUP;
 			m_alpha -= StartAlphaDOWN;
 		}
-		else{m_size += StartSIZECHANGE;}
+		else
+		{
+			if (!m_StartSoundFlg)
+			{
+				KdAudioManager::Instance().Play("Asset/Sounds/SE/StartUI/エアーホーン.WAV", false);
+				m_StartSoundFlg = true;
+			}
+			m_size += StartSIZECHANGE;
+		}
 	}
 
 	if (m_frame >= SECOND)
 	{
 		m_cutX += m_rect.width;
-		if(!m_StartFlg)m_size = 0.0f;
-		m_frame = 0.0f;
+		if (!m_StartFlg)
+		{
+			m_size = 0.0f;
+			m_StartSoundFlg = false;
+			m_frame = 0.0f;
+		}
+
 		if (m_cutX == m_rect.width * Start_GO)
 		{
 			if(!m_StartFlg)m_StartFlg = true;
@@ -65,5 +86,6 @@ void StartUI::Init()
 	m_frame = 0.0f;
 	m_StartFlg = false;
 	m_CountFlg = false;
+	m_StartSoundFlg = false;
 	m_Tex.Load("Asset/Textures/UI/Start/Start.png");
 }

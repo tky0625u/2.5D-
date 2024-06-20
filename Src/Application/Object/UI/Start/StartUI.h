@@ -30,5 +30,6 @@ private:
 	float           m_frame;
 	bool            m_StartFlg;
 	bool            m_CountFlg;
+	bool           m_StartSoundFlg;
 	KdTexture       m_Tex;
 };
