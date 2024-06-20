@@ -13,6 +13,7 @@ void Cannon::Update()
 		bullet->SetAngle(m_angle);                                           //角度格納
 		m_bulletList.push_back(bullet);                                      //リストに格納
 		m_bullet = bullet;                                                   //変数に代入
+		KdAudioManager::Instance().Play3D("Asset/Sounds/SE/Gimmick/Cannon/maou_se_battle_explosion03.WAV", m_pos, false);
 		//=====================================================================
 	}
 

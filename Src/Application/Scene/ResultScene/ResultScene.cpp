@@ -23,7 +23,7 @@ void ResultScene::Update()
 		m_timer->Random();
 		if (!m_ramdomSoundFlg)
 		{
-			KdAudioManager::Instance().Play("Asset/Sounds/SE/Result/電子ルーレット回転中.WAV", false);
+			KdAudioManager::Instance().Play("Asset/Sounds/SE/Result/電子ルーレット回転中.WAV", 0.1f, false);
 			m_ramdomSoundFlg = true;
 		}
 	}
@@ -41,7 +41,7 @@ void ResultScene::PostUpdate()
 		if (m_ramdomSoundFlg && !m_StopSoundFlg)
 		{
 			KdAudioManager::Instance().StopAllSound();
-			KdAudioManager::Instance().Play("Asset/Sounds/SE/Result/電子ルーレット停止ボタンを押す.WAV", false);
+			KdAudioManager::Instance().Play("Asset/Sounds/SE/Result/電子ルーレット停止ボタンを押す.WAV", 0.1f, false);
 			m_StopSoundFlg = true;
 		}
 		if (m_ResultTime == 0)m_timer->TimeNO();

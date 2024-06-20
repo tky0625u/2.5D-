@@ -68,7 +68,7 @@ void KdAudioManager::SetListnerMatrix(const Math::Matrix& mWorld)
 // ・管理用プレイリストへの追加
 // ・戻り値で再生インスタンスを取得可能（音量・ピッチなどを変更する場合に必要
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
-std::shared_ptr<KdSoundInstance> KdAudioManager::Play(std::string_view rName, bool loop)
+std::shared_ptr<KdSoundInstance> KdAudioManager::Play(std::string_view rName, float vol, bool loop)
 {
 	if (!m_audioEng) { return nullptr; }
 
@@ -80,6 +80,7 @@ std::shared_ptr<KdSoundInstance> KdAudioManager::Play(std::string_view rName, bo
 
 	if(!instance->CreateInstance()){ return nullptr; }
 
+	instance->SetVolume(vol);
 	instance->Play(loop);
 
 	AddPlayList(instance);

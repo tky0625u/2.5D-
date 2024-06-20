@@ -97,8 +97,8 @@ void GimmickManager::Init()
 	for (int i = 0; i < TRAMPOLINENUM; ++i)
 	{
 		std::shared_ptr<Trampoline>trampoline = std::make_shared<Trampoline>();
-		trampoline->SetPos(Math::Vector3{ i * 25.0f,i * 10.0f,i * 6.0f });
-		trampoline->SetReverse(i * 10.0f);
+		trampoline->SetPos(Math::Vector3{ i * 25.0f,i * 10.0f,0.0f });
+		trampoline->SetSpeed(TRAMPOLINENUM - i);
 		m_GimmickList.push_back(trampoline);
 	}
 	//=============================================================================================

@@ -14,7 +14,7 @@ void StartUI::Update()
 			{
 				if (!m_StartSoundFlg)
 				{
-					KdAudioManager::Instance().Play("Asset/Sounds/SE/StartUI/maou_se_system27.WAV", false);
+					KdAudioManager::Instance().Play("Asset/Sounds/SE/StartUI/maou_se_system27.WAV", 0.1f, false);
 					m_StartSoundFlg = true;
 				}
 				m_size = StartSIZEMAX;
@@ -37,7 +37,7 @@ void StartUI::Update()
 		{
 			if (!m_StartSoundFlg)
 			{
-				KdAudioManager::Instance().Play("Asset/Sounds/SE/StartUI/エアーホーン.WAV", false);
+				KdAudioManager::Instance().Play("Asset/Sounds/SE/StartUI/エアーホーン.WAV", 0.1f, false);
 				m_StartSoundFlg = true;
 			}
 			m_size += StartSIZECHANGE;

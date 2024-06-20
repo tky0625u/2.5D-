@@ -34,6 +34,7 @@ private:
 	float         m_angleY;        //角度 Y軸
 	float         m_ViewingAngle;  //視野角
 	bool          m_ViewFlg;
+	bool          m_seFlg;
 	Math::Vector3 m_pos;           //座標
 	//======================================
 
@@ -43,4 +44,6 @@ private:
 	std::weak_ptr<StartUI>        m_startUI;
 	std::shared_ptr<GoalUI>       m_goalUI;
 	std::shared_ptr<GameOverUI>   m_gameOverlUI;
+
+	bool                          m_bgmFlg;
 };

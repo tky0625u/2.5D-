@@ -11,8 +11,10 @@ public:
 	void Init()override;
 
 	void SetPos(Math::Vector3 a_pos) { m_pos += a_pos; }
-	void SetReverse(float a_reverse) { m_reverse += a_reverse; }
+	void SetSpeed(int i) { m_speed *= i; }
 
 private:
 	float m_reverse;
+	float m_speed;
+	float m_angleChange;
 };

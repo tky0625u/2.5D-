@@ -18,7 +18,6 @@
 
 void GameScene::PreUpdate()
 {
-
 	if (m_player.expired() == false)
 	{
 		if (m_player.lock()->GetGoal() == false && m_player.lock()->GetGameOver()==false)BaseScene::PreUpdate();
@@ -107,6 +106,8 @@ void GameScene::Event()
 	{
 		if ( (m_player.lock()->GetGameOver() && m_gameOverlUI->GetFinish()) || (m_player.lock()->GetGoal() && m_goalUI->GetFinish()))
 		{
+			KdAudioManager::Instance().StopAllSound();
+
 			if (m_timer.expired() == false)
 			{
 				Write("ResultTime/ResultTime.csv");
@@ -126,6 +127,11 @@ void GameScene::Event()
 				if (m_timer.expired() == false)
 				{
 					m_timer.lock()->StartON();
+				}
+				if (!m_bgmFlg)
+				{
+					KdAudioManager::Instance().Play("Asset/Sounds/BGM/maou_bgm_ethnic31.WAV", 0.1f, true);
+					m_bgmFlg = true;
 				}
 			}
 		}
@@ -155,6 +161,13 @@ void GameScene::Event()
 
 	if (!m_ViewFlg)
 	{
+		static std::shared_ptr<KdSoundInstance> seInstans;
+		if (!m_seFlg)
+		{
+			seInstans = KdAudioManager::Instance().Play("Asset/Sounds/SE/Camera/maou_se_magic_wind01.WAV", 0.1f, true);
+			m_seFlg = true;
+		}
+
 		Math::Vector3 cameraMove;
 		cameraMove.x = playerPos.x - m_pos.x;
 		cameraMove.y = (playerPos.y + 2.0f) - m_pos.y;
@@ -179,6 +192,7 @@ void GameScene::Event()
 				m_pos = { 0.0f,2.0f,0.0f };
 				m_angleX = playerAngleX;
 				m_ViewFlg = true;
+				seInstans->Stop();
 			}
 		}
 	}
@@ -219,6 +233,7 @@ void GameScene::Init()
 	m_angleY = 270;
 	m_ViewingAngle = 60;
 	m_ViewFlg = false;
+	m_seFlg = false;
 	m_pos = { 600,100,0 };
 	m_camera = std::make_unique<KdCamera>();        //メモリ確保
 	m_camera->SetProjectionMatrix(m_ViewingAngle);  //視野角設定
@@ -308,7 +323,7 @@ void GameScene::Init()
 		back[i]->SetPolygon(backPolygon);
 
 	}
-	back[0]->SetPos(Math::Vector3{200.0f,100.0f,0.0f});
+	back[0]->SetPos(Math::Vector3{200.0f,200.0f,0.0f});
 	back[0]->SetAngle(90.0f, 90.0f);
 
 	back[1]->SetPos(Math::Vector3{ 600.0f,0.0f,0.0f });
@@ -332,4 +347,6 @@ void GameScene::Init()
 	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
 	m_fedeinFlg = false;
 	//===========================================================================================================================
+
+	m_bgmFlg = false;
 }
