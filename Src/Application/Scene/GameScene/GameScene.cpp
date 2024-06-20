@@ -155,20 +155,21 @@ void GameScene::Event()
 
 	if (!m_ViewFlg)
 	{
-		if (m_pos.y > playerPos.y + 2.0f)
-		{
-			m_pos.y -= 0.3f;
-		}
-		else
-		{
-			//m_pos.y = playerPos.y + 2.0f;
-		}
+		Math::Vector3 cameraMove;
+		cameraMove.x = playerPos.x - m_pos.x;
+		cameraMove.y = (playerPos.y + 2.0f) - m_pos.y;
 
-		if (m_pos.x > playerPos.x)m_pos.x -= 2.0f;
+		if (fabs(cameraMove.x)>0.1f&&fabs(cameraMove.y)>0.1f)
+		{
+			cameraMove.Normalize();
+			m_pos += 2.0 * cameraMove;
+			if (m_pos.x < playerPos.x)m_pos.x = playerPos.x;
+			if (m_pos.y < playerPos.y + 2.0f)m_pos.y = playerPos.y + 2.0f;
+		}
 		else
 		{
 			if (m_angleY > playerAngleY)m_angleY -= 2.0f;
-			else{ m_angleY = playerAngleY; }
+			else { m_angleY = playerAngleY; }
 
 			if (m_angleX > playerAngleX)m_angleX -= 2.0f;
 			else { m_angleX = playerAngleX; }
