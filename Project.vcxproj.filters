@@ -148,6 +148,21 @@
     <Filter Include="Src\Application\Scene\ResultScene">
       <UniqueIdentifier>{e07c71aa-8fb2-441c-898b-ff4505abd7a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\BackGround">
+      <UniqueIdentifier>{fcefe2c9-796a-477e-9411-3c3eab8ea629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Ground\Water">
+      <UniqueIdentifier>{7f69f3be-6ef2-467b-ba1a-75b4a3e22bd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Ground\GroundWater">
+      <UniqueIdentifier>{4b205c04-eb28-487f-912a-9edb4d2dbec8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Ground\GroundCurve">
+      <UniqueIdentifier>{5a5ae6bc-3745-4ace-88c8-3b1619c52290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Ground\Ground">
+      <UniqueIdentifier>{3372900a-0629-4b09-9bb5-5b0638a01ae3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -378,6 +393,15 @@
     <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene.h">
       <Filter>Src\Application\Scene\ResultScene</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\BackGround\BackGround.h">
+      <Filter>Src\Application\Object\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ground\Water\Water.h">
+      <Filter>Src\Application\Object\Ground\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Ground\Ground\Ground.h">
+      <Filter>Src\Application\Object\Ground\Ground</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -577,6 +601,15 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene.cpp">
       <Filter>Src\Application\Scene\ResultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\BackGround\BackGround.cpp">
+      <Filter>Src\Application\Object\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ground\Water\Water.cpp">
+      <Filter>Src\Application\Object\Ground\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Ground\Ground\Ground.cpp">
+      <Filter>Src\Application\Object\Ground\Ground</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

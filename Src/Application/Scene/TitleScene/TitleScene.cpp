@@ -2,6 +2,18 @@
 #include "../SceneManager.h"
 #include"../../Object/UI/Timer/TimerManager.h"
 
+void TitleScene::Update()
+{
+	if (m_fedeinFlg)
+	{
+		m_brackAlpha += 0.01f;
+	}
+
+	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+
+	Event();
+}
+
 void TitleScene::PostUpdate()
 {
 	m_timer->PostUpdate();
@@ -9,7 +21,12 @@ void TitleScene::PostUpdate()
 
 void TitleScene::DrawSprite()
 {
-	m_timer->DrawSprite();
+	KdShaderManager::Instance().m_spriteShader.Begin();
+	{
+		m_timer->DrawSprite();
+		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
+	}
+	KdShaderManager::Instance().m_spriteShader.End();	
 }
 
 void TitleScene::Load(std::string a_filePath)
@@ -18,7 +35,6 @@ void TitleScene::Load(std::string a_filePath)
 
 	if (ifs.is_open())
 	{
-
 		std::string lineString;
 
 		getline(ifs, lineString);
@@ -30,7 +46,7 @@ void TitleScene::Load(std::string a_filePath)
 		m_timer->SetSize(1.5f);
 		m_timer->Init();
 
-		if (Data == 10)m_timer->TimeNO();
+		if (Data == 0)m_timer->TimeNO();
 		else
 		{
 			for (int i = 0; i < Data; i++)
@@ -45,6 +61,11 @@ void TitleScene::Event()
 {
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 	{
+		m_fedeinFlg = true;
+	}
+
+	if (m_brackAlpha >= 1.0f)
+	{
 		SceneManager::Instance().SetNextScene
 		(
 			SceneManager::SceneType::Game
@@ -54,6 +75,13 @@ void TitleScene::Event()
 
 void TitleScene::Init()
 {
+	//フェードイン===============================================================================================================
+	m_brackAlpha = 0.0f;
+	m_brackPos = {};
+	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+	m_fedeinFlg = false;
+	//===========================================================================================================================
+
 	Load("ResultTime/BestTime.csv");
 	ShowCursor(true);
 }

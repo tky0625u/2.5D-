@@ -38,4 +38,9 @@ protected :
 
 	// 全オブジェクトのアドレスをリストで管理
 	std::list<std::shared_ptr<KdGameObject>> m_objList;
+
+	Math::Vector2 m_brackPos;
+	Math::Color   m_brackColor;
+	float         m_brackAlpha;
+	bool          m_fedeinFlg;
 };

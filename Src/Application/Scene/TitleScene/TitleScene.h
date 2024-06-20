@@ -11,6 +11,7 @@ public :
 	TitleScene() { Init(); }
 	~TitleScene() {}
 
+	void Update()override;
 	void PostUpdate()override;
 	void DrawSprite()override;
 	void Load(std::string a_filePath);

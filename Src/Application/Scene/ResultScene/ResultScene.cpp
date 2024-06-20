@@ -8,6 +8,16 @@
 
 void ResultScene::Update()
 {
+	if (!m_fedeinFlg && m_brackAlpha > 0.0f)
+	{
+		m_brackAlpha -= 0.05f;
+	}
+	else if (m_fedeinFlg)
+	{
+		m_brackAlpha += 0.01f;
+	}
+	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+
 	if (m_ramdomFlg)
 	{
 		m_timer->Random();
@@ -30,7 +40,12 @@ void ResultScene::PostUpdate()
 
 void ResultScene::DrawSprite()
 {
-	m_timer->DrawSprite();
+	KdShaderManager::Instance().m_spriteShader.Begin();
+	{
+		m_timer->DrawSprite();
+		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
+	}
+	KdShaderManager::Instance().m_spriteShader.End();
 }
 
 void ResultScene::Load(std::string a_filePath)
@@ -102,6 +117,11 @@ void ResultScene::Event()
 {
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 	{
+		m_fedeinFlg = true;
+	}
+
+	if (m_fedeinFlg && m_brackAlpha >= 1.0f)
+	{
 		SceneManager::Instance().SetNextScene
 		(
 			SceneManager::SceneType::Title
@@ -111,6 +131,13 @@ void ResultScene::Event()
 
 void ResultScene::Init()
 {
+	//フェードイン===============================================================================================================
+	m_brackAlpha = 1.0f;
+	m_brackPos = {};
+	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+	m_fedeinFlg = false;
+	//===========================================================================================================================
+
 	m_ResultTime = 0;
 	m_frame = 0;
 	m_ramdomFlg = true;

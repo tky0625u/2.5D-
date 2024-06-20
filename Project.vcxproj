@@ -157,6 +157,7 @@
     <ClInclude Include="..\Library\tinygltf\stb_image_write.h" />
     <ClInclude Include="..\Library\tinygltf\tiny_gltf.h" />
     <ClInclude Include="Src\Application\main.h" />
+    <ClInclude Include="Src\Application\Object\BackGround\BackGround.h" />
     <ClInclude Include="Src\Application\Object\Character\Player\Player.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\Board\Board.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\Brock\Brock.h" />
@@ -170,7 +171,9 @@
     <ClInclude Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.h" />
     <ClInclude Include="Src\Application\Object\Ground\Bridge\Bridge.h" />
     <ClInclude Include="Src\Application\Object\Ground\Goal\Goal.h" />
+    <ClInclude Include="Src\Application\Object\Ground\Ground\Ground.h" />
     <ClInclude Include="Src\Application\Object\Ground\Start\StartBlock.h" />
+    <ClInclude Include="Src\Application\Object\Ground\Water\Water.h" />
     <ClInclude Include="Src\Application\Object\UI\GameOver\GameOver.h" />
     <ClInclude Include="Src\Application\Object\UI\Goal\GoalUI.h" />
     <ClInclude Include="Src\Application\Object\UI\Start\StartUI.h" />
@@ -228,6 +231,7 @@
     <ClCompile Include="..\Library\ImGui\imgui_tables.cpp" />
     <ClCompile Include="..\Library\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Src\Application\main.cpp" />
+    <ClCompile Include="Src\Application\Object\BackGround\BackGround.cpp" />
     <ClCompile Include="Src\Application\Object\Character\Player\Player.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\Board\Board.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\Brock\Brock.cpp" />
@@ -241,7 +245,9 @@
     <ClCompile Include="Src\Application\Object\Gimmick\Trampoline\Trampoline.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Bridge\Bridge.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Goal\Goal.cpp" />
+    <ClCompile Include="Src\Application\Object\Ground\Ground\Ground.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Start\StartBlock.cpp" />
+    <ClCompile Include="Src\Application\Object\Ground\Water\Water.cpp" />
     <ClCompile Include="Src\Application\Object\UI\GameOver\GameOver.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Goal\GoalUI.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Start\StartUI.cpp" />

@@ -16,6 +16,8 @@ public:
 	void DrawSprite()override;
 	void Init()override;
 
+	void CountON() { m_CountFlg = true; }
+
 	bool GetStart()const { return m_StartFlg; }
 
 private:
@@ -27,5 +29,6 @@ private:
 	float           m_size;
 	float           m_frame;
 	bool            m_StartFlg;
+	bool            m_CountFlg;
 	KdTexture       m_Tex;
 };

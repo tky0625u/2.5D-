@@ -3,6 +3,8 @@
 
 void StartUI::Update()
 {
+	if (!m_CountFlg)return;
+
 	if (!m_StartFlg)
 	{
 		if (m_frame < SECOND / 2)
@@ -62,5 +64,6 @@ void StartUI::Init()
 	m_size = 0.0f;
 	m_frame = 0.0f;
 	m_StartFlg = false;
+	m_CountFlg = false;
 	m_Tex.Load("Asset/Textures/UI/Start/Start.png");
 }
