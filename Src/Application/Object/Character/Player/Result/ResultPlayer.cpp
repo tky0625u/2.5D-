@@ -19,6 +19,38 @@ void ResultPlayer::Update()
 	}
 	else
 	{
+		static int JumpNUM = 0;
+		if (m_jumpFlg)
+		{
+			if (JumpNUM >= 3)
+			{
+				JumpNUM = 0;
+				m_angleZ = 0.0f;
+			}
+
+			if (JumpNUM < 3)
+			{
+				if (JumpNUM < 2)
+				{
+					m_move.y = 1.0f;
+					JumpNUM++;
+				}
+				else
+				{
+					m_move.y = 1.3f;
+					JumpNUM++;
+				}
+			}
+		}
+		else
+		{
+			if (JumpNUM == 3)
+			{
+				m_angleZ += 10.0f;
+				if (m_angleZ > 360.0f)m_angleZ = 360.0f;
+			}
+		}
+
 		//アニメーション===============================================================================
 		int Anime[IDOL_MAX] = { 0,1,2,3 }; //アニメーション配列
 
@@ -39,7 +71,6 @@ void ResultPlayer::Update()
 		m_move.y -= m_gravity;  //重力を与える
 		m_pos.y += m_move.y;    //高さ
 
-		if (m_angleZ != 0.0f)m_angleZ = 0.0f;
 	}
 	//行列更新=====================================================================================
 	Math::Matrix Scale = Math::Matrix::CreateScale(m_size);                                  //拡縮 S
@@ -102,11 +133,11 @@ void ResultPlayer::PostUpdate()
 	{
 		m_pos = hitPos + Math::Vector3{ 0.0f,-0.1f,0.0f };  //座標更新
 		m_move.y = 0.0f;
-		m_jumpFlg = false;                                  //ジャンプフラグfalse
+		m_jumpFlg = true;                                  //ジャンプフラグfalse
 	}
 	else
 	{
-		m_jumpFlg = true;
+		m_jumpFlg = false;
 	}
 
 	//===============================================================
@@ -139,10 +170,10 @@ void ResultPlayer::Init()
 	m_move = Math::Vector3::Zero;
 	m_angleX = 0.0f;
 	m_angleY = 0.0f;
-	m_angleZ = 45.0f;
+	m_angleZ = 0.0f;
 	m_angleMove = 0.0f;
 	m_gravity = 0.05f;
-	m_jumpFlg = false;
+	m_jumpFlg = true;
 	m_gameOverFlg = false;
 
 	//アニメーション

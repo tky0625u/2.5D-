@@ -154,6 +154,9 @@
     <Filter Include="Src\Application\Object\Character\Player\Result">
       <UniqueIdentifier>{ceaf10a0-831b-4989-8200-c94a1ea9b662}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Cloud">
+      <UniqueIdentifier>{e9a12b9e-5f76-404b-a0e5-a301843b00cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -390,6 +393,9 @@
     <ClInclude Include="Src\Application\Object\Character\Player\Result\ResultPlayer.h">
       <Filter>Src\Application\Object\Character\Player\Result</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Cloud\Cloud.h">
+      <Filter>Src\Application\Object\Cloud</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -595,6 +601,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Character\Player\Result\ResultPlayer.cpp">
       <Filter>Src\Application\Object\Character\Player\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Cloud\Cloud.cpp">
+      <Filter>Src\Application\Object\Cloud</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

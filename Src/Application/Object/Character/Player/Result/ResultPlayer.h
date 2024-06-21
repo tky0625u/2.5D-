@@ -25,6 +25,7 @@ public:
 	void Init()override;
 
 	void SetGameOver(bool a_gameOverFlg) { m_gameOverFlg = a_gameOverFlg; }
+	void SetAngleZ(float a_angleZ) { m_angleZ = a_angleZ; }
 
 private:
 	std::shared_ptr<KdSquarePolygon> m_polygon;  //板ポリ

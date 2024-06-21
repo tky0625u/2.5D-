@@ -10,6 +10,7 @@
 #include"../../Object/UI/GameOver/GameOver.h"
 #include"../../Object/UI/Start/StartUI.h"
 #include"../../Object/Gimmick/GimmickManager/GimmickManager.h"
+#include"../../Object/Cloud/Cloud.h"
 
 #include<fstream>
 #include<sstream>
@@ -226,6 +227,8 @@ void GameScene::Event()
 
 void GameScene::Init()
 {
+	srand(timeGetTime());
+
 	//カメラ　生成＆視野角設定===================================================================================================
 	m_angleX = 20;
 	m_angleY = 270;
@@ -235,8 +238,8 @@ void GameScene::Init()
 	m_pos = { 600,100,0 };
 	m_camera = std::make_unique<KdCamera>();        //メモリ確保
 	m_camera->SetProjectionMatrix(m_ViewingAngle);  //視野角設定
-	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, false);
-	KdShaderManager::Instance().WorkAmbientController().SetheightFog({ 1,1,1 }, -5.0f, -10.0f, 0);
+	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, true);
+	KdShaderManager::Instance().WorkAmbientController().SetheightFog({ 1.0f,1.0f,1.0f }, -5.0f, -10.0f, 0);
 	//===========================================================================================================================
 
 	//ギミック===================================================================================================================
@@ -323,6 +326,19 @@ void GameScene::Init()
 	back[5]->SetAngle(90.0f, 90.0f);
 
 	for (int i = 0; i < BackNUM; ++i)m_objList.push_back(back[i]);
+	//===========================================================================================================================
+
+	//雲=========================================================================================================================
+	static const int CloudNum = 30;
+	for (int i = 0; i < CloudNum; ++i)
+	{
+		std::shared_ptr<Cloud>cloud = std::make_shared<Cloud>();
+		if(i>=15)cloud->SetPos(Math::Vector3{ float(rand() % 850 - 250), float(rand() % 10 + 50 ) ,float(rand() % 601 - 300) });
+		else{ cloud->SetPos(Math::Vector3{ float(rand() % 850 - 250), float(rand() % 10 - 12) ,float(rand() % 601 - 300) }); }
+		cloud->SetMove(Math::Vector3{ float(rand() % 4 + 5) * 0.1f,0.0f,0.0f });
+		cloud->SetSize(5.0f);
+		m_objList.push_back(cloud);
+	}
 	//===========================================================================================================================
 
 	//フェードイン===============================================================================================================

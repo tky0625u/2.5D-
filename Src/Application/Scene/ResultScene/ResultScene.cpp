@@ -5,6 +5,7 @@
 #include"../../Object/Character/Player/Result/ResultPlayer.h"
 #include"../../Object/Ground/Goal/Goal.h"
 #include"../../Object/BackGround/BackGround.h"
+#include"../../Object/Cloud/Cloud.h"
 
 #include<fstream>
 #include<sstream>
@@ -154,10 +155,16 @@ void ResultScene::Event()
 			SceneManager::SceneType::Title
 		);
 	}
+
+	Math::Matrix Trans = Math::Matrix::CreateTranslation(m_pos);
+	Math::Matrix Mat = Trans;
+	m_camera->SetCameraMatrix(Mat);
 }
 
 void ResultScene::Init()
 {
+	srand(timeGetTime());
+
 	//フェードイン===============================================================================================================
 	m_brackAlpha = 1.0f;
 	m_brackPos = {};
@@ -178,15 +185,31 @@ void ResultScene::Init()
 	m_angleX = 0;
 	m_angleY = 0;
 	m_ViewingAngle = 60;
-	m_pos = { 0,0,-10.0f };
+	m_pos = { 0.0f,0,-5.0f };
 	m_camera = std::make_unique<KdCamera>();        //メモリ確保
 	m_camera->SetProjectionMatrix(m_ViewingAngle);  //視野角設定
+	
+	if (!m_gameOverFlg)
+	{
+		KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, true);
+		KdShaderManager::Instance().WorkAmbientController().SetheightFog({ 1.0f,1.0f,1.0f }, -5.0f, -10.0f, 0);
+	}
+	else
+	{
+		KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, false);
+	}
+
 	//===========================================================================================================================
 
+	//プレイヤー=================================================================================================================
 	std::shared_ptr<ResultPlayer>player = std::make_shared<ResultPlayer>();
 	player->SetGameOver(m_gameOverFlg);
+	if (m_gameOverFlg)player->SetAngleZ(45);
+	else { player->SetAngleZ(0); }
 	m_objList.push_back(player);
+	//===========================================================================================================================
 
+	//背景=======================================================================================================================
 	std::shared_ptr<BackGround>back = std::make_shared<BackGround>();
 	std::shared_ptr<KdSquarePolygon> backPolygon = std::make_shared<KdSquarePolygon>();
 	backPolygon->SetMaterial("Asset/Textures/BackGround/BackGround.png");
@@ -194,6 +217,9 @@ void ResultScene::Init()
 	back->SetPos(Math::Vector3{ 0.0f,0.0f,100.0f });
 	back->SetAngle(0.0f, 0.0f);
 	m_objList.push_back(back);
+	//===========================================================================================================================
+
+	static const int CloudNum = 3;
 
 	if (!m_gameOverFlg)
 	{
@@ -202,6 +228,19 @@ void ResultScene::Init()
 		goal->SetPos(Math::Vector3{ 0.0f,-25.0f,30.0f });
 		goal->SetAngle(90.0f);
 		m_objList.push_back(goal);
+		//===========================================================================================================================
+	}
+	else
+	{
+		//雲=========================================================================================================================
+		for (int i = 0; i < CloudNum; ++i)
+		{
+			std::shared_ptr<Cloud>cloud = std::make_shared<Cloud>();
+			cloud->SetPos(Math::Vector3{ float(rand() % 60 - 30),float(rand() % 10 - 30),30.0f });
+			cloud->SetMove(Math::Vector3{ 0.0f, float(rand() % 4 + 5) * 0.1f,0.0f });
+			cloud->SetSize(1.0f);
+			m_objList.push_back(cloud);
+		}
 		//===========================================================================================================================
 	}
 }

@@ -160,6 +160,7 @@
     <ClInclude Include="Src\Application\Object\BackGround\BackGround.h" />
     <ClInclude Include="Src\Application\Object\Character\Player\Player.h" />
     <ClInclude Include="Src\Application\Object\Character\Player\Result\ResultPlayer.h" />
+    <ClInclude Include="Src\Application\Object\Cloud\Cloud.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\Board\Board.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\Brock\Brock.h" />
     <ClInclude Include="Src\Application\Object\Gimmick\Cannon\Bullet\Bullet.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="Src\Application\Object\BackGround\BackGround.cpp" />
     <ClCompile Include="Src\Application\Object\Character\Player\Player.cpp" />
     <ClCompile Include="Src\Application\Object\Character\Player\Result\ResultPlayer.cpp" />
+    <ClCompile Include="Src\Application\Object\Cloud\Cloud.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\Board\Board.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\Brock\Brock.cpp" />
     <ClCompile Include="Src\Application\Object\Gimmick\Cannon\Bullet\Bullet.cpp" />
