@@ -2,6 +2,9 @@
 #include"../SceneManager.h"
 #include"../../WindowUI/WindowUI.h"
 #include"../../Object/UI/Timer/TimerManager.h"
+#include"../../Object/Character/Player/Result/ResultPlayer.h"
+#include"../../Object/Ground/Goal/Goal.h"
+#include"../../Object/BackGround/BackGround.h"
 
 #include<fstream>
 #include<sstream>
@@ -28,11 +31,14 @@ void ResultScene::Update()
 		}
 	}
 
+	for (auto& obj : m_objList)obj->Update();
+
 	Event();
 }
 
 void ResultScene::PostUpdate()
 {
+	for (auto& obj : m_objList)obj->PostUpdate();
 	m_timer->PostUpdate();
 
 	m_frame++;
@@ -53,6 +59,9 @@ void ResultScene::DrawSprite()
 {
 	KdShaderManager::Instance().m_spriteShader.Begin();
 	{
+		for (auto& obj : m_objList)obj->DrawSprite();
+		KdShaderManager::Instance().m_spriteShader.SetMatrix(Math::Matrix::Identity);
+
 		m_timer->DrawSprite();
 		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
 	}
@@ -77,6 +86,8 @@ void ResultScene::Load(std::string a_filePath)
 
 		if (Data > 0)
 		{
+			m_gameOverFlg = false;
+
 			for (int i = 0; i < Data; i++)
 			{
 				m_timer->Scroll();
@@ -87,6 +98,10 @@ void ResultScene::Load(std::string a_filePath)
 			const bool GameOverFlg = stoi(lineString);
 
 			if (!GameOverFlg)BestWrite("ResultTime/BestTime.csv", Data);
+		}
+		else
+		{
+			m_gameOverFlg = true;
 		}
 
 		m_ResultTime = Data;
@@ -155,6 +170,38 @@ void ResultScene::Init()
 	m_ramdomFlg = true;
 	m_ramdomSoundFlg = false;
 	m_StopSoundFlg = false;
+	m_gameOverFlg = false;
 	Load("ResultTime/ResultTime.csv");
 	ShowCursor(true);
+
+	//カメラ　生成＆視野角設定===================================================================================================
+	m_angleX = 0;
+	m_angleY = 0;
+	m_ViewingAngle = 60;
+	m_pos = { 0,0,-10.0f };
+	m_camera = std::make_unique<KdCamera>();        //メモリ確保
+	m_camera->SetProjectionMatrix(m_ViewingAngle);  //視野角設定
+	//===========================================================================================================================
+
+	std::shared_ptr<ResultPlayer>player = std::make_shared<ResultPlayer>();
+	player->SetGameOver(m_gameOverFlg);
+	m_objList.push_back(player);
+
+	std::shared_ptr<BackGround>back = std::make_shared<BackGround>();
+	std::shared_ptr<KdSquarePolygon> backPolygon = std::make_shared<KdSquarePolygon>();
+	backPolygon->SetMaterial("Asset/Textures/BackGround/BackGround.png");
+	back->SetPolygon(backPolygon);
+	back->SetPos(Math::Vector3{ 0.0f,0.0f,100.0f });
+	back->SetAngle(0.0f, 0.0f);
+	m_objList.push_back(back);
+
+	if (!m_gameOverFlg)
+	{
+		//ゴール位置=================================================================================================================
+		std::shared_ptr<Goal>goal = std::make_shared<Goal>();
+		goal->SetPos(Math::Vector3{ 0.0f,-25.0f,30.0f });
+		goal->SetAngle(90.0f);
+		m_objList.push_back(goal);
+		//===========================================================================================================================
+	}
 }

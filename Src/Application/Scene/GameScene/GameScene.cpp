@@ -4,8 +4,6 @@
 #include"../../Object/Ground/Start/StartBlock.h"
 #include"../../Object/Ground/Bridge/Bridge.h"
 #include"../../Object/Ground/Goal/Goal.h"
-#include"../../Object/Ground/Water/Water.h"
-#include"../../Object/Ground/Ground/Ground.h"
 #include"../../Object/Character/Player/Player.h"
 #include"../../Object/UI/Timer/TimerManager.h"
 #include"../../Object/UI/Goal/GoalUI.h"
@@ -237,6 +235,8 @@ void GameScene::Init()
 	m_pos = { 600,100,0 };
 	m_camera = std::make_unique<KdCamera>();        //メモリ確保
 	m_camera->SetProjectionMatrix(m_ViewingAngle);  //視野角設定
+	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, false);
+	KdShaderManager::Instance().WorkAmbientController().SetheightFog({ 1,1,1 }, -5.0f, -10.0f, 0);
 	//===========================================================================================================================
 
 	//ギミック===================================================================================================================
@@ -264,27 +264,8 @@ void GameScene::Init()
 
 	//ゴール位置=================================================================================================================
 	std::shared_ptr<Goal>goal = std::make_shared<Goal>();
+	goal->SetPos(Math::Vector3{ 555.0f,30.0f,0.0f });
 	m_objList.push_back(goal);
-	//===========================================================================================================================
-
-	//水=========================================================================================================================
-	static const int WaterNUM = 3;
-	std::shared_ptr<Water>water[WaterNUM];
-	for (int i = 0; i < WaterNUM; ++i)water[i] = std::make_shared<Water>();
-	water[0]->SetPos(Math::Vector3{ -250.0f,-20.0f,0.0f });
-	water[1]->SetPos(Math::Vector3{ 210.0f,-19.0f,0.0f });
-	water[2]->SetPos(Math::Vector3{ 670.0f,-20.0f,0.0f });
-	for (int i = 0; i < WaterNUM; ++i)m_objList.push_back(water[i]);
-	//===========================================================================================================================
-
-	//地面=======================================================================================================================
-	static const int GroundNUM = 1;
-	std::shared_ptr<Ground>ground[GroundNUM];
-	for (int i = 0; i < GroundNUM; ++i)ground[i] = std::make_shared<Ground>();
-	ground[0]->SetPos(Math::Vector3{ 250.0f,-10.0f,300.0f });
-	//ground[1]->SetPos(Math::Vector3{ 210.0f,-19.0f,0.0f });
-	//ground[2]->SetPos(Math::Vector3{ 670.0f,-20.0f,0.0f });
-	for (int i = 0; i < GroundNUM; ++i)m_objList.push_back(ground[i]);
 	//===========================================================================================================================
 
 	//タイマー===================================================================================================================
@@ -312,7 +293,7 @@ void GameScene::Init()
 	//===========================================================================================================================
 
 	//背景=======================================================================================================================
-	static const int BackNUM = 5;
+	static const int BackNUM = 6;
 	std::shared_ptr<BackGround>back[BackNUM]; 
 	for (int i = 0; i < BackNUM; ++i)
 	{
@@ -337,6 +318,9 @@ void GameScene::Init()
 	
 	back[4]->SetPos(Math::Vector3{ 200.0f,0.0f, -300.0f });
 	back[4]->SetAngle(0.0f, 0.0f);
+
+	back[5]->SetPos(Math::Vector3{ 200.0f,-100.0f,0.0f });
+	back[5]->SetAngle(90.0f, 90.0f);
 
 	for (int i = 0; i < BackNUM; ++i)m_objList.push_back(back[i]);
 	//===========================================================================================================================

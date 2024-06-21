@@ -16,7 +16,7 @@ void Goal::DrawLit()
 void Goal::Init()
 {
 	m_objType = ObjType::Goal;
-	m_pos = { 555.0f,30.0f,0.0f };
+	m_pos = {};
 	m_size = 5.0f;
 	m_angle = 180.0f;
 	m_model = std::make_shared<KdModelData>();          //メモリ確保
