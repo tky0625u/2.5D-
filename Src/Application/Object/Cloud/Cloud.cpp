@@ -5,7 +5,7 @@ void Cloud::Update()
 	if (m_pos.x > 700.0f)
 	{
 		int Random = rand() % 2;
-		if(Random==0)m_pos = { -100.0f, float(rand() % 10 - 12) ,float(rand() % 601 - 300) };
+		if(Random==0)m_pos = { -100.0f, float(rand() % 40 - 50) ,float(rand() % 601 - 300) };
 		else if(Random==1)m_pos = { -100.0f, float(rand() % 10 + 50) ,float(rand() % 401 - 200) };
 
 		m_move = Math::Vector3{ float(rand() % 4 + 5) * 0.1f,0.0f,0.0f };

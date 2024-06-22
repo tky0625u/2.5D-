@@ -59,10 +59,13 @@ void GimmickManager::GenerateDepthMapFromLight()
 void GimmickManager::Init()
 {
 	//大砲=========================================================================================
+	m_BulletModel = std::make_shared<KdModelData>();
+	m_BulletModel->Load("Asset/Models/Cannon/Bullet/Bullet.gltf");
 	for (int i = 0; i < CANNONNUM; ++i)
 	{
 		std::shared_ptr<Cannon>cannon = std::make_shared<Cannon>();
 		cannon->SetPos(i);
+		cannon->SetBulletModel(m_BulletModel);
 		m_GimmickList.push_back(cannon);
 		m_cannon[i] = cannon;
 	}

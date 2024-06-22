@@ -26,13 +26,16 @@ public:
 	void CoolTimeUP();
 
 	void SetPos(int i);
+	void SetBulletModel(std::shared_ptr<KdModelData> a_BulletModel) { m_BulletModel = a_BulletModel; }
 
 	const float GetCoolTime()const { return m_coolTime; }
 	const std::shared_ptr<Bullet> GetBullet() const{ return m_bullet; }
 
 private:
+	float                        m_angleY;
 	float                        m_coolTime;   //発射クールタイム
 
 	std::vector<std::shared_ptr<Bullet>>  m_bulletList;  //弾リスト
 	std::shared_ptr<Bullet>               m_bullet;      //弾
+	std::shared_ptr<KdModelData>          m_BulletModel;
 };

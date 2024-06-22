@@ -5,7 +5,7 @@
 class Bullet :public KdGameObject
 {
 public:
-	Bullet() { Init(); }
+	Bullet(){}
 	~Bullet()override {}
 
 	void Update()override;
@@ -16,10 +16,11 @@ public:
 	void Init()override;
 
 	void SetPos(Math::Vector3 a_pos) { m_pos = a_pos; }
+	void SetModel(std::shared_ptr<KdModelData> a_model) { m_model = a_model; }
 	void SetAngle(float a_angle) { m_angle = a_angle; }
 
 private:
-	std::shared_ptr<KdModelData> m_model;  //モデル
+	std::shared_ptr<KdModelData> m_model = nullptr;  //モデル
 	Math::Vector3                m_pos;    //座標
 	Math::Vector3                m_move;   //移動
 	float                        m_size;   //大きさ

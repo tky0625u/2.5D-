@@ -11,6 +11,7 @@
 #include"../../Object/UI/Start/StartUI.h"
 #include"../../Object/Gimmick/GimmickManager/GimmickManager.h"
 #include"../../Object/Cloud/Cloud.h"
+#include"../../Object//BigCloud/BigCloud.h"
 
 #include<fstream>
 #include<sstream>
@@ -239,7 +240,7 @@ void GameScene::Init()
 	m_camera = std::make_unique<KdCamera>();        //メモリ確保
 	m_camera->SetProjectionMatrix(m_ViewingAngle);  //視野角設定
 	KdShaderManager::Instance().WorkAmbientController().SetFogEnable(false, true);
-	KdShaderManager::Instance().WorkAmbientController().SetheightFog({ 1.0f,1.0f,1.0f }, -5.0f, -10.0f, 0);
+	KdShaderManager::Instance().WorkAmbientController().SetheightFog({ 1.0f,1.0f,1.0f }, -15.0f, -50.0f, 0);
 	//===========================================================================================================================
 
 	//ギミック===================================================================================================================
@@ -339,6 +340,11 @@ void GameScene::Init()
 		cloud->SetSize(5.0f);
 		m_objList.push_back(cloud);
 	}
+	//===========================================================================================================================
+
+	//大きい雲===================================================================================================================
+	std::shared_ptr<BigCloud>big = std::make_shared<BigCloud>();
+	m_objList.push_back(big);
 	//===========================================================================================================================
 
 	//フェードイン===============================================================================================================

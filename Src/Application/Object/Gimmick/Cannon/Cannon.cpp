@@ -9,6 +9,8 @@ void Cannon::Update()
 	{
 		//弾===================================================================
 		std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>();         //メモリ確保
+		bullet->SetModel(m_BulletModel);
+		bullet->Init();
 		bullet->SetPos({m_pos.x+CorrectionX,m_pos.y+ CorrectionY,m_pos.z});  //座標格納
 		bullet->SetAngle(m_angle);                                           //角度格納
 		m_bulletList.push_back(bullet);                                      //リストに格納
@@ -18,6 +20,13 @@ void Cannon::Update()
 	}
 
 	for (auto bullet : m_bulletList)bullet->Update();  //弾更新
+	//=============================================================================================
+
+	//移動=========================================================================================
+	m_angleY += 5.0f;
+	if (m_angleY > 360.0f)m_angleY -= 360.0f;
+	m_move.y = cos(DirectX::XMConvertToRadians(m_angleY)) * 0.1f;
+	m_pos += m_move;
 	//=============================================================================================
 
 	//行列更新=====================================================================================
@@ -92,8 +101,10 @@ void Cannon::Init()
 	m_model = std::make_shared<KdModelData>();
 	m_model->Load("Asset/Models/Cannon/Cannon.gltf");
 	m_pos = { 180.0f,0.0f,10.0f };
+	m_move = { 0,0.05f,0.0f };
 	m_size = 2.5f;
 	m_angle = 180.0f;
+	m_angleY = 0.0f;
 }
 
 void Cannon::CoolTimeUP()

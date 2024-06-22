@@ -29,5 +29,6 @@ private:
 	static const int TRAMPOLINENUM = 5;
 
 	std::weak_ptr<Cannon>                      m_cannon[CANNONNUM];       //大砲　※弾の削除処理のため
+	std::shared_ptr<KdModelData>               m_BulletModel;
 	Math::Vector3                              m_cameraPos;    //カメラ座標
 };
