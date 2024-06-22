@@ -130,9 +130,6 @@
     <Filter Include="Src\Application\Object\Gimmick\Rotate\Circle">
       <UniqueIdentifier>{63881e7f-0d21-4cf1-a1f5-cf532c3fc5e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Gimmick\Rotate\Wall">
-      <UniqueIdentifier>{95491ad7-0cab-4e7c-bda1-55c65c240ec5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\Object\Ground\Goal">
       <UniqueIdentifier>{fb1426c9-bb6d-40c4-9473-0eb0cb5b9414}</UniqueIdentifier>
     </Filter>
@@ -159,6 +156,9 @@
     </Filter>
     <Filter Include="Src\Application\Object\BigCloud">
       <UniqueIdentifier>{df9b9d76-65f5-4156-a68c-10b8c6375f2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Gimmick\Rotate\Storm">
+      <UniqueIdentifier>{517800d3-7803-4cd5-8b55-5fc6a510f29b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -372,9 +372,6 @@
     <ClInclude Include="Src\Application\Object\Gimmick\Rotate\Circle\Circle.h">
       <Filter>Src\Application\Object\Gimmick\Rotate\Circle</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Gimmick\Rotate\Wall\Wall.h">
-      <Filter>Src\Application\Object\Gimmick\Rotate\Wall</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\Object\Ground\Goal\Goal.h">
       <Filter>Src\Application\Object\Ground\Goal</Filter>
     </ClInclude>
@@ -401,6 +398,9 @@
     </ClInclude>
     <ClInclude Include="Src\Application\Object\BigCloud\BigCloud.h">
       <Filter>Src\Application\Object\BigCloud</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Gimmick\Rotate\Storm\Storm.h">
+      <Filter>Src\Application\Object\Gimmick\Rotate\Storm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -584,9 +584,6 @@
     <ClCompile Include="Src\Application\Object\Gimmick\Rotate\Circle\Circle.cpp">
       <Filter>Src\Application\Object\Gimmick\Rotate\Circle</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Gimmick\Rotate\Wall\Wall.cpp">
-      <Filter>Src\Application\Object\Gimmick\Rotate\Wall</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Application\Object\Ground\Goal\Goal.cpp">
       <Filter>Src\Application\Object\Ground\Goal</Filter>
     </ClCompile>
@@ -613,6 +610,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\BigCloud\BigCloud.cpp">
       <Filter>Src\Application\Object\BigCloud</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Gimmick\Rotate\Storm\Storm.cpp">
+      <Filter>Src\Application\Object\Gimmick\Rotate\Storm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@
 #include"../Board/Board.h"
 #include"../Trampoline/Trampoline.h"
 #include"../Rotate/Circle/Circle.h"
-#include"../Rotate/Wall/Wall.h"
+#include"../Rotate/Storm/Storm.h"
 
 void GimmickManager::Update()
 {
@@ -106,17 +106,17 @@ void GimmickManager::Init()
 	}
 	//=============================================================================================
 
-	//回転壁=======================================================================================
+	//竜巻  =======================================================================================
 	
 	//床=======================================================================
 	std::shared_ptr<Circle>circle = std::make_shared<Circle>();
 	m_GimmickList.push_back(circle);
 	//=========================================================================
 
-	//壁=======================================================================
-	std::shared_ptr<Wall>wall = std::make_shared<Wall>();
-	wall->SetPos(circle->GetPos());
-	m_GimmickList.push_back(wall);
+	//竜巻=====================================================================
+	std::shared_ptr<Storm>storm = std::make_shared<Storm>();
+	storm->SetPos(circle->GetPos());
+	m_GimmickList.push_back(storm);
 	//=========================================================================
 	
 	//=============================================================================================
