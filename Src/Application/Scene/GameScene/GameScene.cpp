@@ -12,12 +12,15 @@
 #include"../../Object/Gimmick/GimmickManager/GimmickManager.h"
 #include"../../Object/Cloud/Cloud.h"
 #include"../../Object//BigCloud/BigCloud.h"
+#include"../../Object/UI/Cuesor/Cursor.h"
 
 #include<fstream>
 #include<sstream>
 
 void GameScene::PreUpdate()
 {
+	if (m_menuFlg)return;
+
 	if (m_player.expired() == false)
 	{
 		if (m_player.lock()->GetGoal() == false && m_player.lock()->GetGameOver()==false)BaseScene::PreUpdate();
@@ -26,32 +29,72 @@ void GameScene::PreUpdate()
 
 void GameScene::Update()
 {
-	if (!m_fedeinFlg && m_brackAlpha > 0.0f)
+	if (GetAsyncKeyState(VK_TAB) & 0x8000)
 	{
-		m_brackAlpha -= 0.01f;
-	}
-	else if (m_fedeinFlg)
-	{
-		m_brackAlpha += 0.01f;
-	}
-
-	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
-
-	if (m_player.lock()->GetGoal() == false && m_player.lock()->GetGameOver() == false)
-	{
-		for (auto& obj : m_objList)
+		if (!m_keyFlg)
 		{
-			obj->Update();
+			if (!m_menuFlg)
+			{
+				m_menuFlg = true;
+				KdAudioManager::Instance().PauseAllSound();
+				m_cursor->FlgChange(true);
+				
+			}
+			else 
+			{
+				m_menuFlg = false;
+				KdAudioManager::Instance().ResumeAllSound();
+				
+				SetCursorPos(640, 360);
+				m_cursor->FlgChange(false);
+			}
+
+			m_keyFlg = true;
 		}
 	}
-	else if(m_player.lock()->GetGoal()){ m_goalUI->Update(); }
-	else if (m_player.lock()->GetGameOver()) { m_gameOverlUI->Update(); }
+	else
+	{
+		m_keyFlg = false;
+	}
 
-	Event();
+
+	if (!m_menuFlg)
+	{
+		if (!m_fedeinFlg && m_brackAlpha > 0.0f)
+		{
+			m_brackAlpha -= 0.01f;
+		}
+		else if (m_fedeinFlg)
+		{
+			m_brackAlpha += 0.01f;
+		}
+
+		m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+
+		if (m_player.lock()->GetGoal() == false && m_player.lock()->GetGameOver() == false)
+		{
+			for (auto& obj : m_objList)
+			{
+				obj->Update();
+			}
+		}
+		else if (m_player.lock()->GetGoal()) { m_goalUI->Update(); }
+		else if (m_player.lock()->GetGameOver()) { m_gameOverlUI->Update(); }
+
+		Event();
+	}
+	else
+	{
+		m_cursor->Update();
+	}
 }
 
 void GameScene::PostUpdate()
 {
+	m_cursor->PostUpdate();
+
+	if (m_menuFlg)return;
+
 	if (m_player.expired() == false)
 	{
 		if (m_player.lock()->GetGoal() == false && m_player.lock()->GetGameOver() == false)BaseScene::PostUpdate();
@@ -74,6 +117,8 @@ void GameScene::DrawSprite()
 		}
 
 		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
+
+		m_cursor->DrawSprite();
 	}
 	KdShaderManager::Instance().m_spriteShader.End();
 }
@@ -223,7 +268,7 @@ void GameScene::Event()
 
 	//===========================================================================================================================
 
-	ShowCursor(false);
+	SetCursorPos(640, 360);
 }
 
 void GameScene::Init()
@@ -268,7 +313,7 @@ void GameScene::Init()
 
 	//ゴール位置=================================================================================================================
 	std::shared_ptr<Goal>goal = std::make_shared<Goal>();
-	goal->SetPos(Math::Vector3{ 555.0f,30.0f,0.0f });
+	goal->SetPos(Math::Vector3{ 565.0f,30.0f,0.0f });
 	m_objList.push_back(goal);
 	//===========================================================================================================================
 
@@ -354,5 +399,12 @@ void GameScene::Init()
 	m_fedeinFlg = false;
 	//===========================================================================================================================
 
+	//カーソル===================================================================================================================
+	m_cursor = std::make_unique<Cursor>();
+	m_cursor->FlgChange(false);
+	//===========================================================================================================================
+
 	m_bgmFlg = false;
+	m_menuFlg = false;
+	m_keyFlg = false;
 }

@@ -160,6 +160,12 @@
     <Filter Include="Src\Application\Object\Gimmick\Rotate\Storm">
       <UniqueIdentifier>{517800d3-7803-4cd5-8b55-5fc6a510f29b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\UI\Cursor">
+      <UniqueIdentifier>{0ead7198-176a-4313-abac-9160adb33c3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Particle">
+      <UniqueIdentifier>{4a245c27-c4a4-4b0d-9699-08c517f360eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -402,6 +408,12 @@
     <ClInclude Include="Src\Application\Object\Gimmick\Rotate\Storm\Storm.h">
       <Filter>Src\Application\Object\Gimmick\Rotate\Storm</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\UI\Cuesor\Cursor.h">
+      <Filter>Src\Application\Object\UI\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Particle\Particle.h">
+      <Filter>Src\Application\Object\Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -613,6 +625,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Gimmick\Rotate\Storm\Storm.cpp">
       <Filter>Src\Application\Object\Gimmick\Rotate\Storm</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\UI\Cuesor\Cursor.cpp">
+      <Filter>Src\Application\Object\UI\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Particle\Particle.cpp">
+      <Filter>Src\Application\Object\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

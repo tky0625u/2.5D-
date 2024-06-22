@@ -19,5 +19,5 @@ void Circle::Init()
 	m_bound = 0.0f;
 
 	m_pCollider = std::make_unique<KdCollider>();
-	m_pCollider->RegisterCollisionShape("Circle", m_model, KdCollider::TypeGround);
+	m_pCollider->RegisterCollisionShape("Circle", m_model, KdCollider::TypeGround | KdCollider::TypeBump);
 }

@@ -59,7 +59,6 @@ void Player::Update()
 			m_angleX += (CurSor.y - 360) * VP_SPEED;
 			m_angleY += (CurSor.x - 640) * VP_SPEED;
 		}
-		SetCursorPos(640, 360);
 
 		//角度制御===================================
 		if (m_angleX >= 90.0f)m_angleX = 90.0f;
@@ -370,7 +369,7 @@ void Player::Init()
 	m_polygon->SetMaterial("Asset/Textures/Character/Player/sheets/DinoSprites - doux.png");
 	m_polygon->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 	m_polygon->SetSplit(24, 1);
-	m_pos = { -50.0f,0,0 };
+	m_pos = { -60.0f,0,0 };
 	m_move = Math::Vector3::Zero;
 	m_GmkMove = Math::Vector3::Zero;
 	m_dir = Math::Vector3::Zero;

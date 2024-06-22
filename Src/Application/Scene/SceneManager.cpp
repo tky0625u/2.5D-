@@ -18,6 +18,7 @@ void SceneManager::PreUpdate()
 
 void SceneManager::Update()
 {
+	ShowCursor(false);
 	m_currentScene->Update();
 }
 

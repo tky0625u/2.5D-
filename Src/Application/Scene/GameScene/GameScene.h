@@ -2,6 +2,7 @@
 
 #include"../BaseScene/BaseScene.h"
 
+class Cursor;
 class GimmickManager;
 class Player;
 class TimerManager;
@@ -44,6 +45,9 @@ private:
 	std::weak_ptr<StartUI>        m_startUI;
 	std::shared_ptr<GoalUI>       m_goalUI;
 	std::shared_ptr<GameOverUI>   m_gameOverlUI;
+	std::shared_ptr<Cursor>       m_cursor;
 
 	bool                          m_bgmFlg;
+	bool                          m_menuFlg;
+	bool                          m_keyFlg;
 };

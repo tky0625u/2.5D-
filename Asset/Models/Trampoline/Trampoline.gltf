@@ -23,13 +23,13 @@
 			"name":"\u30c8\u30fc\u30e9\u30b9",
 			"scale":[
 				5.0334343910217285,
-				3.3670079708099365,
+				5.775382041931152,
 				5.0334343910217285
 			],
 			"translation":[
 				0,
 				0.7545522451400757,
-				0
+				-0.4285770356655121
 			]
 		},
 		{
@@ -37,7 +37,7 @@
 			"name":"\u5186\u67f1",
 			"scale":[
 				4.519937515258789,
-				0.09299808740615845,
+				0.11454053968191147,
 				4.519937515258789
 			],
 			"translation":[
@@ -99,6 +99,16 @@
 			]
 		}
 	],
+	"materials":[
+		{
+			"doubleSided":true,
+			"name":"\u30de\u30c6\u30ea\u30a2\u30eb",
+			"pbrMetallicRoughness":{
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		}
+	],
 	"meshes":[
 		{
 			"name":"\u30c8\u30fc\u30e9\u30b9",
@@ -109,7 +119,8 @@
 						"NORMAL":1,
 						"TEXCOORD_0":2
 					},
-					"indices":3
+					"indices":3,
+					"material":0
 				}
 			]
 		},
@@ -131,35 +142,35 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":2304,
+			"count":37345,
 			"max":[
-				1.25,
-				0.25,
-				1.25
+				1.365748405456543,
+				0.48255300521850586,
+				1.16421639919281
 			],
 			"min":[
-				-1.25,
-				-0.25,
-				-1.25
+				-1.3449933528900146,
+				-0.4195025861263275,
+				-1.3871076107025146
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":2304,
+			"count":37345,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":2304,
+			"count":37345,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":3456,
+			"count":221184,
 			"type":"SCALAR"
 		},
 		{
@@ -200,56 +211,56 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":27648,
+			"byteLength":448140,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":27648,
-			"byteOffset":27648,
+			"byteLength":448140,
+			"byteOffset":448140,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":18432,
-			"byteOffset":55296,
+			"byteLength":298760,
+			"byteOffset":896280,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":6912,
-			"byteOffset":73728,
+			"byteLength":442368,
+			"byteOffset":1195040,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":2304,
-			"byteOffset":80640,
+			"byteOffset":1637408,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":2304,
-			"byteOffset":82944,
+			"byteOffset":1639712,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":1536,
-			"byteOffset":85248,
+			"byteOffset":1642016,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":744,
-			"byteOffset":86784,
+			"byteOffset":1643552,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":87528,
+			"byteLength":1644296,
 			"uri":"Trampoline.bin"
 		}
 	]
