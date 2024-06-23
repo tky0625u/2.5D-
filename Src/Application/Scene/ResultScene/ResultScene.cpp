@@ -6,6 +6,8 @@
 #include"../../Object/Ground/Goal/Goal.h"
 #include"../../Object/BackGround/BackGround.h"
 #include"../../Object/Cloud/Cloud.h"
+#include"../../Object/UI/Cuesor/Cursor.h"
+#include"../../Object/UI/Buttom/Exit/Exit.h"
 
 #include<fstream>
 #include<sstream>
@@ -33,7 +35,8 @@ void ResultScene::Update()
 	}
 
 	for (auto& obj : m_objList)obj->Update();
-
+	m_cursor->Update();
+	for (auto& buttom : m_buttomList)buttom->Update();
 	Event();
 }
 
@@ -41,6 +44,7 @@ void ResultScene::PostUpdate()
 {
 	for (auto& obj : m_objList)obj->PostUpdate();
 	m_timer->PostUpdate();
+	m_cursor->PostUpdate();
 
 	m_frame++;
 	if (m_frame >= SECOND * 1)
@@ -64,6 +68,11 @@ void ResultScene::DrawSprite()
 		KdShaderManager::Instance().m_spriteShader.SetMatrix(Math::Matrix::Identity);
 
 		m_timer->DrawSprite();
+
+		for (auto& buttom : m_buttomList)buttom->DrawSprite();
+
+		m_cursor->DrawSprite();
+
 		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
 	}
 	KdShaderManager::Instance().m_spriteShader.End();
@@ -142,9 +151,14 @@ void ResultScene::BestWrite(std::string a_filePath,int Time)
 
 void ResultScene::Event()
 {
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+	bool flg = m_exit.expired();
+	if (m_exit.expired() == false)
 	{
-		m_fedeinFlg = true;
+		bool Flg = m_exit.lock()->GetPush();
+		if (Flg)
+		{
+			m_fedeinFlg = true;
+		}
 	}
 
 	if (m_fedeinFlg && m_brackAlpha >= 1.0f)
@@ -164,6 +178,18 @@ void ResultScene::Event()
 void ResultScene::Init()
 {
 	srand(timeGetTime());
+
+	//Exit===========================================================================================================================
+	std::shared_ptr<Exit> exit = std::make_shared<Exit>();
+	m_buttomList.push_back(exit);
+	m_exit = exit;
+	//===============================================================================================================================
+
+	//カーソル===================================================================================================================
+	m_cursor = std::make_unique<Cursor>();
+	m_cursor->FlgChange(true);
+	m_cursor->SetButtom(m_buttomList);
+	//===========================================================================================================================
 
 	//フェードイン===============================================================================================================
 	m_brackAlpha = 1.0f;
@@ -243,4 +269,5 @@ void ResultScene::Init()
 		}
 		//===========================================================================================================================
 	}
+
 }

@@ -1,6 +1,7 @@
 ﻿#include "TitleScene.h"
 #include "../SceneManager.h"
 #include"../../Object/UI/Timer/TimerManager.h"
+#include"../../Object/UI/Cuesor/Cursor.h"
 
 void TitleScene::Update()
 {
@@ -10,6 +11,7 @@ void TitleScene::Update()
 	}
 
 	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+	m_cursor->Update();
 
 	Event();
 }
@@ -25,6 +27,7 @@ void TitleScene::DrawSprite()
 	{
 		m_timer->DrawSprite();
 		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
+		m_cursor->DrawSprite();
 	}
 	KdShaderManager::Instance().m_spriteShader.End();	
 }
@@ -75,6 +78,11 @@ void TitleScene::Event()
 
 void TitleScene::Init()
 {
+	//カーソル===================================================================================================================
+	m_cursor = std::make_unique<Cursor>();
+	m_cursor->FlgChange(true);
+	//===========================================================================================================================
+
 	//フェードイン===============================================================================================================
 	m_brackAlpha = 0.0f;
 	m_brackPos = {};

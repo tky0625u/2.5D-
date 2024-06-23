@@ -176,6 +176,8 @@
     <ClInclude Include="Src\Application\Object\Ground\Goal\Goal.h" />
     <ClInclude Include="Src\Application\Object\Ground\Start\StartBlock.h" />
     <ClInclude Include="Src\Application\Object\Particle\Particle.h" />
+    <ClInclude Include="Src\Application\Object\UI\Buttom\ButtomBase.h" />
+    <ClInclude Include="Src\Application\Object\UI\Buttom\Exit\Exit.h" />
     <ClInclude Include="Src\Application\Object\UI\Cuesor\Cursor.h" />
     <ClInclude Include="Src\Application\Object\UI\GameOver\GameOver.h" />
     <ClInclude Include="Src\Application\Object\UI\Goal\GoalUI.h" />
@@ -253,6 +255,8 @@
     <ClCompile Include="Src\Application\Object\Ground\Goal\Goal.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Start\StartBlock.cpp" />
     <ClCompile Include="Src\Application\Object\Particle\Particle.cpp" />
+    <ClCompile Include="Src\Application\Object\UI\Buttom\ButtomBase.cpp" />
+    <ClCompile Include="Src\Application\Object\UI\Buttom\Exit\Exit.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Cuesor\Cursor.cpp" />
     <ClCompile Include="Src\Application\Object\UI\GameOver\GameOver.cpp" />
     <ClCompile Include="Src\Application\Object\UI\Goal\GoalUI.cpp" />

@@ -3,6 +3,7 @@
 #include"../BaseScene/BaseScene.h"
 
 class TimerManager;
+class Exit;
 
 class ResultScene : public BaseScene
 {
@@ -30,6 +31,7 @@ private:
 	//======================================
 
 	std::shared_ptr<TimerManager> m_timer;
+	std::weak_ptr<Exit>           m_exit;
 	int                           m_ResultTime;
 	int                           m_frame;
 	bool                          m_ramdomFlg;

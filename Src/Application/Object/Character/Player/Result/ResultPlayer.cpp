@@ -95,9 +95,6 @@ void ResultPlayer::PostUpdate()
 	ray.m_range = -(m_move.y) + enableStepHight;  //レイの長さ
 	ray.m_type = KdCollider::Type::TypeGround;    //当たり判定したいタイプ
 
-	//デバッグ表示
-	Math::Color color = { 1,1,1,1 };
-	m_pDebugWire->AddDebugLine(ray.m_pos, ray.m_dir, ray.m_range, color);
 	//=====================================================
 
 	//当たり判定===========================================
@@ -180,5 +177,4 @@ void ResultPlayer::Init()
 	m_anime.m_AnimeCnt = 0.0f;
 	m_anime.m_CntMAX = IDOL_MAX;
 
-	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
 }

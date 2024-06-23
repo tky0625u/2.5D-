@@ -166,6 +166,12 @@
     <Filter Include="Src\Application\Object\Particle">
       <UniqueIdentifier>{4a245c27-c4a4-4b0d-9699-08c517f360eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\UI\Buttom">
+      <UniqueIdentifier>{3b76e7b5-7931-4a01-b6c6-6c7a98a0c8c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\UI\Buttom\Exit">
+      <UniqueIdentifier>{c398bfac-d995-4f0d-ae47-f0214be2710d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -414,6 +420,12 @@
     <ClInclude Include="Src\Application\Object\Particle\Particle.h">
       <Filter>Src\Application\Object\Particle</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\UI\Buttom\ButtomBase.h">
+      <Filter>Src\Application\Object\UI\Buttom</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\UI\Buttom\Exit\Exit.h">
+      <Filter>Src\Application\Object\UI\Buttom\Exit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -631,6 +643,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Particle\Particle.cpp">
       <Filter>Src\Application\Object\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\UI\Buttom\ButtomBase.cpp">
+      <Filter>Src\Application\Object\UI\Buttom</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\UI\Buttom\Exit\Exit.cpp">
+      <Filter>Src\Application\Object\UI\Buttom\Exit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -298,6 +298,7 @@ void GameScene::Init()
 	std::shared_ptr<Player>player = std::make_shared<Player>();  //メモリ確保
 	player->SetGimmickList(gimmick->GetGimmickList());           //ギミックリストを格納
 	m_player = player;                                           //プレイヤー変数に格納
+	bool flg = m_player.expired();
 	m_objList.push_back(player);                                 //リストに追加
 	//===========================================================================================================================
 

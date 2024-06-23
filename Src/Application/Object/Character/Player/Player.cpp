@@ -179,9 +179,6 @@ void Player::PostUpdate()
 	ray.m_range = -(m_move.y) + enableStepHight;  //レイの長さ
 	ray.m_type = KdCollider::Type::TypeGround;    //当たり判定したいタイプ
 
-	//デバッグ表示
-	Math::Color color = { 1,1,1,1 };
-	m_pDebugWire->AddDebugLine(ray.m_pos, ray.m_dir, ray.m_range, color);
 	//=====================================================
 
 	//当たり判定===========================================
@@ -271,8 +268,6 @@ void Player::PostUpdate()
 	sphere.m_sphere.Radius = 1.5f;                                              //球の半径
 	sphere.m_type = KdCollider::Type::TypeBump;  //当たり判定したいタイプ
 
-	//デバッグ用
-	m_pDebugWire->AddDebugSphere(sphere.m_sphere.Center, sphere.m_sphere.Radius, color);
 
 	std::list<KdCollider::CollisionResult> retSphereList;                           //当たったオブジェクトの情報を格納するリスト
 	for (auto obj : SceneManager::Instance().GetObjList())obj->Intersects(sphere,&retSphereList);
@@ -317,9 +312,6 @@ void Player::PostUpdate()
 	//ゴール判定===================================================================================
 
 	ray.m_range = 50.0f;
-	//デバッグ表示
-	color = { 1,0,0,1 };
-	m_pDebugWire->AddDebugLine(ray.m_pos, ray.m_dir, ray.m_range, color);
 
 	//ゴール判定===========================================
 
@@ -392,7 +384,6 @@ void Player::Init()
 	//デバッグ用
 	m_keyFlg = false;
 	m_air = false;
-	m_pDebugWire = std::make_unique<KdDebugWireFrame>();
 }
 
 void Player::ReStart()

@@ -1,24 +1,33 @@
 ﻿#include "Cursor.h"
 #include"../../Particle/Particle.h"
 #include"../../../WindowUI/WindowUI.h"
+#include"../Buttom/ButtomBase.h"
 
 void Cursor::Update()
 {
 	if (!m_cursorFlg)return;
 
-	POINT Cursor;
-	GetCursorPos(&Cursor);
-	m_pos = { float(Cursor.x + m_rect.width) - 640,float((Cursor.y * -1) - m_rect.height) + 320 };
+
+	GetCursorPos(&cursor);
+	m_pos = { float(cursor.x + (m_rect.width / 2)) - 640,float((cursor.y * -1) - (m_rect.height / 2)) + 360 };
 
 	if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
 	{
 		if (!m_keyFlg)
 		{
+			for (auto& buttom : m_buttomList)
+			{
+				if (buttom->GetHit())
+				{
+					buttom->PushON();
+				}
+			}
+
 			for (int i = 0; i < ParticleNUM; ++i)
 			{
 				std::shared_ptr<Particle>particle = std::make_shared<Particle>();
 				particle->SetTexture(m_particleTex);
-				particle->Emit({ (float)Cursor.x - 640,float(Cursor.y * -1) + 320 },
+				particle->Emit({ (float)cursor.x - 640,float(cursor.y * -1) + 360 },
 					{ float(rand() % 3 - 1),float(rand() % 3 - 1) },
 					3.0f,
 					30);
@@ -30,6 +39,7 @@ void Cursor::Update()
 	else
 	{
 		m_keyFlg = false;
+		for (auto& buttom : m_buttomList)buttom->PushOFF();
 	}
 
 	for (auto& particle : m_ptlList)particle->Update();
@@ -37,6 +47,21 @@ void Cursor::Update()
 
 void Cursor::PostUpdate()
 {
+	for (auto& buttom : m_buttomList)
+	{
+		Math::Vector2 buttomPos = buttom->GetPos();
+		Math::Rectangle buttomRect = buttom->GetRectangle();
+
+		if (m_pos.x - (m_rect.width / 2) > buttomPos.x - (buttomRect.width / 2) && m_pos.x - (m_rect.width / 2) < buttomPos.x + (buttomRect.width / 2) && m_pos.y + (m_rect.height / 2) > buttomPos.y - (buttomRect.height / 2) && m_pos.y + (m_rect.height / 2) < buttomPos.y + (buttomRect.height / 2))
+		{
+			buttom->HitON();
+		}
+		else
+		{
+			buttom->HitOFF();
+		}
+	}
+
 	auto it = m_ptlList.begin();
 
 	while (it != m_ptlList.end())

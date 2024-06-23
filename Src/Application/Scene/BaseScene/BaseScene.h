@@ -1,4 +1,7 @@
 ﻿#pragma once
+#include"../../Object/UI/Buttom/ButtomBase.h"
+
+class Cursor;
 
 class BaseScene
 {
@@ -39,6 +42,8 @@ protected :
 	// 全オブジェクトのアドレスをリストで管理
 	std::list<std::shared_ptr<KdGameObject>> m_objList;
 
+	std::vector<std::shared_ptr<ButtomBase>> m_buttomList;
+	std::shared_ptr<Cursor>       m_cursor;
 	Math::Vector2 m_brackPos;
 	Math::Color   m_brackColor;
 	float         m_brackAlpha;
