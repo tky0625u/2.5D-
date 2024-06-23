@@ -17,15 +17,15 @@
 
 void ResultScene::Update()
 {
-	if (!m_fedeinFlg && m_brackAlpha > 0.0f)
+	if (!m_fedeinFlg && m_whiteAlpha > 0.0f)
 	{
-		m_brackAlpha -= 0.05f;
+		m_whiteAlpha -= 0.05f;
 	}
 	else if (m_fedeinFlg)
 	{
-		m_brackAlpha += 0.01f;
+		m_whiteAlpha += 0.01f;
 	}
-	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+	m_whiteColor = { 1.0f,1.0f,1.0f,m_whiteAlpha };
 
 	if (!m_gameOverFlg)
 	{
@@ -44,6 +44,8 @@ void ResultScene::Update()
 	m_cursor->Update();
 	for (auto& buttom : m_buttomList)buttom->Update();
 	Event();
+
+	m_frame++;
 }
 
 void ResultScene::PostUpdate()
@@ -55,16 +57,22 @@ void ResultScene::PostUpdate()
 		
 	m_timer->PostUpdate();
 
-	m_frame++;
 	if (m_frame >= SECOND * 1)
 	{
 		if (m_ramdomSoundFlg && !m_StopSoundFlg)
 		{
 			KdAudioManager::Instance().StopAllSound();
 			KdAudioManager::Instance().Play("Asset/Sounds/SE/Result/電子ルーレット停止ボタンを押す.WAV", 0.1f, false);
+			KdAudioManager::Instance().Play("Asset/Sounds/SE/BestTime/ドンドンパフパフ.WAV", 0.2f, false);
 			m_StopSoundFlg = true;
 		}
-		if (m_bestFlg)m_bestShowFlg = true;
+		if (m_bestFlg)
+		{
+			if (!m_bestShowFlg)
+			{
+				m_bestShowFlg = true;
+			}
+		}
 		m_ramdomFlg = false;
 	}
 }
@@ -84,7 +92,7 @@ void ResultScene::DrawSprite()
 
 		m_cursor->DrawSprite();
 
-		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
+		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_whitePos.x, (int)m_whitePos.y, 640, 360, &m_whiteColor, true);
 	}
 	KdShaderManager::Instance().m_spriteShader.End();
 }
@@ -154,6 +162,19 @@ void ResultScene::BestWrite(std::string a_filePath,int Time)
 
 void ResultScene::Event()
 {
+	if (!m_bgmFlg && m_frame > SECOND * 4)
+	{
+		if (!m_gameOverFlg)
+		{
+			KdAudioManager::Instance().Play("Asset/Sounds/BGM/Goal/Springin_News_おたよりコーナー.WAV", 0.1f, true);
+		}
+		else
+		{
+			KdAudioManager::Instance().Play("Asset/Sounds/BGM/GameOver/081_BPM118.WAV", 0.1f, true);
+		}
+		m_bgmFlg = true;
+	}
+
 	bool flg = m_exit.expired();
 	if (m_exit.expired() == false)
 	{
@@ -164,7 +185,7 @@ void ResultScene::Event()
 		}
 	}
 
-	if (m_fedeinFlg && m_brackAlpha >= 1.0f)
+	if (m_fedeinFlg && m_whiteAlpha >= 1.0f)
 	{
 		KdAudioManager::Instance().StopAllSound();
 		SceneManager::Instance().SetNextScene
@@ -201,9 +222,9 @@ void ResultScene::Init()
 	//===========================================================================================================================
 
 	//フェードイン===============================================================================================================
-	m_brackAlpha = 1.0f;
-	m_brackPos = {};
-	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+	m_whiteAlpha = 1.0f;
+	m_whitePos = {};
+	m_whiteColor = { 1.0f,1.0f,1.0f,m_whiteAlpha };
 	m_fedeinFlg = false;
 	//===========================================================================================================================
 
@@ -215,6 +236,7 @@ void ResultScene::Init()
 	m_bestFlg = false;
 	m_bestShowFlg = false;
 	m_gameOverFlg = true;
+	m_bgmFlg = false;
 	Load("ResultTime/ResultTime.csv");
 	ShowCursor(true);
 
@@ -289,5 +311,7 @@ void ResultScene::Init()
 		std::shared_ptr<GameOverUI>gameOverUI = std::make_shared<GameOverUI>();
 		m_objList.push_back(gameOverUI);
 		//===========================================================================================================================
+
+		KdAudioManager::Instance().Play("Asset/Sounds/SE/GameOver/呪いの旋律.WAV", 0.1f, false);
 	}
 }

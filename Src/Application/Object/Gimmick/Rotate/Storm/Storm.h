@@ -15,4 +15,6 @@ public:
 private:
 	Math::Vector3 m_CirclePos;
 	float         m_MoveAngle;
+
+	std::shared_ptr<KdSoundInstance3D> m_instance;
 };

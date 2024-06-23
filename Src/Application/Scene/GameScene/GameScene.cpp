@@ -60,16 +60,16 @@ void GameScene::Update()
 
 	if (!m_menuFlg)
 	{
-		if (!m_fedeinFlg && m_brackAlpha > 0.0f)
+		if (!m_fedeinFlg && m_whiteAlpha > 0.0f)
 		{
-			m_brackAlpha -= 0.01f;
+			m_whiteAlpha -= 0.01f;
 		}
 		else if (m_fedeinFlg)
 		{
-			m_brackAlpha += 0.01f;
+			m_whiteAlpha += 0.01f;
 		}
 
-		m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+		m_whiteColor = { 1.0f,1.0f,1.0f,m_whiteAlpha };
 
 		for (auto& obj : m_objList)
 		{
@@ -102,7 +102,7 @@ void GameScene::DrawSprite()
 			obj->DrawSprite();
 		}
 
-		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
+		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_whitePos.x, (int)m_whitePos.y, 640, 360, &m_whiteColor, true);
 
 		m_cursor->DrawSprite();
 	}
@@ -139,15 +139,20 @@ void GameScene::Event()
 		{
 			m_player.lock()->ActionOFF();
 			if (m_timer.expired() == false)m_timer.lock()->StartOFF();
-			KdAudioManager::Instance().StopAllSound();
+			
+			if (m_player.lock()->GetGameOver() && !m_fedeinFlg)
+			{
+				KdAudioManager::Instance().Play("Asset/Sounds/SE/Fall/ヒューンと落下.WAV", 0.2f, false);
+			}
 			m_fedeinFlg = true;
-	
-			if (m_brackAlpha >= 1.0f)
+
+			if (m_whiteAlpha >= 1.0f)
 			{
 				if (m_timer.expired() == false)
 				{
 					Write("ResultTime/ResultTime.csv");
 				}
+				KdAudioManager::Instance().StopAllSound();
 				SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
 			}
 		}
@@ -374,9 +379,9 @@ void GameScene::Init()
 	//===========================================================================================================================
 
 	//フェードイン===============================================================================================================
-	m_brackAlpha = 1.0f;
-	m_brackPos = {};
-	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+	m_whiteAlpha = 1.0f;
+	m_whitePos = {};
+	m_whiteColor = { 1.0f,1.0f,1.0f,m_whiteAlpha };
 	m_fedeinFlg = false;
 	//===========================================================================================================================
 

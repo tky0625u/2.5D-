@@ -24,6 +24,7 @@ void Trampoline::Init()
 	m_angleChange = 0.8f;
 	m_bound = 1.5f;
 	m_speed = 0.1f;
+	m_gmkType = GimmickType::Bound;
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("Trampoline", m_model, KdCollider::TypeGround);

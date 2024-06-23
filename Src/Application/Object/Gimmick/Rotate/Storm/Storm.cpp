@@ -8,13 +8,14 @@ void Storm::Update()
 	m_angle -= 10.0f;
 	if (m_angle < -360.0f)m_angle += 360.0f;
 
-
 	Math::Matrix Scale = Math::Matrix::CreateScale(m_size);
 	Math::Matrix Rot = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_angle));
 	Math::Matrix Trans = Math::Matrix::CreateTranslation(m_pos);
 	Math::Matrix MoveRot = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_MoveAngle));
 	Math::Matrix CircleTrans = Math::Matrix::CreateTranslation(m_CirclePos);
 	m_mWorld = Scale * Rot * Trans * MoveRot * CircleTrans;
+
+	m_instance->SetPos(m_mWorld.Translation());
 }
 
 void Storm::Init()
@@ -28,6 +29,7 @@ void Storm::Init()
 	m_angle = 0.0f;
 	m_MoveAngle = 0.0f;
 	m_bound = 0.0f;
+	m_instance = KdAudioManager::Instance().Play3D("Asset/Sounds/SE/Gimmick/Storm/風が吹く4.WAV", m_mWorld.Translation(), true);
 
 	m_CirclePos = {};
 

@@ -233,6 +233,7 @@ void Player::PostUpdate()
 	Math::Vector3 move = Math::Vector3::Zero;  //移動量
 	float bound = 0.0f;						   //跳ね返り
 	int Cnt = 0;							   //現在がリストの何番目の処理をしているかを計測する変数
+	UINT gmkType = 0;
 	for (auto& ret : retRayGmkList)
 	{
 		//はみ出た長さが一番長いものを探す
@@ -243,6 +244,7 @@ void Player::PostUpdate()
 			hitPos = ret.m_hitPos;
 			move = GimmickList[Cnt]->GetMove();    //移動量を上書き
 			bound = GimmickList[Cnt]->GetBound();  //跳ね返りを上書き
+			gmkType = GimmickList[Cnt]->GetGmkType();
 			//===================================
 
 			RayHit = true;  //当たり判定フラグtrue
@@ -256,6 +258,7 @@ void Player::PostUpdate()
 		m_GmkMove = move;                                   //移動量を更新
 		m_move.y = bound;                                   //跳ね返りに更新
 		m_jumpFlg = false;                                  //ジャンプフラグfalse
+		if (gmkType == GimmickBase::GimmickType::Bound)KdAudioManager::Instance().Play3D("Asset/Sounds/SE/Gimmick/Trampolin/ボヨン.WAV", hitPos, false);
 	}
 	else
 	{

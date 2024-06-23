@@ -42,4 +42,5 @@ private:
 	bool                          m_gameOverFlg;
 	bool                          m_bestFlg;
 	bool                          m_bestShowFlg;
+	bool                         m_bgmFlg;
 };

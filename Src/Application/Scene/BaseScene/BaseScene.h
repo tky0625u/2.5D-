@@ -44,8 +44,8 @@ protected :
 
 	std::vector<std::shared_ptr<ButtomBase>> m_buttomList;
 	std::shared_ptr<Cursor>       m_cursor;
-	Math::Vector2 m_brackPos;
-	Math::Color   m_brackColor;
-	float         m_brackAlpha;
+	Math::Vector2 m_whitePos;
+	Math::Color   m_whiteColor;
+	float         m_whiteAlpha;
 	bool          m_fedeinFlg;
 };

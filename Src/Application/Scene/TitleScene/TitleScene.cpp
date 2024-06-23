@@ -13,10 +13,10 @@ void TitleScene::Update()
 {
 	if (m_fedeinFlg)
 	{
-		m_brackAlpha += 0.01f;
+		m_whiteAlpha += 0.01f;
 	}
 
-	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+	m_whiteColor = { 1.0f,1.0f,1.0f,m_whiteAlpha };
 	m_cursor->Update();
 
 	for (auto& obj : m_objList)obj->Update();
@@ -39,7 +39,7 @@ void TitleScene::DrawSprite()
 		m_timer->DrawSprite();
 		m_best->DrawSprite();
 		m_cursor->DrawSprite();
-		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
+		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_whitePos.x, (int)m_whitePos.y, 640, 360, &m_whiteColor, true);
 	}
 	KdShaderManager::Instance().m_spriteShader.End();	
 }
@@ -79,7 +79,7 @@ void TitleScene::Event()
 		m_fedeinFlg = true;
 	}
 
-	if (m_brackAlpha >= 1.0f)
+	if (m_whiteAlpha >= 1.0f)
 	{
 		KdAudioManager::Instance().StopAllSound();
 		SceneManager::Instance().SetNextScene
@@ -114,9 +114,9 @@ void TitleScene::Init()
 	//===========================================================================================================================
 
 	//フェードイン===============================================================================================================
-	m_brackAlpha = 0.0f;
-	m_brackPos = {};
-	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
+	m_whiteAlpha = 0.0f;
+	m_whitePos = {};
+	m_whiteColor = { 1.0f,1.0f,1.0f,m_whiteAlpha };
 	m_fedeinFlg = false;
 	//===========================================================================================================================
 
