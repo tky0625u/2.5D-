@@ -6,8 +6,6 @@ class GimmickManager;
 class Player;
 class TimerManager;
 class StartUI;
-class GoalUI;
-class GameOverUI;
 
 class GameScene : public BaseScene
 {
@@ -42,8 +40,6 @@ private:
 	std::weak_ptr<GimmickManager> m_gimmick; //ギミック管理クラス　※弾の削除処理のため
 	std::weak_ptr<TimerManager>   m_timer;
 	std::weak_ptr<StartUI>        m_startUI;
-	std::shared_ptr<GoalUI>       m_goalUI;
-	std::shared_ptr<GameOverUI>   m_gameOverlUI;
 
 	bool                          m_bgmFlg;
 	bool                          m_menuFlg;

@@ -42,7 +42,7 @@ private :
 	void Init()
 	{
 		// 開始シーンに切り替え
-		ChangeScene(SceneType::Title);
+		ChangeScene(SceneType::Result);
 	}
 
 	// シーン切り替え関数
@@ -52,7 +52,7 @@ private :
 	std::shared_ptr<BaseScene> m_currentScene = nullptr;
 
 	// 現在のシーンの種類を保持している変数
-	SceneType m_currentSceneType = SceneType::Title;
+	SceneType m_currentSceneType = SceneType::Result;
 	
 	// 次のシーンの種類を保持している変数
 	SceneType m_nextSceneType = m_currentSceneType;

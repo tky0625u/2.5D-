@@ -71,15 +71,10 @@ void GameScene::Update()
 
 		m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
 
-		if (m_player.lock()->GetGoal() == false && m_player.lock()->GetGameOver() == false)
+		for (auto& obj : m_objList)
 		{
-			for (auto& obj : m_objList)
-			{
-				obj->Update();
-			}
+			obj->Update();
 		}
-		else if (m_player.lock()->GetGoal()) { m_goalUI->Update(); }
-		else if (m_player.lock()->GetGameOver()) { m_gameOverlUI->Update(); }
 
 		Event();
 	}
@@ -94,11 +89,8 @@ void GameScene::PostUpdate()
 	m_cursor->PostUpdate();
 
 	if (m_menuFlg)return;
-
-	if (m_player.expired() == false)
-	{
-		if (m_player.lock()->GetGoal() == false && m_player.lock()->GetGameOver() == false)BaseScene::PostUpdate();
-	}
+	
+	BaseScene::PostUpdate();
 }
 
 void GameScene::DrawSprite()
@@ -108,12 +100,6 @@ void GameScene::DrawSprite()
 		for (auto& obj : m_objList)
 		{
 			obj->DrawSprite();
-		}
-
-		if (m_player.expired() == false)
-		{
-			if (m_player.lock()->GetGoal())m_goalUI->DrawSprite();
-			else if (m_player.lock()->GetGameOver())m_gameOverlUI->DrawSprite();
 		}
 
 		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
@@ -132,10 +118,10 @@ void GameScene::Write(std::string a_filePath)
 		//ゲームオーバーだった場合
 		if (m_player.lock()->GetGameOver())
 		{
-			ost << "Second" << "\n" << 0 << "\n" << "GameOver" << "\n" << m_player.lock()->GetGameOver();
+			ost << "Second" << "\n" << 0 << "\n";
 		}
 		//ゴールした場合
-		else if(m_player.lock()->GetGoal())ost << "Second" << "\n" << m_timer.lock()->GetSecond() << "\n" << "GameOver" << "\n" << m_player.lock()->GetGameOver();
+		else if (m_player.lock()->GetGoal())ost << "Second" << "\n" << m_timer.lock()->GetSecond() << "\n";
 
 		ost.close();
 	}
@@ -149,17 +135,21 @@ void GameScene::Event()
 
 	if (m_player.expired() == false)
 	{
-		if ( (m_player.lock()->GetGameOver() && m_gameOverlUI->GetFinish()) || (m_player.lock()->GetGoal() && m_goalUI->GetFinish()))
+		if ( m_player.lock()->GetGameOver() || m_player.lock()->GetGoal())
 		{
+			m_player.lock()->ActionOFF();
+			if (m_timer.expired() == false)m_timer.lock()->StartOFF();
 			KdAudioManager::Instance().StopAllSound();
-
-			if (m_timer.expired() == false)
+			m_fedeinFlg = true;
+	
+			if (m_brackAlpha >= 1.0f)
 			{
-				Write("ResultTime/ResultTime.csv");
+				if (m_timer.expired() == false)
+				{
+					Write("ResultTime/ResultTime.csv");
+				}
+				SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
 			}
-			if(GetAsyncKeyState(VK_SPACE) & 0x8000)m_fedeinFlg = true;
-
-			if (m_brackAlpha >= 1.0f)SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
 		}
 
 		if (m_startUI.expired() == false)
@@ -326,16 +316,6 @@ void GameScene::Init()
 	m_timer = timer;
 	//===========================================================================================================================
 
-	//ゴール表記=================================================================================================================
-	std::shared_ptr<GoalUI>goalUI = std::make_shared<GoalUI>();
-	m_goalUI = goalUI;
-	//===========================================================================================================================
-
-	//ゲームオーバー表記=========================================================================================================
-	std::shared_ptr<GameOverUI>gameOverUI = std::make_shared<GameOverUI>();
-	m_gameOverlUI = gameOverUI;
-	//===========================================================================================================================
-
 	//スタート表記===============================================================================================================
 	std::shared_ptr<StartUI>startUI = std::make_shared<StartUI>();
 	m_objList.push_back(startUI);
@@ -369,7 +349,7 @@ void GameScene::Init()
 	back[4]->SetPos(Math::Vector3{ 200.0f,0.0f, -300.0f });
 	back[4]->SetAngle(0.0f, 0.0f);
 
-	back[5]->SetPos(Math::Vector3{ 200.0f,-100.0f,0.0f });
+	back[5]->SetPos(Math::Vector3{ 200.0f,-200.0f,0.0f });
 	back[5]->SetAngle(90.0f, 90.0f);
 
 	for (int i = 0; i < BackNUM; ++i)m_objList.push_back(back[i]);

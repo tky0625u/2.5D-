@@ -18,7 +18,7 @@ void GoalUI::DrawSprite()
 
 void GoalUI::Init()
 {
-	m_pos = {};
+	m_pos = {0.0f,260.0f,0.0f};
 	m_size = 0.0f;
 	m_finishFlg = false;
 	m_Tex.Load("Asset/Textures/UI/Goal/Goal.png");

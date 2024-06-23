@@ -33,6 +33,7 @@ void Cursor::Update()
 					30);
 				m_ptlList.push_back(particle);
 			}
+			KdAudioManager::Instance().Play("Asset/Sounds/SE/Crick/決定ボタンを押す2.WAV", 0.5f, false);
 			m_keyFlg = true;
 		}
 	}

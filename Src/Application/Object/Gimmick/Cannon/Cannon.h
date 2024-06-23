@@ -18,9 +18,9 @@ public:
 
 	void Update()override;
 	void PostUpdate()override;
-	virtual void Draw();
-	virtual void DrawLit()override;
-	virtual void GenerateDepthMapFromLight()override;
+	void Draw();
+	void DrawLit()override;
+	void GenerateDepthMapFromLight()override;
 	void Init()override;
 
 	void CoolTimeUP();

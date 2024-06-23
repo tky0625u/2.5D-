@@ -11,6 +11,7 @@ void Player::Update()
 	if (m_actionFlg)
 	{
 		m_dir = Math::Vector3::Zero;
+
 		if (GetAsyncKeyState('W') & 0x8000)
 		{
 			m_dir.z = 1.0f;
@@ -94,6 +95,8 @@ void Player::Update()
 	if (!m_air)m_move.y -= m_gravity;  //重力と跳ね返りを与える
 	m_pos.y += m_move.y;              //高さ
 	m_pos += m_GmkMove;               //ギミックの移動量を合わせる
+
+	if (m_pos.y < -200.0f)m_pos.y = -200.0f;
 
 	//前後=============================================================================================================
 															   //      ↓*速度制御*↓     //                     前 右 後 左

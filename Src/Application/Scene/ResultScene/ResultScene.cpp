@@ -9,6 +9,8 @@
 #include"../../Object/UI/Cuesor/Cursor.h"
 #include"../../Object/UI/Buttom/Exit/Exit.h"
 #include"../../Object/UI/Best TIme/Best Time.h"
+#include"../../Object/UI/Goal/GoalUI.h"
+#include"../../Object/UI/GameOver/GameOver.h"
 
 #include<fstream>
 #include<sstream>
@@ -25,13 +27,16 @@ void ResultScene::Update()
 	}
 	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
 
-	if (m_ramdomFlg)
+	if (!m_gameOverFlg)
 	{
-		m_timer->Random();
-		if (!m_ramdomSoundFlg)
+		if (m_ramdomFlg)
 		{
-			KdAudioManager::Instance().Play("Asset/Sounds/SE/Result/電子ルーレット回転中.WAV", 0.1f, false);
-			m_ramdomSoundFlg = true;
+			m_timer->Random();
+			if (!m_ramdomSoundFlg)
+			{
+				KdAudioManager::Instance().Play("Asset/Sounds/SE/Result/電子ルーレット回転中.WAV", 0.1f, false);
+				m_ramdomSoundFlg = true;
+			}
 		}
 	}
 
@@ -44,8 +49,11 @@ void ResultScene::Update()
 void ResultScene::PostUpdate()
 {
 	for (auto& obj : m_objList)obj->PostUpdate();
-	m_timer->PostUpdate();
 	m_cursor->PostUpdate();
+
+	if (m_gameOverFlg)return;
+		
+	m_timer->PostUpdate();
 
 	m_frame++;
 	if (m_frame >= SECOND * 1)
@@ -56,7 +64,6 @@ void ResultScene::PostUpdate()
 			KdAudioManager::Instance().Play("Asset/Sounds/SE/Result/電子ルーレット停止ボタンを押す.WAV", 0.1f, false);
 			m_StopSoundFlg = true;
 		}
-		if (m_ResultTime == 0)m_timer->TimeNO();
 		if (m_bestFlg)m_bestShowFlg = true;
 		m_ramdomFlg = false;
 	}
@@ -69,7 +76,7 @@ void ResultScene::DrawSprite()
 		for (auto& obj : m_objList)obj->DrawSprite();
 		KdShaderManager::Instance().m_spriteShader.SetMatrix(Math::Matrix::Identity);
 
-		m_timer->DrawSprite();
+		if (!m_gameOverFlg)m_timer->DrawSprite();
 
 		if(m_bestShowFlg)m_best->DrawSprite();
 
@@ -93,31 +100,22 @@ void ResultScene::Load(std::string a_filePath)
 		getline(ifs, lineString);
 		const int Data = stoi(lineString);
 
+		if (Data == 0)return;
+
 		m_timer = std::make_shared<TimerManager>();
-		m_timer->SetPos(Math::Vector2{ 0,100 });
+		m_timer->SetPos(Math::Vector2{ 0,0 });
 		m_timer->SetSize(2.0f);
 		m_timer->Init();
 
-		if (Data > 0)
+		m_gameOverFlg = false;
+
+		for (int i = 0; i < Data; i++)
 		{
-			m_gameOverFlg = false;
-
-			for (int i = 0; i < Data; i++)
-			{
-				m_timer->Scroll();
-			}
-
-			getline(ifs, lineString);
-			getline(ifs, lineString);
-			const bool GameOverFlg = stoi(lineString);
-
-			if (!GameOverFlg)BestWrite("ResultTime/BestTime.csv", Data);
-		}
-		else
-		{
-			m_gameOverFlg = true;
+			m_timer->Scroll();
 		}
 
+		BestWrite("ResultTime/BestTime.csv", Data);
+	
 		m_ResultTime = Data;
 	}
 
@@ -198,7 +196,7 @@ void ResultScene::Init()
 
 	//ベストスコア===============================================================================================================
 	m_best = std::make_shared<BestTime>();
-	m_best->SetPos(Math::Vector2{ 0.0f,280 });
+	m_best->SetPos(Math::Vector2{ 0.0f,20 });
 	m_best->SetSize(1.0f);
 	//===========================================================================================================================
 
@@ -214,9 +212,9 @@ void ResultScene::Init()
 	m_ramdomFlg = true;
 	m_ramdomSoundFlg = false;
 	m_StopSoundFlg = false;
-	m_gameOverFlg = false;
 	m_bestFlg = false;
 	m_bestShowFlg = false;
+	m_gameOverFlg = true;
 	Load("ResultTime/ResultTime.csv");
 	ShowCursor(true);
 
@@ -268,6 +266,11 @@ void ResultScene::Init()
 		goal->SetAngle(90.0f);
 		m_objList.push_back(goal);
 		//===========================================================================================================================
+
+		//ゴール表記=================================================================================================================
+		std::shared_ptr<GoalUI>goalUI = std::make_shared<GoalUI>();
+		m_objList.push_back(goalUI);
+		//===========================================================================================================================
 	}
 	else
 	{
@@ -281,6 +284,10 @@ void ResultScene::Init()
 			m_objList.push_back(cloud);
 		}
 		//===========================================================================================================================
-	}
 
+		//ゲームオーバー表記=========================================================================================================
+		std::shared_ptr<GameOverUI>gameOverUI = std::make_shared<GameOverUI>();
+		m_objList.push_back(gameOverUI);
+		//===========================================================================================================================
+	}
 }

@@ -81,6 +81,7 @@ void TitleScene::Event()
 
 	if (m_brackAlpha >= 1.0f)
 	{
+		KdAudioManager::Instance().StopAllSound();
 		SceneManager::Instance().SetNextScene
 		(
 			SceneManager::SceneType::Game
@@ -181,6 +182,8 @@ void TitleScene::Init()
 	std::shared_ptr<Crick>crick = std::make_shared<Crick>();
 	m_objList.push_back(crick);
 	//===========================================================================================================================
+
+	KdAudioManager::Instance().Play("Asset/Sounds/BGM/Title/Short60_ゆったりDIY_02.WAV", 0.1f, true);
 
 	Load("ResultTime/BestTime.csv");
 	ShowCursor(true);

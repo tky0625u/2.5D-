@@ -29,6 +29,7 @@ public:
 	void Scroll();
 	void TimeNO();
 	void StartON() { m_startFlg = true; }
+	void StartOFF() { m_startFlg = false; }
 	
 	void SetPos(Math::Vector2 a_pos) { m_pos = a_pos; }
 	void SetSize(float a_size) { m_size = a_size; }

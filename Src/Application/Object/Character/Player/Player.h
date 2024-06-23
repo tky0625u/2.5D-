@@ -39,6 +39,7 @@ public:
 	void Init()override;
 
 	void ActionON() { m_actionFlg = true; }
+	void ActionOFF() { m_actionFlg = false; }
 	void ReStart();
 
 	void SetGimmickList(std::vector<std::shared_ptr<GimmickBase>> a_GimmickList) { m_GimmickList = a_GimmickList; }
