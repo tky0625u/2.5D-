@@ -2,6 +2,7 @@
 #include "../SceneManager.h"
 #include"../../Object/UI/Timer/TimerManager.h"
 #include"../../Object/UI/Cuesor/Cursor.h"
+#include"../../Object/UI/Best TIme/Best Time.h"
 
 void TitleScene::Update()
 {
@@ -26,8 +27,9 @@ void TitleScene::DrawSprite()
 	KdShaderManager::Instance().m_spriteShader.Begin();
 	{
 		m_timer->DrawSprite();
-		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
+		m_best->DrawSprite();
 		m_cursor->DrawSprite();
+		KdShaderManager::Instance().m_spriteShader.DrawBox((int)m_brackPos.x, (int)m_brackPos.y, 640, 360, &m_brackColor, true);
 	}
 	KdShaderManager::Instance().m_spriteShader.End();	
 }
@@ -45,7 +47,7 @@ void TitleScene::Load(std::string a_filePath)
 		const int Data = stoi(lineString);
 
 		m_timer = std::make_shared<TimerManager>();
-		m_timer->SetPos(Math::Vector2{ 0,-100 });
+		m_timer->SetPos(Math::Vector2{ 0,-150 });
 		m_timer->SetSize(1.5f);
 		m_timer->Init();
 
@@ -88,6 +90,12 @@ void TitleScene::Init()
 	m_brackPos = {};
 	m_brackColor = { 0.0f,0.0f,0.0f,m_brackAlpha };
 	m_fedeinFlg = false;
+	//===========================================================================================================================
+
+	//ベストスコア===============================================================================================================
+	m_best = std::make_shared<BestTime>();
+	m_best->SetPos(Math::Vector2{ 0.0f,-140 });
+	m_best->SetSize(0.8f);
 	//===========================================================================================================================
 
 	Load("ResultTime/BestTime.csv");

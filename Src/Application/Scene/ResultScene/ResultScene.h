@@ -4,6 +4,7 @@
 
 class TimerManager;
 class Exit;
+class BestTime;
 
 class ResultScene : public BaseScene
 {
@@ -31,6 +32,7 @@ private:
 	//======================================
 
 	std::shared_ptr<TimerManager> m_timer;
+	std::shared_ptr<BestTime>     m_best;
 	std::weak_ptr<Exit>           m_exit;
 	int                           m_ResultTime;
 	int                           m_frame;
@@ -38,4 +40,6 @@ private:
 	bool                          m_ramdomSoundFlg;
 	bool                          m_StopSoundFlg;
 	bool                          m_gameOverFlg;
+	bool                          m_bestFlg;
+	bool                          m_bestShowFlg;
 };

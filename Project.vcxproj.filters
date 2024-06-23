@@ -172,6 +172,9 @@
     <Filter Include="Src\Application\Object\UI\Buttom\Exit">
       <UniqueIdentifier>{c398bfac-d995-4f0d-ae47-f0214be2710d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\UI\Best Time">
+      <UniqueIdentifier>{155249d6-b065-4766-98e8-c22c0545bc63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -426,6 +429,9 @@
     <ClInclude Include="Src\Application\Object\UI\Buttom\Exit\Exit.h">
       <Filter>Src\Application\Object\UI\Buttom\Exit</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\UI\Best TIme\Best Time.h">
+      <Filter>Src\Application\Object\UI\Best Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -649,6 +655,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\UI\Buttom\Exit\Exit.cpp">
       <Filter>Src\Application\Object\UI\Buttom\Exit</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\UI\Best TIme\Best Time.cpp">
+      <Filter>Src\Application\Object\UI\Best Time</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

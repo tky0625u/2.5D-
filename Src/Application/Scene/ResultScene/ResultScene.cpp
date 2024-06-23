@@ -8,6 +8,7 @@
 #include"../../Object/Cloud/Cloud.h"
 #include"../../Object/UI/Cuesor/Cursor.h"
 #include"../../Object/UI/Buttom/Exit/Exit.h"
+#include"../../Object/UI/Best TIme/Best Time.h"
 
 #include<fstream>
 #include<sstream>
@@ -56,6 +57,7 @@ void ResultScene::PostUpdate()
 			m_StopSoundFlg = true;
 		}
 		if (m_ResultTime == 0)m_timer->TimeNO();
+		if (m_bestFlg)m_bestShowFlg = true;
 		m_ramdomFlg = false;
 	}
 }
@@ -68,6 +70,8 @@ void ResultScene::DrawSprite()
 		KdShaderManager::Instance().m_spriteShader.SetMatrix(Math::Matrix::Identity);
 
 		m_timer->DrawSprite();
+
+		if(m_bestShowFlg)m_best->DrawSprite();
 
 		for (auto& buttom : m_buttomList)buttom->DrawSprite();
 
@@ -90,7 +94,7 @@ void ResultScene::Load(std::string a_filePath)
 		const int Data = stoi(lineString);
 
 		m_timer = std::make_shared<TimerManager>();
-		m_timer->SetPos(Math::Vector2{ -200,0 });
+		m_timer->SetPos(Math::Vector2{ 0,100 });
 		m_timer->SetSize(2.0f);
 		m_timer->Init();
 
@@ -135,6 +139,7 @@ void ResultScene::BestWrite(std::string a_filePath,int Time)
 
 		if ((Data > Time && Time > 0) || Data == 0)
 		{
+			m_bestFlg = true;
 			std::ofstream ost(a_filePath);
 
 			if (ost.is_open())
@@ -179,16 +184,22 @@ void ResultScene::Init()
 {
 	srand(timeGetTime());
 
-	//Exit===========================================================================================================================
+	//Exit=======================================================================================================================
 	std::shared_ptr<Exit> exit = std::make_shared<Exit>();
 	m_buttomList.push_back(exit);
 	m_exit = exit;
-	//===============================================================================================================================
+	//===========================================================================================================================
 
 	//カーソル===================================================================================================================
 	m_cursor = std::make_unique<Cursor>();
 	m_cursor->FlgChange(true);
 	m_cursor->SetButtom(m_buttomList);
+	//===========================================================================================================================
+
+	//ベストスコア===============================================================================================================
+	m_best = std::make_shared<BestTime>();
+	m_best->SetPos(Math::Vector2{ 0.0f,280 });
+	m_best->SetSize(1.0f);
 	//===========================================================================================================================
 
 	//フェードイン===============================================================================================================
@@ -204,6 +215,8 @@ void ResultScene::Init()
 	m_ramdomSoundFlg = false;
 	m_StopSoundFlg = false;
 	m_gameOverFlg = false;
+	m_bestFlg = false;
+	m_bestShowFlg = false;
 	Load("ResultTime/ResultTime.csv");
 	ShowCursor(true);
 

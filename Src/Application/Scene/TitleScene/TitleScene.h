@@ -3,6 +3,7 @@
 #include"../BaseScene/BaseScene.h"
 
 class TimerManager;
+class BestTime;
 
 class TitleScene : public BaseScene
 {
@@ -22,4 +23,5 @@ private :
 	void Init() override;
 
 	std::shared_ptr<TimerManager> m_timer;
+	std::shared_ptr<BestTime>     m_best;
 };
