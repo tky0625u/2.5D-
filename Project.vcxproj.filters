@@ -175,6 +175,12 @@
     <Filter Include="Src\Application\Object\UI\Best Time">
       <UniqueIdentifier>{155249d6-b065-4766-98e8-c22c0545bc63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\UI\TItle">
+      <UniqueIdentifier>{6057dfa0-1205-4c58-a8dc-b35d7b58b183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\UI\Crick">
+      <UniqueIdentifier>{e012a6de-559c-4219-809d-523e32ba11a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -432,6 +438,12 @@
     <ClInclude Include="Src\Application\Object\UI\Best TIme\Best Time.h">
       <Filter>Src\Application\Object\UI\Best Time</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\UI\Title\TItle.h">
+      <Filter>Src\Application\Object\UI\TItle</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\UI\Crick\Crick.h">
+      <Filter>Src\Application\Object\UI\Crick</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -658,6 +670,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\UI\Best TIme\Best Time.cpp">
       <Filter>Src\Application\Object\UI\Best Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\UI\Title\TItle.cpp">
+      <Filter>Src\Application\Object\UI\TItle</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\UI\Crick\Crick.cpp">
+      <Filter>Src\Application\Object\UI\Crick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

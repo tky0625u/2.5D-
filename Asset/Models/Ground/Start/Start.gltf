@@ -121,6 +121,20 @@
 			"doubleSided":true,
 			"name":"\u30de\u30c6\u30ea\u30a2\u30eb.003",
 			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":0
+				},
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"\u30de\u30c6\u30ea\u30a2\u30eb.004",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":1
+				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
@@ -186,7 +200,8 @@
 						"NORMAL":12,
 						"TEXCOORD_0":13
 					},
-					"indices":10
+					"indices":10,
+					"material":3
 				}
 			]
 		},
@@ -200,9 +215,26 @@
 						"TEXCOORD_0":16
 					},
 					"indices":17,
-					"material":3
+					"material":4
 				}
 			]
+		}
+	],
+	"textures":[
+		{
+			"sampler":0,
+			"source":0
+		},
+		{
+			"sampler":0,
+			"source":0
+		}
+	],
+	"images":[
+		{
+			"mimeType":"image/png",
+			"name":"start",
+			"uri":"start.png"
 		}
 	],
 	"accessors":[
@@ -473,6 +505,12 @@
 			"byteLength":3936,
 			"byteOffset":26516,
 			"target":34963
+		}
+	],
+	"samplers":[
+		{
+			"magFilter":9729,
+			"minFilter":9987
 		}
 	],
 	"buffers":[

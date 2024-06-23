@@ -11,7 +11,8 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4
 			]
 		}
 	],
@@ -77,6 +78,26 @@
 				10.32336139678955,
 				0
 			]
+		},
+		{
+			"mesh":4,
+			"name":"\u5e73\u9762.002",
+			"rotation":[
+				0.7227067351341248,
+				-0.6911548376083374,
+				0,
+				3.0211339208108257e-08
+			],
+			"scale":[
+				1,
+				1,
+				5.163363933563232
+			],
+			"translation":[
+				2.2165558338165283,
+				10.32336139678955,
+				0
+			]
 		}
 	],
 	"materials":[
@@ -90,6 +111,28 @@
 					0.800000011920929,
 					1
 				],
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"\u30de\u30c6\u30ea\u30a2\u30eb.001",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":0
+				},
+				"metallicFactor":0,
+				"roughnessFactor":0.5
+			}
+		},
+		{
+			"doubleSided":true,
+			"name":"\u30de\u30c6\u30ea\u30a2\u30eb.002",
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":1
+				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
@@ -145,9 +188,41 @@
 						"NORMAL":12,
 						"TEXCOORD_0":13
 					},
-					"indices":14
+					"indices":14,
+					"material":1
 				}
 			]
+		},
+		{
+			"name":"\u5e73\u9762.002",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":15,
+						"NORMAL":16,
+						"TEXCOORD_0":17
+					},
+					"indices":14,
+					"material":2
+				}
+			]
+		}
+	],
+	"textures":[
+		{
+			"sampler":0,
+			"source":0
+		},
+		{
+			"sampler":0,
+			"source":0
+		}
+	],
+	"images":[
+		{
+			"mimeType":"image/png",
+			"name":"goal",
+			"uri":"goal.png"
 		}
 	],
 	"accessors":[
@@ -280,6 +355,34 @@
 			"componentType":5123,
 			"count":6,
 			"type":"SCALAR"
+		},
+		{
+			"bufferView":15,
+			"componentType":5126,
+			"count":4,
+			"max":[
+				1,
+				0,
+				1
+			],
+			"min":[
+				-1,
+				0,
+				-1
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":16,
+			"componentType":5126,
+			"count":4,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":17,
+			"componentType":5126,
+			"count":4,
+			"type":"VEC2"
 		}
 	],
 	"bufferViews":[
@@ -372,11 +475,35 @@
 			"byteLength":12,
 			"byteOffset":31216,
 			"target":34963
+		},
+		{
+			"buffer":0,
+			"byteLength":48,
+			"byteOffset":31228,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":48,
+			"byteOffset":31276,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":31324,
+			"target":34962
+		}
+	],
+	"samplers":[
+		{
+			"magFilter":9729,
+			"minFilter":9987
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":31228,
+			"byteLength":31356,
 			"uri":"Goal.bin"
 		}
 	]

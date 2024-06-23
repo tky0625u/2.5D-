@@ -324,7 +324,7 @@ void Application::Execute()
 		m_fpsController.Update();
 
 		//タイトルバーにFPS表示
-		std::string titleBar = "SKY DASH　fps=" + std::to_string(m_fpsController.m_nowfps);
+		std::string titleBar = "Sky Run　fps=" + std::to_string(m_fpsController.m_nowfps);
 		SetWindowTextA(m_window.GetWndHandle(), titleBar.c_str());
 	}
 
